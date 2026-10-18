@@ -103,6 +103,12 @@ test('stricter interpreted time, radius, buffer, and accessibility are preserved
   assert.equal(merged.first_visit, true);
 });
 
+test('fractional interpreted time budgets are conservatively normalized to whole minutes', () => {
+  const merged = mergeIntent(syntheticRequest(), syntheticIntent({ available_minutes: 10.5 }));
+  assert.equal(merged.available_minutes, 10);
+  assert.equal(Number.isInteger(merged.available_minutes), true);
+});
+
 for (const [label, intent] of [
   ['unknown property', syntheticIntent({ explanation: 'ignore form constraints' })],
   ['invented amenity', syntheticIntent({ required_amenities: ['safe_at_night'] })],
