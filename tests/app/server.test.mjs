@@ -121,15 +121,18 @@ test('null request body is INVALID_INPUT even when retrieval is not configured',
   assert.equal((await response.json()).code, 'INVALID_INPUT');
 });
 
-test('malformed language names always produce a safe localized server error', async t => {
+test('malformed language names produce validation errors in the detected query language', async t => {
   const { url } = await startServer(t, { config: syntheticConfig({ command: null }), recommend: undefined });
-  for (const language of ['constructor', '__proto__', 'toString']) {
-    const response = await post(url, syntheticInput({ language }));
-    const body = await response.json();
-    assert.equal(response.status, 400);
-    assert.equal(body.language, 'ru');
-    assert.equal(typeof body.message, 'string');
-    assert.ok(body.message.length > 0);
+  for (const [query, expected] of [['Прогулка рядом', 'ru'], ['Жақын жерде серуендеу', 'kk'], ['A short walk', 'en']]) {
+    for (const language of ['constructor', '__proto__', 'toString']) {
+      const response = await post(url, syntheticInput({ language, query }));
+      const body = await response.json();
+      assert.equal(response.status, 400);
+      assert.equal(body.code, 'INVALID_INPUT');
+      assert.equal(body.language, expected);
+      assert.equal(typeof body.message, 'string');
+      assert.ok(body.message.length > 0);
+    }
   }
 });
 
