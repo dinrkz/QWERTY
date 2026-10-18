@@ -1,24 +1,26 @@
 # Member 1 source feasibility
 
-Checked: 2026-10-18. These are source research findings, not a completed collector or approved final dataset choice. The user confirmed Python backend and explicitly prioritized 2GIS as a main POI source. A demo key has since been created; API success and data-use rights remain unverified. The map remains 2GIS. Wikidata is a fallback or optional supplement, not the default replacement.
+Updated: 2026-10-18. These findings distinguish source research, completed bounded tooling and remaining application work. The user confirmed Python backend and prioritizes 2GIS as a main POI source. Ten probe attempts are counted, with nine successful aggregate summaries and one validation failure. A separate collector retained 73 unique source records privately using eleven of twelve allowed attempts. Access and sampled field coverage are verified; persistent data-use rights and production retrieval remain unresolved. The map remains 2GIS. Wikidata is a fallback or optional supplement, not the default replacement.
 
-## 2GIS — demo access provisioned; API use and rights unresolved
+## 2GIS — bounded private collection completed; integration unresolved
 
-Platform Manager showed `qadam` / Kazakhstan, `qadam-data-dev`, Active Demo, 2026-10-18 to 2026-11-18, and Places API usage 0 / 1,000. No key value is recorded here. No 2GIS API calls have run. The [permissions inquiry](2GIS_PERMISSIONS_INQUIRY.md) is drafted but unsent; the [ten-attempt probe](2GIS_PROBE_PLAN.md) is implemented with synthetic offline tests and remains unauthorized for live execution. Only documentation pages were consulted during drafting; no source request was needed for implementation or tests.
+The [ten-attempt probe](2GIS_PROBE_PLAN.md) exhausted its authorized budget. All six earlier attempts were preserved, including a failed validation request, and the final four succeeded. No raw venue dataset was saved under that transient-only design. The later [collector](2GIS_COLLECTOR.md) saved raw responses and normalized records under separate project-owner authorization; that authorization is not a provider grant. The dataset, account details and credentials remain private and excluded from Git. The inquiry is deferred at the user's request; no email was sent.
 
-The [Places API overview](https://docs.2gis.com/en/api/search/places/overview) documents geographic/category search and requires an access key. Some additional fields require separate access. Astana results, descriptions, amenities, pagination, and limits have not been tested with the team's account.
+The [Places API overview](https://docs.2gis.com/en/api/search/places/overview), reviewed during the original research, documents geographic/category search and requires an access key; some fields require additional access. Astana coffee, park and museum samples returned usable coordinates and varying category/hour coverage. Descriptions were absent from every successful probe summary; in the separate collected dataset, 69 of 73 records lack descriptions. Pagination, rich amenities, applicable reuse permission and production retrieval remain unverified. The documented composite-ID format justified fixing the probe's numeric-only ID validation, without proving the exact cause of its discarded failed response.
 
 The [directory pricing policy](https://law.2gis.ru/catalog-pay) lists storage capability as a separate pricing component. The [directory API offer, section 3.1](https://law.2gis.ru/webapi-offer) restricts extraction, storage, processing and redistribution outside the contract; caching is not provided under that text. This is evidence that ordinary access is insufficient to assume dataset rights, not a finding that every 2GIS contract prohibits our use. That offer's directory definition refers to the Russian Federation; the agreement applicable to Astana/the team's account must be confirmed separately. No clear grant for our OpenAI processing or public snapshot was verified.
 
-Decision: prioritize 2GIS as the primary candidate and first production-source integration target. Do not collect a persistent 2GIS dataset until the applicable agreement supports it. Ask for access and written coverage of storage, indexing, sending selected records to OpenAI for inference, public demo display, snapshot redistribution, attribution and retention. A free key alone does not answer those questions. A concrete access/rights blocker or measured coverage gap is required before proposing a replacement.
+The later [Kazakhstan preflight](2GIS_PREFLIGHT.md) records the applicable published-term concerns and lack of a verified account-specific exception. No permission claim is inferred from successful requests, private storage or the user's authorization. Existing source evidence is retained as historical research; no terms were fetched again during this offline review.
 
-### Next 2GIS checkpoint
+Decision: keep 2GIS as the preferred main source and integration target while preserving the private originals and documenting unresolved storage, indexing, OpenAI processing, display, redistribution, attribution and retention rights. Email is not a mandatory step and remains deferred. The measured description gap supports considering a narrowly scoped supplement without replacing 2GIS. Neither this decision nor the unused collector slot authorizes further requests or data transfers.
 
-1. Demo key creation is complete; local secret configuration and successful API access remain pending. Confirm the applicable agreement for Kazakhstan and the project's intended use.
-2. Review the inquiry, probe and offline verification, establish permission for transient inspection, and obtain explicit execution approval. Then run at most ten attempts across cafes, parks, museums and landmarks. Derive actual demo anchors from returned evidence; the initial search centre is simulated, not personal location. Do not persist venue responses until storage rights are established.
-3. Report actual success/errors and field coverage: stable IDs, name, coordinates, category, description, hours, source links, and any requested amenities. Richness is a hypothesis to measure: category/marketing text must not imply sockets, quietness, accessibility, or current opening.
-4. Check actual pagination, account limits, attribution and refresh requirements. Estimate a small collection scope from observed results and approved quotas, without assuming an unlimited city-wide export.
-5. After rights and the shared Python contract are settled, build the 2GIS collector first. Use another source only for an evidenced gap or blocker; preserve separate provenance and reuse terms when combining records.
+### Current offline checkpoint
+
+1. Preserve the 73 private source records and all original accounting. The collector remains at **11/12 attempts**, with ten earlier probe attempts unchanged; no live request is authorized now.
+2. Use the implemented offline persistence, normalization, deduplication and replay tools. The [walking audit](WALKING_DATASET_REVIEW.md) assessed 45 relevance candidates, seven needing review and 21 excluded for the sample scenarios; these are relevance judgments, not verified accessible or demo-ready destinations.
+3. Agree member 2's description/record contract and application integration. Keep missing descriptions, schedules and amenities unknown; do not turn generated ideas into source facts.
+4. Keep rights and retention questions explicit before any new use, indexing, external AI processing or redistribution. User authorization for local work does not supply provider permission.
+5. Assess scenario and description gaps offline. Any later collection or supplement needs its own reviewed scope and applicable source terms; do not spend the remaining slot automatically.
 
 ## Open alternatives — proposals
 
@@ -35,12 +37,13 @@ Recommendation: retain the completed Wikidata probe as fallback/supplement evide
 
 The script follows the [Wikidata data-access guidance](https://www.wikidata.org/wiki/Wikidata:Data_access) and [User-Agent policy](https://foundation.wikimedia.org/wiki/Policy:User-Agent_policy): an identifying project agent, gzip, one bounded request with timeout, and no automatic retries after errors or throttling. It writes the query, report and successful raw response into a new local directory. Existing runs are never overwritten. Endpoint failure exits nonzero and does not claim successful collection.
 
-Run with an installed Python interpreter from the repository root:
+Historical reproduction command, shown for documentation only; it sends a live source request and is **not authorized by the current offline task**:
 
 ```powershell
 python scripts/data/probe_wikidata.py --output-dir data/raw/wikidata-probe-NEW-RUN
-python -m unittest discover -s tests/data -v
 ```
+
+Offline verification uses `python -m unittest discover -s tests/data -v` and does not run the live command above.
 
 Use a fresh output directory per run. `data/raw/` is ignored by Git. This script is an exploratory source probe, not the AT-05 collector: normalization, suitability/category review, source revisions, complete pagination/coverage policy, refresh behavior and a redistributable demo snapshot remain to be built after the shared contract is agreed.
 
@@ -53,14 +56,6 @@ Local environment: tested interpreter is Python 3.13.12 at `C:/Users/arlan/AppDa
 - Network-enabled probe succeeded (exit 0) at 2026-10-18T12:25:57.504902+00:00, under `data/raw/wikidata-probe-20261018-02/`. It returned 200 rows, 159 distinct entities, 125 entities with descriptions and 157 with instance types. The row cap was reached; coverage is incomplete and biased by ordering on entity ID. Query SHA-256: `67100ccec588e58f7f67d8b18a65ee1651abfb7fedbf8c9ec8691d2a7a07199a`.
 - All project acceptance checks remain NOT RUN. No normalized demo dataset, retrieval service or live RAG is claimed.
 
-Sample inspection found source-described parks, a museum and monuments, alongside many hotels, transport stops and administrative entities. Thus geographic proximity alone is insufficient. Examples below are returned source records, not validated recommendations; current access/hours were not checked.
-
-| Source entity | Returned name | Description observation |
-|---|---|---|
-| [Q18405670](https://www.wikidata.org/wiki/Q18405670) | Национальный музей Республики Казахстан | Russian description present |
-| [Q104866684](https://www.wikidata.org/wiki/Q104866684) | Президентский парк (Нур-Султан) | English description present; name reflects an older city name |
-| [Q104866925](https://www.wikidata.org/wiki/Q104866925) | Жетысу | English description present |
-| [Q12572863](https://www.wikidata.org/wiki/Q12572863) | Казак ели (монумент) | English description present |
-| [Q120868819](https://www.wikidata.org/wiki/Q120868819) | Парк Жеруйык | Description absent in returned language fallback |
+Sample inspection found source-described parks, a museum and monuments, alongside many hotels, transport stops and administrative entities. Thus geographic proximity alone is insufficient. Descriptions use mixed languages, some are absent, and some labels reflect historical naming. Record examples remain in the ignored local evidence rather than this document. Current access and hours were not checked.
 
 Coffee-stop coverage is still unverified; the sample is insufficient to rule it in or out. Further Wikidata work is deferred unless a supplement is needed. Preserve language metadata in the eventual normalized records; a Russian name does not mean its description is Russian.

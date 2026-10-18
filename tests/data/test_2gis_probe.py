@@ -359,7 +359,7 @@ class OfflineProbeTests(unittest.TestCase):
     def test_malformed_responses_and_fields_are_rejected(self):
         invalid = [None, [], {}, {"meta": {"code": 403}},
                    {"meta": {"code": "200"}}, payload([], -1), payload([], True)]
-        for field, value in (("id", 123), ("id", "url"), ("name", None),
+        for field, value in (("id", 123), ("id", ""), ("name", None),
                              ("point", None), ("point", {"lon": True, "lat": 51}),
                              ("description", []), ("rubrics", [None]),
                              ("schedule", "hours"), ("adm_div", ["city"])):
@@ -368,6 +368,71 @@ class OfflineProbeTests(unittest.TestCase):
         for body in invalid:
             with self.subTest(body=body), self.assertRaises(probe.ProbeError):
                 probe.summarize(body, 1, {})
+
+    def test_item_failure_reports_fixed_field_code_and_status_without_raw_values(self):
+        cases = [(SECRET, "INVALID_ITEM_OBJECT"),
+                 ({**item(), "id": {"private": SECRET}}, "INVALID_ITEM_ID"),
+                 ({**item(), "id": 123}, "INVALID_ITEM_ID"),
+                 ({**item(), "name": {"private": SECRET}}, "INVALID_ITEM_NAME"),
+                 ({**item(), "name": " "}, "INVALID_ITEM_NAME")]
+        for index, (record, expected) in enumerate(cases):
+            with self.subTest(expected=expected, index=index):
+                self.directory = Path(self.temp.name) / str(index)
+                report = self.run_fake(Mock(return_value=payload([record])))
+                self.assertEqual(report["error"], expected)
+                self.assertEqual(report["failure_status"], {"http_status": 200, "api_code": 200})
+                self.assertEqual(len(report["attempts"]), 1)
+                saved = (self.directory / "ledger.jsonl").read_text()
+                self.assertNotIn(SECRET, saved)
+                self.assertNotIn(SOURCE_TEXT, saved)
+
+    def test_composite_ids_are_kept_intact_for_deduplication(self):
+        # Synthetic forms of the composite string ID documented by 2GIS.
+        rows = [item("12345_tokenA"), item("12345_tokenB"), item("12345_tokenA")]
+        summary, accepted, ids = probe.summarize(payload(rows), 1, {})
+        self.assertEqual(ids, {"12345_tokenA", "12345_tokenB"})
+        self.assertEqual(summary["duplicate_count"], 1)
+        self.assertEqual(accepted, rows)
+
+    def test_id_safety_limits_still_reject_invalid_values(self):
+        for identifier in (None, 123, True, "", " ", "a\nsecret", "a\x7f", "a" * 513):
+            with self.subTest(identifier_type=type(identifier).__name__), \
+                 self.assertRaisesRegex(probe.ProbeError, "INVALID_ITEM_ID"):
+                probe.summarize(payload([item(identifier)]), 1, {})
+
+    def test_probe_mixed_rows_excludes_invalid_data_and_counts_fixed_reasons(self):
+        rows = [item("123_alpha"), None, item(42), {**item(), "name": ""},
+                {**item(), "point": None}, {**item(), "description": []}]
+        summary, accepted, ids = probe.summarize_probe(payload(rows), 3, {"A": probe.CENTER})
+        self.assertEqual(summary["returned"], 6)
+        self.assertEqual(summary["accepted_count"], 1)
+        self.assertEqual(summary["rejected_count"], 5)
+        self.assertEqual(summary["validation_status"], "partial")
+        self.assertEqual(summary["rejection_reasons"], {
+            "INVALID_ITEM_OBJECT": 1, "INVALID_ITEM_ID": 1, "INVALID_ITEM_NAME": 1,
+            "INVALID_COORDINATE": 1, "INVALID_OPTIONAL_FIELD": 1})
+        self.assertEqual(ids, {"123_alpha"})
+        self.assertEqual(accepted, rows[:1])
+        for counts in summary["fields"].values():
+            self.assertEqual(sum(counts.values()), 1)
+        self.assertNotIn(SOURCE_TEXT, json.dumps(summary))
+        self.assertNotIn("123_alpha", json.dumps(summary))
+
+    def test_probe_all_rejected_and_empty_are_distinct_from_valid_coverage(self):
+        for rows, expected in (([None, item(None)], "all_rejected"), ([], "empty")):
+            with self.subTest(expected=expected):
+                summary, accepted, ids = probe.summarize_probe(payload(rows), 1, {})
+                self.assertEqual(summary["validation_status"], expected)
+                self.assertEqual(summary["accepted_count"], 0)
+                self.assertEqual(summary["rejected_count"], len(rows))
+                self.assertEqual(accepted, [])
+                self.assertEqual(ids, set())
+
+    def test_probe_envelope_and_api_errors_remain_fatal(self):
+        for response in (None, {"meta": {"code": 403}}, payload([item()], 0),
+                         payload([item()] * 11), payload([], True)):
+            with self.subTest(response_type=type(response).__name__), self.assertRaises(probe.ProbeError):
+                probe.summarize_probe(response, 3, {"A": probe.CENTER})
 
     def test_duplicates_and_out_of_radius_are_measured(self):
         remote = {**item("999"), "point": {"lon": 72, "lat": 52}}

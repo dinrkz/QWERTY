@@ -2,7 +2,19 @@
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main` commit `155b7e4`. The deliverable commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/MEMBER_1_HANDOFF.md`.
 
-## Current increment — collector limits and safe pending-query revisions
+## Current increment — probe recovery, validation and offline tests
+
+The user authorized review, commit and PR #4 update of the remaining probe recovery work, with no provider requests and no dataset publication. This increment publishes the previously local recovery tooling and tests; it does not run the historical probe again. Current status here supersedes the earlier preparation-stage statements below.
+
+The first-anchor recovery preserves the first spent attempt and permits at most nine additional attempts. The transcript-bound completion path preserves five attempts; its final-four variant preserves all six attempts, including the failed validation dispatch, and never repeats that slot. Exact ledger/transcript approvals, exclusive locking, durable reservations before dispatch and refusal of repeat recovery retain the cumulative ten-attempt ceiling. Opaque provider IDs remain intact; malformed rows produce fixed aggregate quality counters without persisting source records or provider error text. The PowerShell helper is an explicitly interactive live launcher; the Python probe/completion CLIs default to offline dry runs.
+
+Owned changes: `scripts/data/probe_2gis.py`, `scripts/data/finish_2gis_probe.py`, `scripts/data/run_2gis_probe.ps1`, `tests/data/test_2gis_probe.py`, `tests/data/test_2gis_finish.py`, `tests/data/test_2gis_recovery.py`, `docs/2GIS_PROBE_PLAN.md`, `docs/2GIS_PERMISSIONS_INQUIRY.md`, `docs/DATA_SOURCE_FEASIBILITY.md`, and this focused handoff. Documentation distinguishes historical runs from current status and retains the optional, unsent permissions inquiry. No shared contracts, dependencies, application modules or collector behavior changed. Private chronological handoff observations are preserved in ignored `data/runtime/`, not included in the public handoff.
+
+Verification: **156 offline tests passed in an isolated export of the exact staged file set**: 68 2GIS probe/recovery, ten Wikidata probe, 66 collector/live-adapter and 12 walking-audit tests. Independent read-only code review passed the 68 probe/recovery tests with no actionable findings; a separate documentation review corrected stale claims and removed private source/account details. All three Python probe/completion default dry-run variants passed with zero network requests; PowerShell syntax and embedded approval hashes checked successfully. No configured application lint/type/build checks exist. Provider requests, real credentials and application acceptance checks were not used in this review.
+
+The historical probe remains exhausted at ten counted attempts. The separate private collector remains at **11/12** attempts and **73 unique records**, with the original snapshot and probe ledger unchanged. Nothing under `data/`, no credentials and no source payloads are included in this increment. Storage/indexing/AI-processing/redistribution rights and the integration lead's shared contract remain unresolved; publishing these tools grants no new execution budget.
+
+## Previous increment — collector limits and safe pending-query revisions
 
 The user authorized review, commit and PR #4 update of the remaining collector fixes with no provider calls and no dataset publication. Corrected all twelve public-plan demo pages from 50 to 10 and reject larger live pages before key reads or dispatch. Added bounded spatial searches with omitted `q` (blank/null remain invalid), and an explicit prior-manifest hash for changes to unreserved requests. Existing query fingerprints, attempt accounting and raw-response archives remain stable.
 
@@ -68,7 +80,7 @@ Remaining: human code review, permission basis for transient inspection/diagnost
 
 Local draft changes on `work/data/source-feasibility`; not committed or published by this drafting task. Owned paths for this increment: `docs/2GIS_PERMISSIONS_INQUIRY.md`, `docs/2GIS_PROBE_PLAN.md`, and updates to this handoff, `docs/DATA_PLAN.md`, `docs/DATA_SOURCE_FEASIBILITY.md`.
 
-Created organization `qadam` / Kazakhstan and demo key `qadam-data-dev` with the user's explicit authorization. UI evidence: Active Demo, expires 2026-11-18, Places API 0 / 1,000 at creation. Successful API calls are still untested. Drafted an unsent permissions inquiry and a maximum-ten-attempt probe specification; user currently authorizes planning only. No 2GIS or OpenAI API request was sent. No new script, fixture, shared contract, configuration or dependency was added. Existing Wikidata code is unchanged.
+Created Kazakhstan demo access with the user's explicit authorization. Account-specific observations remain private. At this historical preparation stage, successful API calls were still untested. Drafted an unsent permissions inquiry and a maximum-ten-attempt probe specification; user currently authorizes planning only. No 2GIS or OpenAI API request was sent. No new script, fixture, shared contract, configuration or dependency was added. Existing Wikidata code is unchanged.
 
 Verification for this documentation increment: checked official Places overview/items reference and local cross-references; `git diff --check` passed. No application tests or live probes were run for these prose changes. The future 2GIS script, offline quota tests, permission response and explicit live-run approval remain pending. Historical verification below belongs to the earlier Wikidata increment.
 
@@ -113,7 +125,7 @@ PR #4 review fix: added explicit validation of response objects, row objects, en
 ## Blockers and next dependency
 
 1. Member 2: review [interface proposal](DATA_INTERFACE_PROPOSAL.md), record the agreed contract and production module ownership. Member 1 must not create competing shared types or edit application modules.
-2. Team: 2GIS demo key creation is now complete; review the [unsent inquiry](2GIS_PERMISSIONS_INQUIRY.md), confirm the applicable permissions, and review the [probe plan](2GIS_PROBE_PLAN.md) before live execution. API response coverage is untested. No external message has been sent.
-3. Member 1 next increment: implement the 2GIS collector once access/rights are established, plus normalization/provenance, validation and retrieval against the agreed contract; add a permitted snapshot and behavior tests. Consider supplements only for measured gaps or a concrete blocker.
+2. Team: provider storage/indexing/AI-processing/redistribution rights remain unresolved. The [optional inquiry](2GIS_PERMISSIONS_INQUIRY.md) is unsent; existing private collection does not establish those rights or authorize publication.
+3. Member 1: use the saved private records and [offline review](WALKING_DATASET_REVIEW.md) to assess coverage and implement retrieval once the shared contract is agreed. No additional provider requests are authorized by this handoff.
 
 Human review of this diff and evidence is pending. Member 2 owns integration; do not merge directly to main.

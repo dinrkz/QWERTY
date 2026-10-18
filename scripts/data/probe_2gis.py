@@ -51,6 +51,15 @@ PLAN = {
     "policy": "transient-only; no-retry; no-redirect; no-resume; human-anchor-review",
 }
 PLAN_HASH = hashlib.sha256(json.dumps(PLAN, sort_keys=True).encode()).hexdigest()
+RECOVERY_PLAN = {
+    "version": 1, "original_plan_sha256": PLAN_HASH,
+    "eligible_stop": "one received slot 1; ANCHOR_REVIEW_STOPPED",
+    "slots": list(range(1, 10)), "max_additional_attempts": 9,
+    "max_total_attempts": MAX_ATTEMPTS,
+    "policy": "one explicit recovery; repeat slot 1; omit slot 10; no automatic retries",
+}
+RECOVERY_PLAN_HASH = hashlib.sha256(
+    json.dumps(RECOVERY_PLAN, sort_keys=True).encode()).hexdigest()
 
 
 class ProbeError(Exception):
@@ -149,8 +158,8 @@ def field_state(item, field, expected):
     return "present" if value else "empty"
 
 
-def summarize(payload, slot, anchors):
-    """Return aggregates plus transient records. Never write source records here."""
+def response_items(payload, slot, anchors):
+    """Validate the response envelope before any per-record handling."""
     if not isinstance(payload, dict) or not isinstance(payload.get("meta"), dict):
         raise ProbeError("INVALID_RESPONSE")
     code = payload["meta"].get("code")
@@ -163,6 +172,12 @@ def summarize(payload, slot, anchors):
     params = parameters(slot, anchors)
     if type(total) is not int or total < len(items) or len(items) > params["page_size"]:
         raise ProbeError("INVALID_RESPONSE")
+    return items, total, params
+
+
+def summarize(payload, slot, anchors):
+    """Strict aggregates plus transient records; rejects a malformed record."""
+    items, total, params = response_items(payload, slot, anchors)
     counts = {name: dict.fromkeys(("missing", "null", "empty", "present"), 0)
               for name in ("description", "rubrics", "schedule", "adm_div")}
     ids = set()
@@ -170,11 +185,16 @@ def summarize(payload, slot, anchors):
     origin = tuple(map(float, params["point"].split(",")))
     for item in items:
         if not isinstance(item, dict):
-            raise ProbeError("INVALID_ITEM")
-        if not isinstance(item.get("id"), str) or not re.fullmatch(r"[0-9]+", item["id"]):
-            raise ProbeError("INVALID_ITEM")
+            raise ProbeError("INVALID_ITEM_OBJECT", http_status=200, api_code=200)
+        # The official items example includes composite IDs with underscores and
+        # letters. Keep the complete opaque value; the size/control limits below
+        # are local input safeguards, not claims about the provider's ID grammar.
+        identifier = item.get("id")
+        if (not isinstance(identifier, str) or not identifier.strip() or
+            len(identifier) > 512 or any(ord(c) < 32 or ord(c) == 127 for c in identifier)):
+            raise ProbeError("INVALID_ITEM_ID", http_status=200, api_code=200)
         if not isinstance(item.get("name"), str) or not item["name"].strip():
-            raise ProbeError("INVALID_ITEM")
+            raise ProbeError("INVALID_ITEM_NAME", http_status=200, api_code=200)
         point = item.get("point")
         if not isinstance(point, dict):
             raise ProbeError("INVALID_COORDINATE")
@@ -190,18 +210,49 @@ def summarize(payload, slot, anchors):
             "fields": counts}, items, ids
 
 
+def summarize_probe(payload, slot, anchors):
+    """Measure partial data quality without accepting malformed POI records.
+
+    Envelope/API/transport failures remain fatal. Only fixed reason counts are
+    retained for rejected rows; field coverage and ID comparisons use valid rows.
+    """
+    items, total, _ = response_items(payload, slot, anchors)
+    accepted, rejected = [], {}
+    row_errors = {"INVALID_ITEM_OBJECT", "INVALID_ITEM_ID", "INVALID_ITEM_NAME",
+                  "INVALID_COORDINATE", "INVALID_OPTIONAL_FIELD"}
+    for item in items:
+        try:
+            summarize({"meta": {"code": 200}, "result": {"items": [item], "total": 1}},
+                      slot, anchors)
+        except ProbeError as error:
+            code = str(error)
+            if code not in row_errors:
+                raise
+            rejected[code] = rejected.get(code, 0) + 1
+        else:
+            accepted.append(item)
+    summary, valid_items, ids = summarize(
+        {"meta": {"code": 200}, "result": {"items": accepted, "total": total}}, slot, anchors)
+    summary.update(returned=len(items), accepted_count=len(accepted),
+                   rejected_count=len(items) - len(accepted), rejection_reasons=rejected,
+                   validation_status=("empty" if not items else "all_rejected" if not accepted
+                                      else "partial" if rejected else "valid"))
+    return summary, valid_items, ids
+
+
 class Ledger:
     """One fixed run, exclusive lock and fsynced reservations before dispatch.
 
-    Existing state (even corrupt/empty state) refuses a fresh run. There is no
-    reset or resume command. Stale locks after a crash require human review.
+    Existing state refuses a fresh run. One explicitly approved recovery from
+    the first anchor review stop may append; it never refunds the first attempt.
     """
 
-    def __init__(self, directory):
+    def __init__(self, directory, recover_anchor_stop=None):
         self.directory = Path(directory)
         self.path = self.directory / "ledger.jsonl"
         self.lock = self.directory / "run.lock"
         self.output = None
+        self.recover_anchor_stop = recover_anchor_stop
         self.data = {"plan_sha256": PLAN_HASH, "started_at": now(), "attempts": [],
                      "status": "running", "skipped_slots": []}
 
@@ -213,10 +264,14 @@ class Ledger:
             raise ProbeError("RUN_LOCKED") from None
         os.close(fd)
         try:
-            if any((self.directory / name).exists()
-                   for name in ("ledger.jsonl", "ledger.json", "ledger.tmp")):
-                raise ProbeError("EXISTING_RUN_REQUIRES_REVIEW")
-            self.output = self.path.open("x", encoding="utf-8")
+            if self.recover_anchor_stop is not None:
+                self.prepare_recovery()
+                self.output = self.path.open("a", encoding="utf-8")
+            else:
+                if any((self.directory / name).exists()
+                       for name in ("ledger.jsonl", "ledger.json", "ledger.tmp")):
+                    raise ProbeError("EXISTING_RUN_REQUIRES_REVIEW")
+                self.output = self.path.open("x", encoding="utf-8")
             self.save()
         except BaseException:
             if self.output is not None:
@@ -224,6 +279,50 @@ class Ledger:
             self.lock.unlink()
             raise
         return self
+
+    def prepare_recovery(self):
+        """Accept only the reviewed, complete four-snapshot first-anchor stop.
+
+        The approval fingerprint binds this exception to the exact prior ledger.
+        Called under the same exclusive lock used for reservations. No source
+        records survive the original run, so the mall lookup must be spent again.
+        """
+        if (not isinstance(self.recover_anchor_stop, str) or
+            not re.fullmatch(r"[0-9a-f]{64}", self.recover_anchor_stop) or
+            any((self.directory / name).exists() for name in ("ledger.json", "ledger.tmp"))):
+            raise ProbeError("RECOVERY_NOT_ELIGIBLE")
+        try:
+            with self.path.open("rb") as previous:
+                raw = previous.read(MAX_BYTES + 1)
+            if len(raw) > MAX_BYTES or not raw.endswith(b"\n"):
+                raise ProbeError("RECOVERY_NOT_ELIGIBLE")
+            if hashlib.sha256(raw).hexdigest() != self.recover_anchor_stop:
+                raise ProbeError("RECOVERY_LEDGER_CHANGED")
+            history = [json.loads(line) for line in raw.decode("utf-8").splitlines()]
+            last = history[-1]
+            attempt, = last["attempts"]
+            summary = attempt["summary"]
+            base = {"plan_sha256": PLAN_HASH, "started_at": last["started_at"],
+                    "attempts": [], "status": "running", "skipped_slots": []}
+            reservation = {"slot": 1, "reserved_at": attempt["reserved_at"], "status": "reserved"}
+            received = {**reservation, "status": "received",
+                        "finished_at": attempt["finished_at"], "summary": summary}
+            expected = [base, {**base, "attempts": [reservation]},
+                        {**base, "attempts": [received]},
+                        {**base, "attempts": [received], "status": "stopped",
+                         "error": "ANCHOR_REVIEW_STOPPED", "failure_status": {},
+                         "finished_at": last["finished_at"]}]
+            if (history != expected or summary["http_status"] != 200 or
+                summary["api_code"] != 200 or type(summary["returned"]) is not int or
+                not 1 <= summary["returned"] <= 5):
+                raise ProbeError("RECOVERY_NOT_ELIGIBLE")
+        except (OSError, ValueError, KeyError, TypeError, IndexError):
+            raise ProbeError("RECOVERY_NOT_ELIGIBLE") from None
+        self.data = {**base, "attempts": [received], "skipped_slots": [10],
+                     "recovery": {"plan_sha256": RECOVERY_PLAN_HASH,
+                                  "prior_ledger_sha256": self.recover_anchor_stop,
+                                  "prior_attempts": 1, "max_additional_attempts": 9,
+                                  "started_at": now()}}
 
     def save(self):
         # Full aggregate snapshots are appended; no rewriting reserved attempts.
@@ -236,7 +335,8 @@ class Ledger:
         attempts = self.data["attempts"]
         if len(attempts) >= MAX_ATTEMPTS:
             raise ProbeError("BUDGET_EXHAUSTED")
-        if type(slot) is not int or slot != len(attempts) + 1:
+        prior_attempts = 1 if self.recover_anchor_stop is not None else 0
+        if type(slot) is not int or slot != len(attempts) - prior_attempts + 1:
             raise ProbeError("UNAPPROVED_SLOT")
         attempts.append({"slot": slot, "reserved_at": now(), "status": "reserved"})
         self.save()
@@ -281,7 +381,7 @@ def review_anchor(items, slot):
         print(index, safe_display(item["name"]), safe_display(item["type"]),
               safe_display([r["name"] for r in item.get("rubrics") or []]),
               safe_display(item["point"]))
-    choice = input("Select the actual mall/landmark number, or Enter to stop: ").strip()
+    choice = input("Type the actual mall/landmark number (e.g. 1), then Enter; blank stops: ").strip()
     if not choice.isdigit() or not 1 <= int(choice) <= len(eligible):
         raise ProbeError("ANCHOR_REVIEW_STOPPED")
     item = eligible[int(choice) - 1]
@@ -292,7 +392,7 @@ def review_anchor(items, slot):
 
 
 def confirm_anchors():
-    return input("Both anchors reviewed. Type CONTINUE to allow slots 3–10: ") == "CONTINUE"
+    return input("Both anchors reviewed. Type CONTINUE to allow the remaining approved queries: ") == "CONTINUE"
 
 
 def review_results(items, slot):
@@ -346,7 +446,10 @@ def run(key, ledger, transport=fetch, reviewer=review_anchor,
     """Execute one approved session. Tests inject transport; CLI alone authorizes live."""
     anchors, ids_by_slot, summaries = {}, {}, {}
     try:
-        for slot in range(1, MAX_ATTEMPTS + 1):
+        # Recovery repeats the lost mall lookup and drops optional pagination.
+        # Its original attempt remains in this ledger and in the global limit.
+        last_slot = 9 if ledger.recover_anchor_stop is not None else MAX_ATTEMPTS
+        for slot in range(1, last_slot + 1):
             if slot == 3 and not confirm():
                 raise ProbeError("ANCHOR_REVIEW_STOPPED")
             if slot == 10 and not (summaries[7]["returned"] == 10 and
@@ -399,22 +502,26 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true", help="Requires separately approved live use")
     parser.add_argument("--approved-plan", help="SHA-256 of the explicitly approved plan")
+    parser.add_argument("--recover-anchor-stop", metavar="LEDGER_SHA256",
+                        help="One approved recovery from the first anchor stop; keeps spent attempt")
     parser.add_argument("--transient-use-permitted", action="store_true",
                         help="Attest that transient inspection/aggregate reporting is permitted")
     args = parser.parse_args(argv)
+    plan = RECOVERY_PLAN if args.recover_anchor_stop is not None else PLAN
+    plan_hash = RECOVERY_PLAN_HASH if args.recover_anchor_stop is not None else PLAN_HASH
     if not args.live:
         print(json.dumps({"mode": "dry_run", "network_requests": 0,
-                          "plan_sha256": PLAN_HASH, "plan": PLAN,
+                          "plan_sha256": plan_hash, "plan": plan,
                           "unresolved_anchors": ["A", "B"]}, ensure_ascii=False, indent=2))
         return 0
-    if args.approved_plan != PLAN_HASH or not args.transient_use_permitted:
+    if args.approved_plan != plan_hash or not args.transient_use_permitted:
         print("LIVE_APPROVAL_REQUIRED", file=sys.stderr)
         return 2
     if not sys.stdin.isatty() or not sys.stdout.isatty():
         print("INTERACTIVE_TERMINAL_REQUIRED", file=sys.stderr)
         return 2
     try:
-        with Ledger(STATE_DIR) as ledger:
+        with Ledger(STATE_DIR, recover_anchor_stop=args.recover_anchor_stop) as ledger:
             # getpass can otherwise fall back to echoed input on unsupported terminals.
             with warnings.catch_warnings():
                 warnings.simplefilter("error", getpass.GetPassWarning)
