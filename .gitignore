@@ -24,6 +24,7 @@ data/*.db-*
 uploads/
 logs/
 *.log
+.worktrees/
 
 # Local OS files
 .DS_Store
