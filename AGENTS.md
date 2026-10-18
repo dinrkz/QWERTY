@@ -7,6 +7,14 @@
 - Treat `old/` as an archive. Its HackAlem rubric, deadlines, filenames, and generic agent workflow are superseded by these root documents.
 - Separate official requirements, team implementation decisions, proposals, and verified implementation status. Never claim a proposed feature works.
 
+## Audience and product focus
+- Primary audiences: people exploring Astana on foot, including residents taking a walk, and first-time visitors who need help discovering the city.
+- Use the team's naming rationale, Qadam (қадам, “step”), to guide the product: help users decide their next worthwhile stop nearby.
+- Default the MVP to walking. Prioritize nearby discovery, walking effort/time, available visit time, interests, and clear explanations for people unfamiliar with local places. Do not assume the user knows landmark names or the city's layout.
+- Core scenarios: a short local walk; a first-time visitor exploring nearby sights; a coffee/rest stop during a walk. Child-outing, airport, and nighttime cases remain secondary robustness checks, not separate required product modes.
+- Favor features that help these audiences. General driving itineraries, bookings, fitness/step tracking, and full turn-by-turn navigation are outside the initial scope. Multi-stop routes remain optional, as in the brief.
+- This focus fits the supplied walking-assistant track and its tourist example. It does not waive automated POI collection, real RAG, contextual recommendations, source/uncertainty labels, privacy, or submission requirements.
+
 ## Judging priorities, in the supplied order
 1. Relevance and usefulness of recommendations.
 2. Context and adaptation: distance, time, user needs, explicit constraints, opening hours.

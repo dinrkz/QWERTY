@@ -39,7 +39,7 @@ Before integration, verify the source's current documentation, geographic/catego
 8. Document exact collection and refresh commands once implemented. Verify repeatability on fixed source input and separately demonstrate successful real collection.
 
 ## Coverage review
-Check that actual collected records support the chosen walk, coffee, and child-outing scenarios. If sockets/quietness/child suitability are not documented, preserve that limitation and demonstrate honest unknown handling. Do not manufacture positive evidence to make the demo succeed.
+Check that actual collected records support short walks, first-time visitor discovery, and coffee/rest stops in the chosen demo area. Prioritize nearby parks, landmarks, museums, and cafes with sufficient source descriptions to explain their relevance to someone unfamiliar with Astana. Do not invent historical/cultural context. If sockets/quietness or attributes in secondary child-outing checks are not documented, preserve that limitation and demonstrate honest unknown handling. Do not manufacture positive evidence to make the demo succeed.
 
 ## Evidence to capture
 Source documentation and terms links; date checked; collector command; collection date; dataset counts; validation report; attribution; refresh behavior; live-source failures; approved snapshot version/hash. Exclude credentials and personal user coordinates.
