@@ -1,8 +1,10 @@
 # Member 1 source feasibility
 
-Checked: 2026-10-18. These are source research findings, not a completed collector or approved final dataset choice. The user confirmed Python backend and no current 2GIS Places access, and explicitly prioritized 2GIS as a main POI source. The map remains 2GIS. Wikidata is a fallback or optional supplement, not the default replacement.
+Checked: 2026-10-18. These are source research findings, not a completed collector or approved final dataset choice. The user confirmed Python backend and explicitly prioritized 2GIS as a main POI source. A demo key has since been created; API success and data-use rights remain unverified. The map remains 2GIS. Wikidata is a fallback or optional supplement, not the default replacement.
 
-## 2GIS — account and rights unresolved
+## 2GIS — demo access provisioned; API use and rights unresolved
+
+Platform Manager showed `qadam` / Kazakhstan, `qadam-data-dev`, Active Demo, 2026-10-18 to 2026-11-18, and Places API usage 0 / 1,000. No key value is recorded here. No 2GIS API calls have run. The [permissions inquiry](2GIS_PERMISSIONS_INQUIRY.md) is drafted but unsent; the [ten-attempt probe](2GIS_PROBE_PLAN.md) is implemented with synthetic offline tests and remains unauthorized for live execution. Only documentation pages were consulted during drafting; no source request was needed for implementation or tests.
 
 The [Places API overview](https://docs.2gis.com/en/api/search/places/overview) documents geographic/category search and requires an access key. Some additional fields require separate access. Astana results, descriptions, amenities, pagination, and limits have not been tested with the team's account.
 
@@ -12,8 +14,8 @@ Decision: prioritize 2GIS as the primary candidate and first production-source i
 
 ### Next 2GIS checkpoint
 
-1. Obtain a Places-enabled demo/subscription key through the official platform; keep it in local secret configuration, never chat or Git. Confirm the applicable agreement for Kazakhstan and the project's intended use.
-2. Once access is available, run a bounded feasibility check in Astana across cafes, parks, museums, landmarks, and small nearby businesses. Use sourced demo coordinates, not personal location. Do not persist venue responses until storage rights are established.
+1. Demo key creation is complete; local secret configuration and successful API access remain pending. Confirm the applicable agreement for Kazakhstan and the project's intended use.
+2. Review the inquiry, probe and offline verification, establish permission for transient inspection, and obtain explicit execution approval. Then run at most ten attempts across cafes, parks, museums and landmarks. Derive actual demo anchors from returned evidence; the initial search centre is simulated, not personal location. Do not persist venue responses until storage rights are established.
 3. Report actual success/errors and field coverage: stable IDs, name, coordinates, category, description, hours, source links, and any requested amenities. Richness is a hypothesis to measure: category/marketing text must not imply sockets, quietness, accessibility, or current opening.
 4. Check actual pagination, account limits, attribution and refresh requirements. Estimate a small collection scope from observed results and approved quotas, without assuming an unlimited city-wide export.
 5. After rights and the shared Python contract are settled, build the 2GIS collector first. Use another source only for an evidenced gap or blocker; preserve separate provenance and reuse terms when combining records.

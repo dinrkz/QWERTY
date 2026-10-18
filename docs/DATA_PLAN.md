@@ -1,10 +1,12 @@
 # Automated POI data collection plan
 
-Status: **2GIS Places API is the candidate POI source**, not a final selection. Account access, applicable permissions, collector implementation, and actual records remain unverified. The map will use 2GIS regardless of whether this candidate is selected. The following is a team plan to satisfy R04/R05.
+Status: **2GIS Places API is the candidate POI source**, not a final selection. A Places-enabled demo key is active in Platform Manager; successful API access, applicable data-use permissions, collector implementation, and actual records remain unverified. The map will use 2GIS regardless of whether this candidate is selected. The following is a team plan to satisfy R04/R05.
 
-Member 1 checkpoint (2026-10-18): Python backend confirmed by the user; no 2GIS access yet. See [source feasibility and live Wikidata sample evidence](DATA_SOURCE_FEASIBILITY.md), the [proposed Python boundary](DATA_INTERFACE_PROPOSAL.md), and [handoff](MEMBER_1_HANDOFF.md). A bounded alternate-source probe succeeded; no production collector, normalized demo snapshot, or shared application contract is complete.
+Member 1 checkpoint (2026-10-18): Python backend confirmed by the user. Organization `qadam` / Kazakhstan and demo key `qadam-data-dev` were created; the UI showed 0 / 1,000 Places requests and expiry 2026-11-18. No 2GIS API calls have run. The user requires planning and review before spending quota: see the [unsent permissions inquiry](2GIS_PERMISSIONS_INQUIRY.md) and [proposed ten-attempt probe](2GIS_PROBE_PLAN.md). See also [source feasibility and live Wikidata sample evidence](DATA_SOURCE_FEASIBILITY.md), the [proposed Python boundary](DATA_INTERFACE_PROPOSAL.md), and [handoff](MEMBER_1_HANDOFF.md). No production collector, normalized demo snapshot, or shared application contract is complete.
 
 User priority (2026-10-18): make **2GIS a main POI source**, prioritizing its evaluation and collector before alternatives. This expresses the team's preferred source, not verified access or permissions. Wikidata/OSM are fallback or supplementary candidates for concrete blockers or measured gaps. Keep the 2GIS map decision separate from the data-use agreement.
+
+Offline implementation checkpoint: `scripts/data/probe_2gis.py` now prints the plan without networking by default and enforces a fixed ten-attempt ledger in its gated live mode. `tests/data/test_2gis_probe.py` uses synthetic responses only. See [probe usage and limitations](2GIS_PROBE_PLAN.md). No live access, source data collection or production retrieval is claimed.
 
 ## 2GIS feasibility check — member 1
 1. Obtain access through the official platform and test Astana categories/locations needed for the demo.
