@@ -87,7 +87,7 @@ const ERRORS = {
   INTERNAL_ERROR: ['Не удалось обработать запрос. Попробуйте позже.', 'Сұрауды өңдеу мүмкін болмады. Кейінірек қайталаңыз.', 'The request could not be processed. Please try later.']
 };
 export function errorResult(code, language = 'ru') {
-  const lang = COPY[language] ? language : 'ru';
+  const lang = typeof language === 'string' && Object.hasOwn(COPY, language) ? language : 'ru';
   const safeCode = Object.hasOwn(ERRORS, code) ? code : 'INTERNAL_ERROR';
   return { status: safeCode === 'NEEDS_CLARIFICATION' ? 'needs_clarification' : 'error', code: safeCode,
     language: lang, message: ERRORS[safeCode][['ru','kk','en'].indexOf(lang)],
@@ -130,7 +130,7 @@ export function present(request, retrieval, generated, mode) {
   return { status: synthetic ? 'synthetic_test' : mode, language: request.language,
     message: synthetic ? copy.synthetic : mode === 'live_rag' ? copy.live : mode === 'no_match' ? copy.empty : copy.fallback,
     context_used: { ...providerContext(request), location: 'manual_or_device_ephemeral', query_terms: request.query_terms },
-    recommendations, warnings: [...retrieval.warnings, ...(recommendations.length > 0 && recommendations.length < 3 ? [copy.partial] : [])] };
+    recommendations, warnings: [...retrieval.warnings, ...(recommendations.length > 0 && retrieval.candidates.length < 3 ? [copy.partial] : [])] };
 }
 export function fallbackSelections(request, candidates) {
   return { recommendations: candidates.slice(0, 3).map(c => ({ poi_id: c.poi.id,

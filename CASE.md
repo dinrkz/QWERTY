@@ -3,7 +3,7 @@
 ## Source and status
 Source: [user-supplied Russian brief](docs/HACKATHON_BRIEF_RU.txt), preserved verbatim. Organizer named in that brief: School of AI and Data Science; task partners: Smart City Research Center and GDG Astana. This document summarizes that supplied text; it is not independent verification of organizer rules.
 
-Current repository status: planning and operating rules only. No application, collected POI dataset, or completed demo exists yet.
+Current repository status: member 2 has implemented a local application increment; see README and `docs/CONTRACTS.md` for the actual boundary and limitations. A collected POI dataset, integrated retrieval, verified live generation and completed demo are still pending. The requirement map below remains the competition specification, not a results report.
 
 ## Official objective
 Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo that recommends where to go and what to do in Astana based on current location, preferences, and context. Recommendations should be useful, safe, concrete, and understandable.

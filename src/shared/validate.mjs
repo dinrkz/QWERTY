@@ -53,7 +53,7 @@ export function mergeIntent(request, intent) {
   const next = { ...request, categories, query_terms: intent.query_terms,
     required_amenities: [...new Set([...request.required_amenities, ...intent.required_amenities])],
     preferred_amenities: [...new Set([...request.preferred_amenities, ...intent.preferred_amenities])],
-    available_minutes: Math.min(request.available_minutes, intent.available_minutes ?? Infinity),
+    available_minutes: Math.floor(Math.min(request.available_minutes, intent.available_minutes ?? Infinity)),
     max_distance_m: Math.min(request.max_distance_m, intent.max_distance_m ?? Infinity),
     buffer_minutes: Math.max(request.buffer_minutes, intent.buffer_minutes ?? 0) };
   for (const k of ['return_to_start','require_open','events_only','first_visit']) next[k] = request[k] || intent[k] === true;
