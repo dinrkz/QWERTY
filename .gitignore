@@ -1,0 +1,30 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependency and build output (when applicable)
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.venv/
+__pycache__/
+*.pyc
+
+# Private/runtime data; approved demo snapshots belong in data/demo/
+data/private/
+data/raw/
+data/runtime/
+data/*.db
+data/*.db-*
+uploads/
+logs/
+*.log
+
+# Local OS files
+.DS_Store
+Thumbs.db
