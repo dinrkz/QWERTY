@@ -1,6 +1,6 @@
 # Member 1 source feasibility
 
-Checked: 2026-10-18. These are source research findings, not a completed collector or approved final dataset choice. The user confirmed Python backend and no current 2GIS Places access. The map remains 2GIS.
+Checked: 2026-10-18. These are source research findings, not a completed collector or approved final dataset choice. The user confirmed Python backend and no current 2GIS Places access, and explicitly prioritized 2GIS as a main POI source. The map remains 2GIS. Wikidata is a fallback or optional supplement, not the default replacement.
 
 ## 2GIS — account and rights unresolved
 
@@ -8,7 +8,15 @@ The [Places API overview](https://docs.2gis.com/en/api/search/places/overview) d
 
 The [directory pricing policy](https://law.2gis.ru/catalog-pay) lists storage capability as a separate pricing component. The [directory API offer, section 3.1](https://law.2gis.ru/webapi-offer) restricts extraction, storage, processing and redistribution outside the contract; caching is not provided under that text. This is evidence that ordinary access is insufficient to assume dataset rights, not a finding that every 2GIS contract prohibits our use. That offer's directory definition refers to the Russian Federation; the agreement applicable to Astana/the team's account must be confirmed separately. No clear grant for our OpenAI processing or public snapshot was verified.
 
-Decision: keep 2GIS as a candidate; do not collect a persistent 2GIS dataset until the applicable agreement supports it. Ask for access and written coverage of storage, indexing, sending selected records to OpenAI for inference, public demo display, snapshot redistribution, attribution and retention. A free key alone does not answer those questions.
+Decision: prioritize 2GIS as the primary candidate and first production-source integration target. Do not collect a persistent 2GIS dataset until the applicable agreement supports it. Ask for access and written coverage of storage, indexing, sending selected records to OpenAI for inference, public demo display, snapshot redistribution, attribution and retention. A free key alone does not answer those questions. A concrete access/rights blocker or measured coverage gap is required before proposing a replacement.
+
+### Next 2GIS checkpoint
+
+1. Obtain a Places-enabled demo/subscription key through the official platform; keep it in local secret configuration, never chat or Git. Confirm the applicable agreement for Kazakhstan and the project's intended use.
+2. Once access is available, run a bounded feasibility check in Astana across cafes, parks, museums, landmarks, and small nearby businesses. Use sourced demo coordinates, not personal location. Do not persist venue responses until storage rights are established.
+3. Report actual success/errors and field coverage: stable IDs, name, coordinates, category, description, hours, source links, and any requested amenities. Richness is a hypothesis to measure: category/marketing text must not imply sockets, quietness, accessibility, or current opening.
+4. Check actual pagination, account limits, attribution and refresh requirements. Estimate a small collection scope from observed results and approved quotas, without assuming an unlimited city-wide export.
+5. After rights and the shared Python contract are settled, build the 2GIS collector first. Use another source only for an evidenced gap or blocker; preserve separate provenance and reuse terms when combining records.
 
 ## Open alternatives — proposals
 
@@ -17,7 +25,7 @@ Decision: keep 2GIS as a candidate; do not collect a persistent 2GIS dataset unt
 | Wikidata structured entity data | [Licensing policy](https://www.wikidata.org/wiki/Wikidata:Licensing) publishes structured data under CC0. This supports copying and adapting entity data for a snapshot; provenance will still be retained. | Measure relevant Astana coverage, descriptions/languages, coordinates, categories and coffee-stop suitability. Do not import Wikipedia prose or images under the entity-data license. |
 | OpenStreetMap data | [Copyright page](https://www.openstreetmap.org/copyright) permits reuse under ODbL with attribution and applicable share-alike requirements. | Choose an export/API with suitable usage rules, inspect actual Astana tags/descriptions, and document dataset distribution obligations before collection. No OSM request or dataset collection has run. |
 
-Recommendation: assess Wikidata as a low-dependency initial source for sightseeing; consider OSM separately if actual coffee/park coverage needs it. This is not a claim that either source covers all three scenarios. The final source remains pending coverage evidence and team selection.
+Recommendation: retain the completed Wikidata probe as fallback/supplement evidence while prioritizing 2GIS. Do not expand a fallback into the default collector merely because it is easier to access. OSM remains an untested alternative. The final usable source combination remains conditional on access, reuse rights and measured scenario coverage.
 
 ## Bounded Wikidata probe
 
@@ -53,4 +61,4 @@ Sample inspection found source-described parks, a museum and monuments, alongsid
 | [Q12572863](https://www.wikidata.org/wiki/Q12572863) | Казак ели (монумент) | English description present |
 | [Q120868819](https://www.wikidata.org/wiki/Q120868819) | Парк Жеруйык | Description absent in returned language fallback |
 
-Coffee-stop coverage is still unverified; the sample is insufficient to rule it in or out. Next source task: category-filtered coverage queries plus source-revision capture, then evaluate whether another permitted source is necessary. Preserve language metadata in the eventual normalized records; a Russian name does not mean its description is Russian.
+Coffee-stop coverage is still unverified; the sample is insufficient to rule it in or out. Further Wikidata work is deferred unless a supplement is needed. Preserve language metadata in the eventual normalized records; a Russian name does not mean its description is Russian.

@@ -4,7 +4,7 @@ Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main`
 
 ## Completed scope
 
-- Checked 2GIS source documentation and storage restrictions; account access and the applicable Astana agreement remain unresolved.
+- Checked 2GIS source documentation and storage restrictions; account access and the applicable Astana agreement remain unresolved. The user explicitly prioritizes 2GIS as a main data source and first collector target; Wikidata is fallback/supplement evidence.
 - Added a dependency-free Python Wikidata source probe and obtained a bounded live sample: 200 rows / 159 unique entities, including 125 with descriptions. This is exploratory evidence, not the final dataset.
 - Proposed a Python retrieval boundary and POI/evidence conventions for member 2 to approve and record in the shared contract.
 - Added focused tests for coverage reporting, malformed source data, failure handling and existing-run preservation.
@@ -41,7 +41,7 @@ An intermediate test run hit Windows sandbox permissions in the system temporary
 ## Blockers and next dependency
 
 1. Member 2: review [interface proposal](DATA_INTERFACE_PROPOSAL.md), record the agreed contract and production module ownership. Member 1 must not create competing shared types or edit application modules.
-2. Team: choose a permitted source after source/category coverage review, or obtain 2GIS access with explicit rights for the intended dataset and AI use. No 2GIS account was created and no external message was sent.
-3. Member 1 next increment: implement source-specific collection, normalization/provenance, validation and retrieval against the agreed contract; add a permitted snapshot and behavior tests. Check the coffee-stop coverage gap explicitly.
+2. Team: obtain 2GIS Places access and confirm explicit rights for the intended dataset and AI use. Prioritize its Astana coverage/field checks before expanding fallback work. No 2GIS account was created and no external message was sent.
+3. Member 1 next increment: implement the 2GIS collector once access/rights are established, plus normalization/provenance, validation and retrieval against the agreed contract; add a permitted snapshot and behavior tests. Consider supplements only for measured gaps or a concrete blocker.
 
 Human review of this diff and evidence is pending. Member 2 owns integration; do not merge directly to main.

@@ -65,6 +65,6 @@ Proposed minimal empty-result example (synthetic, not a live response):
 
 1. Record the approved schema, exact module paths, and ownership in `docs/CONTRACTS.md`.
 2. Confirm category vocabulary, time-estimate policy, and whether opening-hours evaluation is in the initial increment.
-3. Confirm the first source after reviewing [source feasibility](DATA_SOURCE_FEASIBILITY.md). 2GIS map remains the confirmed map provider.
+3. Prioritize 2GIS as the first source integration target per the user's explicit direction, subject to access/rights and measured coverage in [source feasibility](DATA_SOURCE_FEASIBILITY.md). Wikidata is a fallback/supplement. 2GIS map remains the confirmed map provider.
 
 Once agreed, member 1 implements the collector, normalization, snapshot validation, and retrieval against that boundary. The initial quality checks cover invalid coordinates, deduplication, missing descriptions, unknown hard amenities, no matches, time budgets, repeatability, and explicit collection failures.
