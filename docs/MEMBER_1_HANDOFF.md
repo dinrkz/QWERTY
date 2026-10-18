@@ -2,7 +2,13 @@
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main` commit `155b7e4`. The deliverable commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/MEMBER_1_HANDOFF.md`.
 
-## Current increment — probe recovery, validation and offline tests
+## Current increment — offline retrieval plan and member 2 handoff
+
+The user authorized review, commit and PR #4 update of the [retrieval plan](OFFLINE_RETRIEVAL_PLAN.md), [member 2 handoff](MEMBER_2_RETRIEVAL_HANDOFF.md), updated [interface proposal](DATA_INTERFACE_PROPOSAL.md), and this handoff. Code baseline: `66d06f6`; the documentation commit is the commit containing this section. Member 2's next dependency is the approved schema/module ownership and structured-only offline evaluation policy. No retrieval implementation, shared contract, dependency, configuration or application file changed; no direct handoff message was sent.
+
+Preparation used two read-only subagents for design and snapshot readiness, followed by independent design and privacy reviews for publication. Documentation checks passed: 21 local links, two synthetic JSON examples, unchanged fingerprints for five private artifacts, whitespace and the exact four-document commit scope. No application tests were rerun for this documentation-only increment; the 156-test baseline below remains prior evidence, not validation of proposed retrieval. Dataset stays private and unchanged; no data-provider API calls or provider credential reads occurred. Collector usage remains 11/12 plus ten historical probe attempts. Shared contract, source permissions and demo eligibility remain unresolved.
+
+## Published increment — probe recovery, validation and offline tests
 
 The user authorized review, commit and PR #4 update of the remaining probe recovery work, with no provider requests and no dataset publication. This increment publishes the previously local recovery tooling and tests; it does not run the historical probe again. Current status here supersedes the earlier preparation-stage statements below.
 
