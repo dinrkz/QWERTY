@@ -7,6 +7,7 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import re
 import sys
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
@@ -34,19 +35,33 @@ LIMIT 200
 """
 
 
+def binding_value(row, field, *, optional=False):
+    """Unbound optional SPARQL variables are omitted, not null bindings."""
+    if optional and field not in row:
+        return None
+    binding = row.get(field)
+    if not isinstance(binding, dict) or not isinstance(binding.get("value"), str):
+        raise ValueError("Expected a SPARQL binding with a string value")
+    return binding["value"]
+
+
 def summarize(payload):
     """Count unique entities; multiple coordinates/types can produce duplicate rows."""
-    rows = payload["results"]["bindings"]
+    if not isinstance(payload, dict) or not isinstance(payload.get("results"), dict):
+        raise ValueError("Expected a SPARQL results object")
+    rows = payload["results"].get("bindings")
     if not isinstance(rows, list):
         raise ValueError("Expected a SPARQL bindings list")
     entities = {}
     for row in rows:
-        identifier = row["item"]["value"]
-        if not identifier.startswith("http://www.wikidata.org/entity/Q"):
+        if not isinstance(row, dict):
+            raise ValueError("Expected a SPARQL result row object")
+        identifier = binding_value(row, "item")
+        if not re.fullmatch(r"http://www\.wikidata\.org/entity/Q[1-9][0-9]*", identifier):
             raise ValueError("Unexpected entity identifier")
         entity = entities.setdefault(identifier, {"description": False, "type": False})
-        entity["description"] |= bool(row.get("itemDescription", {}).get("value"))
-        entity["type"] |= bool(row.get("type", {}).get("value"))
+        entity["description"] |= bool(binding_value(row, "itemDescription", optional=True))
+        entity["type"] |= bool(binding_value(row, "type", optional=True))
     return {
         "rows": len(rows),
         "unique_entities": len(entities),

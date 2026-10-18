@@ -34,9 +34,11 @@ Commands run from the repository root with installed Python 3.13.12:
 git diff --check
 ```
 
-Results: six unit tests passed; live probe exited 0; whitespace check passed. The initial sandbox probe failed with `URLError` and correctly exited 1. Source details and timestamps are in [DATA_SOURCE_FEASIBILITY.md](DATA_SOURCE_FEASIBILITY.md). No application lint/type/build commands are configured. AT-05 and other project acceptance checks remain NOT RUN; this increment does not satisfy the complete collector acceptance check.
+Results: ten unit tests passed; whitespace check passed. The earlier live probe exited 0; the initial sandbox probe failed with `URLError` and correctly exited 1. Source details and timestamps are in [DATA_SOURCE_FEASIBILITY.md](DATA_SOURCE_FEASIBILITY.md). No application lint/type/build commands are configured. AT-05 and other project acceptance checks remain NOT RUN; this increment does not satisfy the complete collector acceptance check.
 
 An intermediate test run hit Windows sandbox permissions in the system temporary directory. Tests now create and clean their temporary fixtures in ignored workspace-local `data/runtime/source-probe-tests/`; all six passed on rerun without changing assertions.
+
+PR #4 review fix: added explicit validation of response objects, row objects, entity identifiers and consumed binding values. Numeric IDs and null/non-object optional bindings now produce a sanitized failure report and exit 1; omitted optional bindings remain valid unknowns. New regression cases reproduced failures before the fix; all ten tests passed afterward. This verification used synthetic responses and did not repeat the live network request. Tests assert that invalid responses produce no response snapshot or success counts and do not echo source text.
 
 ## Blockers and next dependency
 

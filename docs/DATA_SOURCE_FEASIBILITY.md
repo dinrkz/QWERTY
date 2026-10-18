@@ -46,7 +46,7 @@ Local environment: tested interpreter is Python 3.13.12 at `C:/Users/arlan/AppDa
 
 ## Evidence
 
-- Six synthetic unit tests cover unique-entity counting, empty results, row-cap warning, malformed response rejection, failure reporting without sensitive exception text, and preservation of existing evidence. These do not verify live collection.
+- Ten synthetic unit tests cover unique-entity counting, empty results, row-cap warning, malformed response rejection, failure reporting without sensitive exception text, and preservation of existing evidence. Regression cases include numeric entity IDs, null/non-object optional bindings, invalid response/row shapes, and successful handling of omitted optional fields. Malformed consumed fields fail before a response snapshot is written. These do not verify live collection.
 - Initial sandbox run returned `URLError`, exit 1, with a failure report under `data/raw/wikidata-probe-20261018-01/`.
 - Network-enabled probe succeeded (exit 0) at 2026-10-18T12:25:57.504902+00:00, under `data/raw/wikidata-probe-20261018-02/`. It returned 200 rows, 159 distinct entities, 125 entities with descriptions and 157 with instance types. The row cap was reached; coverage is incomplete and biased by ordering on entity ID. Query SHA-256: `67100ccec588e58f7f67d8b18a65ee1651abfb7fedbf8c9ec8691d2a7a07199a`.
 - All project acceptance checks remain NOT RUN. No normalized demo dataset, retrieval service or live RAG is claimed.

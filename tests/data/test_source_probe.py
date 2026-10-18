@@ -46,9 +46,71 @@ class ProbeSummaryTests(unittest.TestCase):
 
     def test_malformed_source_fails(self):
         for payload in ({}, {"results": {"bindings": {}}},
-                        {"results": {"bindings": [{"item": {"value": "bad"}}]}}):
+                        {"results": {"bindings": [{"item": {"value": "bad"}}]}},
+                        {"results": {"bindings": [{"item": {"value":
+                            "http://www.wikidata.org/entity/Qnot-an-id"}}]}}):
             with self.subTest(payload=payload), self.assertRaises((ValueError, KeyError)):
                 probe.summarize(payload)
+
+    def assert_reported_invalid_payload(self, payload):
+        with tempfile.TemporaryDirectory(dir=self.scratch) as directory:
+            output = Path(directory) / "run"
+            stdout = io.StringIO()
+            with patch("sys.argv", ["probe", "--output-dir", str(output)]), \
+                 patch.object(probe, "fetch", return_value=payload), \
+                 contextlib.redirect_stdout(stdout):
+                self.assertEqual(probe.main(), 1)
+            report = json.loads((output / "report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["status"], "failed")
+            self.assertEqual(report["error"], "ValueError")
+            self.assertEqual(json.loads(stdout.getvalue()), report)
+            self.assertNotIn("private source text", stdout.getvalue())
+            self.assertFalse((output / "response.json").exists())
+            self.assertNotIn("unique_entities", report)
+
+    def test_numeric_entity_id_produces_failure_report(self):
+        self.assert_reported_invalid_payload({"results": {"bindings": [
+            {"item": {"value": 123}, "itemDescription": {"value": "private source text"}}
+        ]}})
+
+    def test_malformed_optional_bindings_produce_failure_report(self):
+        for field in ("itemDescription", "type"):
+            for binding in (None, [], "private source text", {}, {"value": None},
+                            {"value": 123}, {"value": ["private source text"]}):
+                with self.subTest(field=field, binding=binding):
+                    self.assert_reported_invalid_payload({"results": {"bindings": [
+                        {"item": {"value": "http://www.wikidata.org/entity/Q1"},
+                         field: binding}
+                    ]}})
+
+    def test_malformed_payload_shapes_produce_failure_report(self):
+        for payload in (None, [], {}, {"results": None}, {"results": []},
+                        {"results": {}}, {"results": {"bindings": None}},
+                        {"results": {"bindings": {}}}):
+            with self.subTest(payload=payload):
+                self.assert_reported_invalid_payload(payload)
+        for row in (None, [], "private source text", {}, {"item": None},
+                    {"item": []}, {"item": {}}, {"item": {"value": None}}):
+            with self.subTest(row=row):
+                self.assert_reported_invalid_payload({"results": {"bindings": [row]}})
+
+    def test_absent_optional_bindings_remain_successful_and_unknown(self):
+        payload = {"results": {"bindings": [
+            {"item": {"value": "http://www.wikidata.org/entity/Q1"}}
+        ]}}
+        with tempfile.TemporaryDirectory(dir=self.scratch) as directory:
+            output = Path(directory) / "run"
+            with patch("sys.argv", ["probe", "--output-dir", str(output)]), \
+                 patch.object(probe, "fetch", return_value=payload), \
+                 contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(probe.main(), 0)
+            report = json.loads((output / "report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["status"], "sample_received")
+            self.assertEqual(report["unique_entities"], 1)
+            self.assertEqual(report["entities_with_description"], 0)
+            self.assertEqual(report["entities_with_type"], 0)
+            self.assertEqual(json.loads((output / "response.json").read_text(
+                encoding="utf-8")), payload)
 
     def test_failed_fetch_records_failure_without_response_or_sensitive_text(self):
         with tempfile.TemporaryDirectory(dir=self.scratch) as directory:
