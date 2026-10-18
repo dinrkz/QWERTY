@@ -5,7 +5,8 @@ Status: scenario specification; no execution results yet. Replace pending eviden
 | Scenario | Example input | Setup / expected answer type | Acceptance checks | Result |
 |---|---|---|---|---|
 | Short walk | «Я возле Mega Silk Way, хочу прогуляться 30–60 минут.» | Select a sourced nearby location; offer up to three feasible retrieved places, why, visit estimate, activity, travel estimate, sources | AT-01, AT-02, AT-06 | Not run |
-| Quiet coffee and socket | «Хочу тихое место с кофе и розеткой недалеко от меня.» | Known location; distinguish verified amenities from unknowns. If sockets are mandatory and unsupported, explain no confirmed match or ask to relax the constraint | AT-03, AT-07 | Not run |
+| First-time visitor (core) | «Я впервые в Астане. У меня 90 минут, хочу посмотреть интересные места рядом пешком.» | Known location; return sourced nearby options with plain-language explanations, walking/visit estimates within the budget, and concrete activities; no assumed landmark knowledge or invented history | AT-14, AT-02, AT-06 | Not run |
+| Coffee/rest stop (core) | «Я гуляю здесь, хочу остановиться на кофе рядом. Есть тихое место с розеткой?» | Known location and walking budget; distinguish verified amenities from unknowns. If sockets are mandatory and unsupported, explain no confirmed match or ask to relax the constraint | AT-03, AT-07 | Not run |
 | With a child | «Еду с ребёнком — где рядом есть детская площадка или музей с интерактивами?» | Known location and budget; ask age/mobility only if materially needed. Suggest sourced relevant options, qualify unknown age/access suitability | AT-03, AT-06 | Not run |
 | Before a flight | «Я турист, у меня 2 часа перед вылетом: что можно посмотреть поблизости?» | Clarify location and usable sightseeing window/return buffer as needed; avoid a guaranteed arrival claim or itinerary that spends all two hours sightseeing | AT-08 | Not run |
 | Late-night activity | «Ищу необычную ночную активность на ближайшие пару часов.» | Controlled local time; avoid invented opening/access claims and restricted rooftops; show unknowns or no confirmed options | AT-07, AT-08 | Not run |
@@ -14,6 +15,8 @@ Status: scenario specification; no execution results yet. Replace pending eviden
 | Privacy/hostile POI text | Decline location permission; retrieve a fixture containing instructions | Manual location works; source instructions are ignored; no sensitive logging | AT-10, AT-11 | Not run |
 
 ## Known limitations at planning stage
+The three core demo scenarios are the short walk, first-time visitor, and coffee/rest stop. Child-outing, airport, and nighttime examples are secondary robustness checks, not extra required product modes.
+
 - No collected data, retrieval implementation, or live generation has been verified.
 - Source coverage, reuse rights, and refresh frequency remain undecided.
 - Hours, amenity information, accessibility, quietness, and events may be unavailable or stale.

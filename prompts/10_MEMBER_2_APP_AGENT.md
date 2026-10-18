@@ -13,7 +13,7 @@ Use 2GIS for map rendering and OpenAI API for generation. The user reports avail
 
 Follow TEAM_WORKFLOW.md's Git integration protocol, including for your own application changes. Push to your task branch and open a PR; obtain another teammate's review. Integrate PRs serially, update each against current main, and test the combined result before merging. Never directly push to main, force-push, or resolve conflicts by discarding an owner's work. Report remote protection as pending until verified.
 
-Use clearly labeled fixtures only to unblock scaffolding; replace them with real retrieval early. Do not implement a competing collector or retrieval service. Build the walking scenario end-to-end first, then coffee and child-outing scenarios. Own unit tests for your modules; member 3 tests the integrated behavior independently.
+Use clearly labeled fixtures only to unblock scaffolding; replace them with real retrieval early. Do not implement a competing collector or retrieval service. Build the short walking scenario end-to-end first, then first-time visitor discovery and coffee/rest-stop scenarios. Default to walking and explain places without assuming local knowledge; do not invent local history. Own unit tests for your modules; member 3 tests the integrated behavior independently.
 
 Integrate human-reviewed commits in small increments, resolve conflicts with the responsible owner, and run relevant combined tests/build checks. Do not overwrite another agent's work. Existing publishing permissions still apply.
 

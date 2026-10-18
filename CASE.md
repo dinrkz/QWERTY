@@ -28,13 +28,25 @@ Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo
 
 The brief explicitly requires automated collection even though its submission-format wording calls code/scripts optional. Team decision: include the collector and runnable demo in this repository so collection and RAG can be inspected.
 
-## Team concept and initial scope — proposed
-Qadam helps Astana residents and visitors choose a short outing near their selected location. A user supplies a location, time budget, and preferences; the assistant returns up to three grounded options with practical activities and visible uncertainty.
+## Team concept and audience — confirmed focus; implementation pending
+Qadam helps people discover Astana on foot, with primary attention to people taking a walk and first-time visitors. The team's naming rationale is Qadam (қадам, “step”): help someone choose their next worthwhile stop nearby. A user supplies a location, time budget, and preferences; the assistant returns up to three grounded options with practical activities, clear explanations, and visible uncertainty.
+
+Residents can discover something nearby during an ordinary walk. First-time visitors need plain-language context about why a place is worth seeing without assumed knowledge of landmarks or city layout. Walking is the default travel mode; distance and time estimates retain the evidence/uncertainty rules.
+
+## Fit with the supplied track
+| Evidence in the supplied brief | Implication for Qadam |
+|---|---|
+| Task title: «ИИ-помощник по прогулкам в городе Астана» | A walking-first Astana assistant directly matches the stated task |
+| Recommendations near the user based on location, preferences, and context | Nearby discovery with a walking/visit budget supports the core objective |
+| Examples include a 30–60 minute walk and a tourist with limited time | Walkers and first-time visitors are supported audience choices; first-time visitors are our narrower product interpretation |
+| Optional recommendation to focus on two or three strong scenarios | Three walking-focused scenarios are an appropriate scope choice |
+
+Assessment: compatible with the supplied track, not a promise of organizer approval or judging results. Audience focus does not remove any requirement in R01–R14. The original brief remains unchanged.
 
 Initial scenarios:
 1. A 30–60 minute walk near Mega Silk Way.
-2. Coffee in a quiet place with a socket, subject to actual evidence for those attributes.
-3. An outing with a child: nearby playground or interactive museum, subject to actual evidence.
+2. A first-time visitor has 60–90 minutes to discover nearby sights on foot; explain why each place matters using sourced facts, with walking and visit estimates.
+3. A coffee/rest stop during a walk, with optional quietness/socket constraints supported by actual evidence.
 
 Select location from user input, a map/preset, or permission-based device location. Specific coordinates and venues must come from collected sources; none are asserted here. Russian is the proposed first demo language; the brief does not require a particular language.
 
@@ -55,7 +67,7 @@ Location + request + available time → validate and interpret constraints → r
 The brief gives an example scale such as 1–10 and refers to organizer-defined weights; no exact weights are supplied.
 
 ## Optional, not MVP requirements
-Group planning, a three-stop mini-route, multilingual responses, local events, and accessibility-focused recommendations. Route and accessibility claims still need evidence. The two-hours-before-a-flight and nighttime examples are useful boundary scenarios, not a requirement to implement every example as a dedicated feature.
+Group planning, a three-stop mini-route, multilingual responses, local events, and accessibility-focused recommendations. Route and accessibility claims still need evidence. Child-outing, two-hours-before-a-flight, and nighttime examples remain useful secondary checks, not separate mandatory product modes. General driving itineraries, bookings, fitness/step tracking, and full turn-by-turn navigation are outside the team's initial scope; the name does not imply a pedometer product.
 
 ## Open facts and limitations
 - Hackathon date, build duration, deadline, exact weights, and upload destination are absent from the supplied brief.

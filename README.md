@@ -1,6 +1,6 @@
 # Qadam — Build with AI
 
-An Astana walking assistant using collected points of interest (POIs) and retrieval-augmented generation (RAG).
+An Astana walking assistant for people exploring on foot and first-time visitors, using collected points of interest (POIs) and retrieval-augmented generation (RAG). Qadam (қадам, “step”) expresses the team's goal: help you choose your next worthwhile stop nearby.
 
 **Status:** adapted planning documents and agent rules. Application code, the automated collector, dataset, slides, and demo video are not implemented yet.
 
@@ -13,7 +13,7 @@ An Astana walking assistant using collected points of interest (POIs) and retrie
 ## Planned demo
 Choose a real or simulated Astana location, describe your preferences and available time, and receive up to three relevant places with a short explanation, estimated visit duration, a concrete activity, and source/uncertainty labels.
 
-Initial scenarios: a short walk, coffee with specific amenities, and an outing with a child. Automated POI collection and real retrieval plus generation are core requirements.
+Core scenarios: a short local walk, a first-time visitor discovering nearby sights, and a coffee/rest stop during a walk. Walking is the default; explanations should be useful even when the user knows little about Astana. Automated POI collection and real retrieval plus generation remain core requirements. See the [track-fit assessment](CASE.md#fit-with-the-supplied-track).
 
 ## Provider decisions
 - **Map: 2GIS.** Planned map integration; access and implementation still need setup.

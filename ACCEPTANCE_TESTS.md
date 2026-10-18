@@ -18,4 +18,13 @@ Status: **NOT RUN** for every check. This is a specification, not a test-results
 | AT-12 | Team reproducibility check | Start from a clean checkout using only README instructions | Actual documented install/configuration/data/run commands work. Approved snapshot can reproduce demo inputs; automated refresh is separately documented/tested. Applicable tests, type/lint checks, and build pass; absent checks are reported accurately. |
 | AT-13 | R01, R11, R12, R13, R14 | Audit the final submission as a judge | Concept and RAG explanation match implementation; scenario/limitations document includes inputs and expected response types; slides/PDF support a rehearsed 5–7 minute talk covering business idea, limits, risks, roadmap; repository/archive and accessible YouTube link are recorded. |
 
+## AT-14 — Walking-first discovery for a first-time visitor
+Maps to R01, R02, R06, and R07; status: **NOT RUN**.
+
+Given a sourced Astana location and collected candidates, submit: «Я впервые в Астане. У меня 90 минут, хочу посмотреть интересные места рядом пешком.»
+
+Expect walking as the default travel mode, up to three sourced options, plain-language reasons that do not assume local knowledge, concrete activities, and disclosed walking/visit estimates that fit the budget. The options are alternatives unless explicitly presented as a combined itinerary; a combined itinerary must fit the total budget. Historical/cultural claims require source evidence. Unknown access, hours, and route conditions remain visible; geometric proximity must not be presented as verified pedestrian access. If no supported option fits, explain that honestly.
+
+The primary demo set is short walk (AT-01), first-time visitor (AT-14), and coffee/rest stop (AT-03). Existing child-outing, airport, and nighttime checks remain secondary robustness checks; they do not require separate product modes.
+
 Do not require exact model wording. Check grounding, relevance, constraint compliance, schema validity, and usefulness. Human evaluation should record why an answer is relevant or irrelevant; passing deterministic tests alone does not establish recommendation quality.
