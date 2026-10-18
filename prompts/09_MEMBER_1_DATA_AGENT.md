@@ -9,6 +9,8 @@ Read AGENTS.md, CASE.md, ACCEPTANCE_TESTS.md, TEAM_WORKFLOW.md, docs/DATA_PLAN.m
 
 Coordinate the POI schema and retrieval interface with member 2 before parallel implementation. If the contract is missing, propose the minimum fields, units, unknown handling, and example output; work on source verification while the integration lead records the agreed contract.
 
+Evaluate 2GIS Places API first as the candidate POI source. Verify Astana coverage, returned fields, account access, and applicable collection/storage/indexing/AI-processing/redistribution permissions. Do not treat the source as confirmed. The 2GIS map and OpenAI generation are already team decisions; if this source is unsuitable, propose another permitted dataset source while retaining those choices.
+
 Follow TEAM_WORKFLOW.md's Git integration protocol. Use a task-specific data branch, sync with current origin/main before review, push only your branch, and submit a PR. Never force-push, push directly to main, or discard another member's changes to resolve a conflict. Member 2 coordinates integration.
 
 Within your assigned files, implement permitted automated collection, normalization, stable IDs, provenance, validation, deduplication, repeatable snapshots, and retrieval with agreed geographic/context filters. Produce a small real dataset and callable retrieval path early. Validate source access and reuse terms; never invent data or silently treat unknown amenities as confirmed.

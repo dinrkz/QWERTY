@@ -1,6 +1,15 @@
 # Automated POI data collection plan
 
-Status: no source selected, access terms verified, collector implemented, or records collected yet. The following is a team plan to satisfy R04/R05.
+Status: **2GIS Places API is the candidate POI source**, not a final selection. Account access, applicable permissions, collector implementation, and actual records remain unverified. The map will use 2GIS regardless of whether this candidate is selected. The following is a team plan to satisfy R04/R05.
+
+## 2GIS feasibility check — member 1
+1. Obtain access through the official platform and test Astana categories/locations needed for the demo.
+2. Inspect actual returned fields, missing descriptions/amenities/hours, geographic coverage, pagination, and account limits.
+3. Verify applicable rights for automated collection, storage, retrieval indexing, sending data to OpenAI, and any public dataset redistribution. API access alone does not establish these permissions.
+4. Document the permitted collection/refresh process and attribution. Do not assume live queries alone satisfy the brief's collected-dataset requirement.
+5. If the source is unsuitable, propose a permitted alternative without changing the confirmed 2GIS map decision.
+
+Starting references: [Places API](https://docs.2gis.com/en/api/search/places/overview), [map APIs](https://docs.2gis.com/en/maps/overview), and [directory API pricing including storage rights](https://law.2gis.ru/catalog-pay). These references do not establish the permissions of the team's eventual subscription.
 
 ## Source selection gate
 Before integration, verify the source's current documentation, geographic/category coverage, access method, rate limits, attribution, license/reuse terms, and snapshot redistribution rights. Record direct source links and date checked. Prefer a documented API or export where available. Do not treat the brief's sample recommendations as factual source records.

@@ -10,7 +10,7 @@ Read AGENTS.md, CASE.md, ACCEPTANCE_TESTS.md, docs/DATA_PLAN.md, and docs/ARCHIT
 
 Build the smallest complete implementation for the three proposed core scenarios, starting with one end-to-end flow. First state a concise plan and unresolved dependencies, then continue within the authorized scope.
 
-Verify permitted POI source access/reuse; implement and demonstrate automated collection, normalization, provenance, and repeatable demo data. Select the simplest suitable stack/retrieval method and an actually available generation provider; do not assume keys or services exist.
+Use the confirmed 2GIS map and OpenAI generation choices; the user reports available OpenAI API credits. Verify usable credentials, model access, and budget during implementation. Evaluate 2GIS Places API as a candidate POI source, including coverage and storage/indexing/AI-processing/redistribution rights; it is not yet confirmed. Implement and demonstrate permitted automated collection, normalization, provenance, and repeatable demo data. Select the simplest suitable stack/retrieval method; do not assume configured keys or working integrations already exist.
 
 Implement location/preferences/time input → real retrieval → geographic and contextual filtering → grounded generation → validation → 1–3 useful options with why, visit-duration estimate, activity, sources, and uncertainty. If no candidates satisfy constraints, explain that honestly.
 

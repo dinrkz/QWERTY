@@ -9,6 +9,8 @@ Read AGENTS.md, CASE.md, ACCEPTANCE_TESTS.md, TEAM_WORKFLOW.md, and docs/ARCHITE
 
 Own shared types/contracts, dependency manifests/lockfiles, root configuration, and integration. Coordinate changes affecting other agents before making them. Implement user input → member 1's retrieval → grounded real generation → validation → recommendation UI, with sources, estimates, uncertainty, privacy, and failure states.
 
+Use 2GIS for map rendering and OpenAI API for generation. The user reports available OpenAI API credits; verify usable credentials, model access, and budget without exposing secrets. No exact model is selected yet. Keep OpenAI secrets server-side and configure any browser-facing map key for its intended use with supported restrictions. Member 1 evaluates 2GIS Places API as a possible data source; keep that decision separate from the confirmed map choice.
+
 Follow TEAM_WORKFLOW.md's Git integration protocol, including for your own application changes. Push to your task branch and open a PR; obtain another teammate's review. Integrate PRs serially, update each against current main, and test the combined result before merging. Never directly push to main, force-push, or resolve conflicts by discarding an owner's work. Report remote protection as pending until verified.
 
 Use clearly labeled fixtures only to unblock scaffolding; replace them with real retrieval early. Do not implement a competing collector or retrieval service. Build the walking scenario end-to-end first, then coffee and child-outing scenarios. Own unit tests for your modules; member 3 tests the integrated behavior independently.

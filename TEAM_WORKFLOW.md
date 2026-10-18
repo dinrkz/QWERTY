@@ -60,6 +60,8 @@ Open a pull request targeting `main`. Member 2 coordinates the merge; other memb
 Repository-admin setup target: protect `main`, require PR review by another teammate, block force pushes/deletion, and require the actual configured CI checks against current `main` when available. Do not claim enforcement until repository settings have been inspected and enabled. No protection settings, CI workflow, or access restrictions have been configured by this planning document. Exact account identities and runnable checks must be known before configuring reviewer ownership or required checks.
 
 ## First shared checkpoint
+Confirmed choices: **2GIS map** and **OpenAI API**, with API credits reported available by the user. **2GIS Places API is a candidate data source**, pending feasibility and permission checks. Member 1 investigates that source; member 2 owns map and OpenAI integration and verifies usable access/model/budget; member 3 verifies the integrated behavior and updates submission evidence. Do not spend time reselecting the confirmed providers unless a concrete blocker requires a team decision.
+
 Agree on the normalized POI format in `docs/DATA_PLAN.md`, request fields (location, preferences, budget, travel mode), and retrieval output (candidate records, source evidence, distance estimates, unknowns). Record the actual API/module contract after choosing the stack. Person 1 delivers a small real collected dataset early; Person 2 can scaffold against clearly labeled fixtures until it is ready; Person 3 prepares scenario checks immediately. Fixtures do not count as the finished RAG demo.
 
 ## Milestones

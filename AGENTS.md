@@ -19,6 +19,8 @@
 Exact numerical weights and the development deadline are not provided. Do not reuse the old 20/25/20/20/15 rubric or invent a freeze time.
 
 ## Core implementation rules
+- Team decisions: use 2GIS for the map and OpenAI for generation. The user reports available OpenAI API credits; model choice, usable credentials, remaining balance, and integration are not yet verified.
+- 2GIS Places API is a candidate POI source, not a confirmed dataset source. Verify access, Astana coverage, storage/indexing/AI-processing rights, and redistribution terms before committing to collection from it. The map-provider decision does not depend on selecting 2GIS as the dataset source.
 - Deliver a real retrieval-and-generation flow over a team-collected Astana POI dataset. Automated data collection is mandatory in the supplied brief.
 - Prioritize a complete flow for two or three scenarios. Add stretch features only after the core passes acceptance checks.
 - Retrieve from actual POI records before generating recommendations. Validate that each recommended POI ID belongs to the retrieved candidates.
@@ -44,7 +46,7 @@ Exact numerical weights and the development deadline are not provided. Do not re
 ## Privacy, safety, and secrets
 - Explain the inputs used: location, preferences, filters, and relevant context. Support a manually selected or simulated location for the demo.
 - Ask for device location only when needed. Minimize precision and retention; do not persist or log precise user coordinates or location-bearing prompts by default.
-- Disclose what location/context is sent to providers; send only what is necessary. Keep provider keys on the server and out of Git, browser bundles, screenshots, and demo recordings.
+- Disclose what location/context is sent to providers; send only what is necessary. Keep OpenAI and other secret backend credentials on the server and out of Git, browser bundles, screenshots, and demo recordings. If the map integration requires a browser-facing access key, configure only a key intended for that use with supported restrictions; never reuse a secret backend credential.
 - Never commit `.env`, credentials, personal location histories, or provider logs containing personal data. Maintain `.env.example` only when actual configuration is chosen.
 - Avoid recommendations that require trespass or unverified access. Do not promise safety, accessibility, opening, or arrival before a flight without evidence.
 
