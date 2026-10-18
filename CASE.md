@@ -36,7 +36,9 @@ Initial scenarios:
 2. Coffee in a quiet place with a socket, subject to actual evidence for those attributes.
 3. An outing with a child: nearby playground or interactive museum, subject to actual evidence.
 
-Select location from user input, a map/preset, or permission-based device location. Specific coordinates and venues must come from collected sources; none are asserted here. Russian is the proposed first demo language; the brief does not require a particular language. Stack, generation provider, data sources, budget, and schedule remain undecided.
+Select location from user input, a map/preset, or permission-based device location. Specific coordinates and venues must come from collected sources; none are asserted here. Russian is the proposed first demo language; the brief does not require a particular language.
+
+Team decisions: **2GIS for the map; OpenAI API for generation**, using API credits reported available by the user. **2GIS Places API remains a candidate data source**, conditional on access, coverage, and applicable collection/storage/indexing/AI-processing/redistribution permissions. The stack, model, final dataset source, exact available budget, and schedule remain undecided. Credentials and live integrations have not been verified. These are team choices, not organizer requirements.
 
 ## Main flow — proposed
 Location + request + available time → validate and interpret constraints → retrieve relevant collected POIs → filter/rank using geographic and contextual evidence → generate explanations and activity ideas grounded in retrieved records → validate IDs/claims → display recommendations, sources, estimates, and unknowns.

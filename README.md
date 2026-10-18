@@ -15,6 +15,11 @@ Choose a real or simulated Astana location, describe your preferences and availa
 
 Initial scenarios: a short walk, coffee with specific amenities, and an outing with a child. Automated POI collection and real retrieval plus generation are core requirements.
 
+## Provider decisions
+- **Map: 2GIS.** Planned map integration; access and implementation still need setup.
+- **POI data: possibly 2GIS Places API.** Pending coverage/access tests and permission checks for collection, storage, indexing, AI processing, and redistribution. Another permitted dataset source may be used with the 2GIS map.
+- **AI: OpenAI API.** The team reports available API credits. Model choice, configured credentials, and the usable balance remain to be verified; no live integration has run yet.
+
 ## Documents
 - [Original Russian brief](docs/HACKATHON_BRIEF_RU.txt)
 - [Proposed RAG architecture](docs/ARCHITECTURE.md)
@@ -26,7 +31,7 @@ Initial scenarios: a short walk, coffee with specific amenities, and an outing w
 - [README completion template](README_TEMPLATE.md)
 
 ## Setup
-No runtime or dependencies have been selected. Add tested installation, environment, ingestion, run, test, and build instructions when the application exists. No API provider or key is required by these planning files.
+No runtime or dependencies have been selected. Add tested installation, environment, ingestion, run, test, and build instructions when the application exists. Configure OpenAI and 2GIS access during implementation; these planning files do not contain credentials.
 
 ## Submission
 The supplied brief requires a repository link or prototype archive, presentation PDF/slides, a test-scenario and limitations document, and a YouTube demo accessible by link. Exact rubric weights and deadline have not been supplied.
