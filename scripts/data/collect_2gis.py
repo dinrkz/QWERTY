@@ -86,10 +86,11 @@ def coordinate(value):
 
 def parameters(value):
     """Small fixed query surface; key, endpoint overrides and extra fields rejected."""
-    required = {"q", "point", "radius", "page_size", "page", "sort", "locale", "fields"}
-    if not isinstance(value, dict) or set(value) != required:
+    required = {"point", "radius", "page_size", "page", "sort", "locale", "fields"}
+    if not isinstance(value, dict) or set(value) not in (required, required | {"q"}):
         raise CollectionError("INVALID_PARAMETERS")
-    if not isinstance(value["q"], str) or not value["q"].strip() or len(value["q"]) > 100:
+    if "q" in value and (not isinstance(value["q"], str) or
+                         not value["q"].strip() or len(value["q"]) > 100):
         raise CollectionError("INVALID_QUERY")
     try:
         if not isinstance(value["point"], str):
@@ -105,7 +106,10 @@ def parameters(value):
             raise CollectionError("INVALID_QUERY_LIMIT")
     if value["sort"] != "distance" or value["locale"] != "ru_KZ" or value["fields"] != FIELDS:
         raise CollectionError("INVALID_QUERY_MODE")
-    return {**value, "q": value["q"].strip(), "point": f"{lon},{lat}"}
+    result = {**value, "point": f"{lon},{lat}"}
+    if "q" in result:
+        result["q"] = result["q"].strip()
+    return result
 
 
 def fingerprint(params):
@@ -464,7 +468,8 @@ class Collector:
                 raise CollectionError("NO_SAVED_COLLECTION")
             return self.publish(self.reconcile())
 
-    def collect_one(self, manifest, request_id, transport, *, secrets=(), before_dispatch=None):
+    def collect_one(self, manifest, request_id, transport, *, secrets=(), before_dispatch=None,
+                    approved_previous_manifest=None):
         """One explicit entry per invocation; transport(params) -> (status, bytes).
 
         Live adapters supply the key in `secrets` and bind approval to the manifest.
@@ -488,15 +493,36 @@ class Collector:
             if any(e["kind"] == "blocked" for e in self.events()):
                 raise CollectionError("COLLECTION_BLOCKED")
             old_path = self.raw / "manifest.json"
+            new_requests = {r["id"]: r for r in manifest["requests"]}
+            if approved_previous_manifest is not None and not old_path.exists():
+                raise CollectionError("PREVIOUS_MANIFEST_APPROVAL_MISMATCH")
             if old_path.exists():
-                old = strict_json(old_path.read_bytes())
+                old = validate_manifest(strict_json(old_path.read_bytes()))
+                if approved_previous_manifest is not None and digest(old) != approved_previous_manifest:
+                    raise CollectionError("PREVIOUS_MANIFEST_APPROVAL_MISMATCH")
                 old_requests = {r["id"]: r for r in old["requests"]}
-                new_requests = {r["id"]: r for r in manifest["requests"]}
-                if any(new_requests.get(name) != value for name, value in old_requests.items()):
+                changed = {name for name, value in old_requests.items()
+                           if new_requests.get(name) != value}
+                reserved_ids = {e["request_id"] for e in self.events() if e["kind"] == "reserve"}
+                if changed and (approved_previous_manifest is None or changed & reserved_ids):
                     raise CollectionError("MANIFEST_MUST_BE_APPEND_ONLY")
             attempts = sum(e["kind"] == "reserve" for e in self.events())
             if attempts >= MAX_ATTEMPTS:
                 raise CollectionError("BUDGET_EXHAUSTED")
+            if attempts and not old_path.exists():
+                raise CollectionError("CORRUPT_OR_MISSING_MANIFEST")
+            # Protect counted entries on every new dispatch, not just explicit
+            # revisions: the mutable current manifest is not historical evidence.
+            # reconcile() has already verified these archived files and their hashes.
+            for event in self.events():
+                if event["kind"] != "reserve":
+                    continue
+                archive = validate_manifest(strict_json((self.raw / "manifests" /
+                    (event["manifest_sha256"] + ".json")).read_bytes()))
+                original = next((r for r in archive["requests"]
+                                 if r["id"] == event["request_id"]), None)
+                if original is None or new_requests.get(event["request_id"]) != original:
+                    raise CollectionError("MANIFEST_MUST_BE_APPEND_ONLY")
             if before_dispatch is not None:
                 before_dispatch(self, responses)
             atomic_write(old_path, encoded(manifest) + b"\n")

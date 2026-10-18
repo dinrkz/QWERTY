@@ -74,6 +74,7 @@ class LiveCollectorTests(unittest.TestCase):
         self.assertEqual(12, len(manifest["requests"]))
         self.assertEqual(12, len({c.fingerprint(r["parameters"]) for r in manifest["requests"]}))
         self.assertEqual([], manifest["pending"])
+        self.assertTrue(all(r["parameters"]["page_size"] == 10 for r in manifest["requests"]))
         self.assertIsNone(manifest["storage_basis"])
         neighbors = [r for r in manifest["requests"] if r["area"] == "zhetysu-shubar"]
         self.assertEqual(2, len(neighbors))
@@ -130,6 +131,21 @@ class LiveCollectorTests(unittest.TestCase):
             self.run_live()
         self.opener.open.assert_not_called()
         self.assertFalse(self.collector.ledger.exists())
+
+    def test_demo_oversize_page_rejected_before_key_state_or_dispatch(self):
+        for index, size in ((0, 11), (11, 50)):
+            with self.subTest(index=index, size=size):
+                manifest = copy.deepcopy(self.manifest)
+                manifest["requests"][index]["parameters"]["page_size"] = size
+                self.args.approved_manifest = c.digest(manifest)
+                path = self.root / "oversize-plan.json"
+                path.write_bytes(c.encoded(manifest))
+                with self.assertRaisesRegex(c.CollectionError, "DEMO_PAGE_SIZE_EXCEEDED"):
+                    live.read_manifest(path)
+                with patch.object(live, "read_key", side_effect=AssertionError("NO_KEY_READ")), self.assertRaisesRegex(c.CollectionError, "DEMO_PAGE_SIZE_EXCEEDED"):
+                    live.run_live(manifest, self.args, self.collector)
+        self.assertFalse(self.collector.ledger.exists())
+        self.opener.open.assert_not_called()
 
     def test_output_never_pairs_old_quality_with_newer_snapshot(self):
         original = self.collector.collect_one
@@ -195,6 +211,43 @@ class LiveCollectorTests(unittest.TestCase):
             self.run_live()
         self.assertEqual(0, self.count())
         self.opener.open.assert_not_called()
+
+    def test_pending_broad_query_after_seven_calls_preserves_budget_and_checkpoints(self):
+        original_hash = c.digest(self.manifest)
+        for request in self.manifest["requests"][:7]:
+            self.args.request_id = request["id"]
+            result = self.run_live()
+            self.args.reviewed_snapshot = result["snapshot_sha256"]
+        ledger_prefix = self.collector.ledger.read_bytes()
+        query = self.manifest["requests"][7]
+        query["id"] = "mega-silk-way-all-categories"
+        query["intent"] = "all-categories-sample"
+        query["parameters"].pop("q", None)
+        self.args.request_id = query["id"]
+        self.args.approved_manifest = c.digest(self.manifest)
+        for approval, code in ((None, "MANIFEST_MUST_BE_APPEND_ONLY"),
+                               ("0" * 64, "PREVIOUS_MANIFEST_APPROVAL_MISMATCH")):
+            self.args.revise_pending_from = approval
+            with patch.object(live, "read_key", side_effect=AssertionError("NO_KEY_READ")), self.assertRaisesRegex(c.CollectionError, code):
+                self.run_live()
+        self.assertEqual(ledger_prefix, self.collector.ledger.read_bytes())
+        self.assertEqual(7, self.opener.open.call_count)
+        self.args.revise_pending_from = original_hash
+        reviewed = self.args.reviewed_snapshot
+        self.args.reviewed_snapshot = "stale"
+        with self.assertRaisesRegex(c.CollectionError, "SAVED_PAGE_REVIEW_REQUIRED"):
+            self.run_live()
+        self.args.reviewed_snapshot = reviewed
+        result = self.run_live()
+        self.assertEqual(8, self.opener.open.call_count)
+        self.assertEqual(8, result["quality"]["new_attempts_used"])
+        self.assertEqual(4, result["quality"]["new_attempts_remaining"])
+        self.assertEqual(18, result["quality"]["project_attempts"])
+        self.assertTrue(self.collector.ledger.read_bytes().startswith(ledger_prefix))
+        self.assertNotIn("q", parse_qs(urlsplit(self.opener.open.call_args.args[0].full_url).query))
+        with patch.object(live, "read_key", side_effect=AssertionError("NO_KEY_READ")):
+            self.run_live()
+        self.assertEqual(8, self.opener.open.call_count)
 
     def test_optional_refinements_require_gap_review_and_can_skip_either(self):
         for request in self.manifest["requests"][:10]:

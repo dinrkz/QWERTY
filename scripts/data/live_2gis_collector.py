@@ -39,6 +39,9 @@ def read_manifest(path):
 
 def validate_live_manifest(manifest):
     c.validate_manifest(manifest)
+    # The demo key has a lower ceiling than the general items API (50).
+    if any(r["parameters"]["page_size"] > 10 for r in manifest["requests"]):
+        raise c.CollectionError("DEMO_PAGE_SIZE_EXCEEDED")
     if (len(manifest["requests"]) != 12 or manifest["pending"] or
             manifest["requests"][0]["id"] != "bayterek-coffee" or
             {r["id"] for r in manifest["requests"][-2:]} != OPTIONAL_IDS or
@@ -178,7 +181,8 @@ def run_live(manifest, args, collector=None):
         transport.key = read_key(args.env_file)
         secrets.append(transport.key)
     quality = collector.collect_one(manifest, args.request_id, transport,
-                                    secrets=secrets, before_dispatch=gate)
+                                    secrets=secrets, before_dispatch=gate,
+                                    approved_previous_manifest=getattr(args, "revise_pending_from", None))
     return {"quality": quality, "snapshot_sha256": snapshot_token(collector, quality),
             "next_action": "Review saved source/category evidence and replay offline before another request"}
 
@@ -193,6 +197,7 @@ def main(argv=None):
     parser.add_argument("--available-requests", type=int)
     parser.add_argument("--usage-checked-on", help="Asia/Qyzylorda date of manual dashboard check (YYYY-MM-DD)")
     parser.add_argument("--reviewed-snapshot")
+    parser.add_argument("--revise-pending-from", help="Exact prior manifest hash authorizing changes to unreserved queries only")
     parser.add_argument("--green-space-gap-reviewed", action="store_true")
     parser.add_argument("--env-file", type=Path, default=c.ROOT / ".env")
     args = parser.parse_args(argv)

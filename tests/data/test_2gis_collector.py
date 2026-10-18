@@ -352,6 +352,80 @@ collector.collect_one(manifest, manifest["requests"][0]["id"], transport)
             self.run_one()
         self.assertEqual(12, len(self.calls))
 
+    def test_no_query_spatial_search_is_bounded_and_old_fingerprints_stable(self):
+        params = copy.deepcopy(self.manifest["requests"][0]["parameters"])
+        params["page_size"] = 10
+        self.assertEqual("1aaf6ce840914327f4e0eba1409379b3e22cfc115bee19de5ffd8be275b681b8", c.fingerprint(params))
+        del params["q"]
+        self.assertNotIn("q", c.parameters(params))
+        for changes in ({"q": ""}, {"q": "  "}, {"q": None}, {"radius": 2001},
+                        {"point": "1,1"}, {"key": "synthetic"}, {"type": "branch"}):
+            with self.subTest(changes=changes), self.assertRaises(c.CollectionError):
+                c.parameters({**params, **changes})
+
+    def test_pending_revision_requires_matching_prior_hash_and_preserves_saved_query(self):
+        original_hash = c.digest(self.manifest)
+        self.run_one()
+        ledger_before = self.collector.ledger.read_bytes()
+        manifest_before = (self.collector.raw / "manifest.json").read_bytes()
+        del self.manifest["requests"][1]["parameters"]["q"]
+        for approval, code in ((None, "MANIFEST_MUST_BE_APPEND_ONLY"),
+                               ("0" * 64, "PREVIOUS_MANIFEST_APPROVAL_MISMATCH")):
+            with self.assertRaisesRegex(c.CollectionError, code):
+                self.run_one(1, approved_previous_manifest=approval)
+        self.assertEqual(ledger_before, self.collector.ledger.read_bytes())
+        self.assertEqual(manifest_before, (self.collector.raw / "manifest.json").read_bytes())
+        result = self.run_one(1, approved_previous_manifest=original_hash)
+        self.assertEqual(2, result["new_attempts_used"])
+        self.assertEqual(10, result["new_attempts_remaining"])
+        self.assertTrue(self.collector.ledger.read_bytes().startswith(ledger_before))
+        self.assertEqual(manifest_before, (self.collector.raw / "manifests" / (original_hash + ".json")).read_bytes())
+        self.assertNotIn("q", self.calls[-1])
+
+    def test_revision_cannot_change_or_remove_any_reserved_request(self):
+        self.run_one()
+        approved = c.digest(self.manifest)
+        for change in ("change", "remove"):
+            revised = copy.deepcopy(self.manifest)
+            if change == "change":
+                revised["requests"][0]["parameters"]["radius"] = 1000
+            else:
+                revised["requests"].pop(0)
+            with self.subTest(change=change), self.assertRaisesRegex(c.CollectionError, "MANIFEST_MUST_BE_APPEND_ONLY"):
+                self.collector.collect_one(revised, "bayterek-parks", self.transport,
+                                           approved_previous_manifest=approved)
+        self.assertEqual(1, self.attempts())
+        self.assertEqual(1, len(self.calls))
+
+    def test_revision_approval_requires_existing_current_manifest(self):
+        with self.assertRaisesRegex(c.CollectionError, "PREVIOUS_MANIFEST_APPROVAL_MISMATCH"):
+            self.run_one(approved_previous_manifest="0" * 64)
+        self.assertEqual(0, self.attempts())
+        self.assertEqual([], self.calls)
+
+    def test_altered_current_manifest_cannot_hide_reserved_metadata_change(self):
+        self.run_one()
+        ledger_before = self.collector.ledger.read_bytes()
+        revised = copy.deepcopy(self.manifest)
+        revised["requests"][0]["intent"] = "changed-counted-intent"
+        (self.collector.raw / "manifest.json").write_bytes(c.encoded(revised))
+        for approval in (None, c.digest(revised)):
+            with self.subTest(approval=approval), self.assertRaisesRegex(c.CollectionError, "MANIFEST_MUST_BE_APPEND_ONLY"):
+                self.collector.collect_one(revised, revised["requests"][1]["id"], self.transport,
+                                           approved_previous_manifest=approval,
+                                           before_dispatch=lambda *_: self.fail("GATE_MUST_NOT_RUN"))
+        self.assertEqual(ledger_before, self.collector.ledger.read_bytes())
+        self.assertEqual(1, len(self.calls))
+
+    def test_missing_current_manifest_stops_continuation_before_gate(self):
+        self.run_one()
+        ledger_before = self.collector.ledger.read_bytes()
+        (self.collector.raw / "manifest.json").unlink()
+        with self.assertRaisesRegex(c.CollectionError, "CORRUPT_OR_MISSING_MANIFEST"):
+            self.run_one(1, before_dispatch=lambda *_: self.fail("GATE_MUST_NOT_RUN"))
+        self.assertEqual(ledger_before, self.collector.ledger.read_bytes())
+        self.assertEqual(1, len(self.calls))
+
     def test_manifest_changes_cannot_replace_approved_queries(self):
         self.run_one()
         self.manifest["requests"][0]["parameters"]["radius"] = 1000

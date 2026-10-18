@@ -2,7 +2,17 @@
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main` commit `155b7e4`. The deliverable commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/MEMBER_1_HANDOFF.md`.
 
-## Current increment — offline walking relevance audit
+## Current increment — collector limits and safe pending-query revisions
+
+The user authorized review, commit and PR #4 update of the remaining collector fixes with no provider calls and no dataset publication. Corrected all twelve public-plan demo pages from 50 to 10 and reject larger live pages before key reads or dispatch. Added bounded spatial searches with omitted `q` (blank/null remain invalid), and an explicit prior-manifest hash for changes to unreserved requests. Existing query fingerprints, attempt accounting and raw-response archives remain stable.
+
+Independent review found that the original revision guard protected counted requests only when the revision flag was supplied. The fix compares every counted request with its immutable archived original before every uncached dispatch, even if the mutable current manifest was changed. A missing current manifest stops continuation before credential/transport gates; an exhausted budget still reports exhaustion. Cached repeats remain offline. Both new regressions failed before the fix and passed afterward.
+
+Owned changes: `scripts/data/collect_2gis.py`, `scripts/data/live_2gis_collector.py`, `scripts/data/2gis_collection_plan.json`, their two collector test files, `docs/2GIS_COLLECTOR.md`, `docs/2GIS_LIVE_PLAN.md`, `docs/DATA_PLAN.md`, historical `docs/2GIS_PREFLIGHT.md`, and this focused handoff. No shared contracts, dependencies or application modules changed. Earlier probe-recovery code/tests and detailed private collection history are excluded. The public preflight retains technical limitations and historical source references; account-specific observations and source records stay private.
+
+Verification: **118 offline tests passed in an isolated export of the exact staged file set**, including 43 collector and 23 live-adapter tests. Both default CLI dry runs passed with live execution disabled and zero requests. The public template digest is `73a19dc0e195ace500f769363754fa6bd8c50aef26a1f3df34608a5724bc198f`. Independent final code review passed all 43 collector engine tests; the combined collector/live suite passed 66. No 2GIS/OpenAI request, key read, collection retry or dataset change occurred. Private integrity review still reports 73 unique records and 11/12 collector attempts, with ten historical probe attempts unchanged. Provider rights and application integration remain unresolved. These changes neither reset the budget nor authorize additional live execution.
+
+## Previous increment — offline walking relevance audit
 
 User authorized offline filtering of all saved places, preservation of originals and no further API calls. Added owned `scripts/data/review_walking_dataset.py`, `tests/data/test_walking_dataset_review.py` and [audit documentation](WALKING_DATASET_REVIEW.md). No shared interface, dependency or configuration changes. Separate independent coffee/noncoffee reviews cover all 73 records: **45 relevance candidates, seven review, 21 excluded** from these scenarios, with all originals retained. Version-bound private annotations preserve evidence, caveats and automated decisions; invalid/stale reviews cannot promote unsupported records. Private final report: `data/private/walking-review-final/README.md` and `review.json`; review helpers/annotations remain in `data/runtime/walking-review/`.
 
