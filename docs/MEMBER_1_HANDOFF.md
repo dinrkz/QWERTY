@@ -2,7 +2,17 @@
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main` commit `155b7e4`. The deliverable commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/MEMBER_1_HANDOFF.md`.
 
-## Current increment — 2GIS probe implementation, offline only
+## Current increment — offline collector saving, deduplication and resume
+
+2026-10-18. Branch `work/data/source-feasibility`; resolve the collector commit with `git log -1 --format=%H -- scripts/data/collect_2gis.py`. New owned paths: `scripts/data/collect_2gis.py`, `tests/data/test_2gis_collector.py`, `docs/2GIS_COLLECTOR.md`; updated `docs/DATA_PLAN.md` and this handoff. No application modules, shared contracts, dependency manifests or root configuration changed. Earlier probe recovery code/tests and supporting evidence remain local and are excluded from this collector commit.
+
+Implemented a standard-library offline collector engine with 12-new-attempt campaign accounting plus the ten historical probe attempts, reserve-before-dispatch, atomic credential-scrubbed response persistence, exact-ID deduplication with version/provenance preservation, immutable query manifests, cache reuse and deterministic offline replay. OS locks release on abrupt process exit; completed raw files reconcile after a crash, while uncertain attempts remain charged and stop further collection. Derived snapshots are selected only after both record and quality files are complete.
+
+Default CLI prints the eight-query hub draft with four unresolved slots and no state mutation; `--replay` rebuilds saved pages offline. No network adapter/live CLI or credential loading is enabled. Injected synthetic transports exercise the collection engine. No new 2GIS/OpenAI calls or real collector outputs occurred in this increment. Records are staging data and marked demo-ineligible pending member 2's contract; storage basis remains unresolved.
+
+Verification: **37 collector tests passed** including two real child-process crash tests; the committed scope contains 77 data tests, while the local 115-test suite additionally includes uncommitted recovery work. Default dry run passed. Read-only subagent review identified recovery, manifest integrity, encoded-secret redaction and serialized-size issues; these were fixed and regression-tested. See [collector operating notes](2GIS_COLLECTOR.md) for commands, files, scope and limitations. No application acceptance checks or live provider behavior were verified.
+
+## Earlier increment — 2GIS probe implementation, offline only
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`. This increment is prepared for [PR #4](https://github.com/dinrkz/QWERTY/pull/4); resolve its commit with the lookup above after committing. The user authorized review, commit and PR update, but no live 2GIS/OpenAI calls.
 

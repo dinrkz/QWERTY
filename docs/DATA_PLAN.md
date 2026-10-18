@@ -1,51 +1,90 @@
-# Automated POI data collection plan
+# Automated POI collection plan
 
-Status: **2GIS Places API is the candidate POI source**, not a final selection. A Places-enabled demo key is active in Platform Manager; successful API access, applicable data-use permissions, collector implementation, and actual records remain unverified. The map will use 2GIS regardless of whether this candidate is selected. The following is a team plan to satisfy R04/R05.
+Updated: 2026-10-18. Owner: member 1. **Live collection remains a proposal: no collection requests authorized or sent by this plan.** The [offline collector engine and tests](2GIS_COLLECTOR.md) are implemented; no network adapter/live CLI is enabled. 2GIS remains the preferred main source. The completed feasibility probe used all ten authorized attempts; its aggregate ledger stays intact. No reusable 2GIS place dataset was saved. See [probe evidence](2GIS_PROBE_PLAN.md).
 
-Member 1 checkpoint (2026-10-18): Python backend confirmed by the user. Organization `qadam` / Kazakhstan and demo key `qadam-data-dev` were created; the UI showed 0 / 1,000 Places requests and expiry 2026-11-18. No 2GIS API calls have run. The user requires planning and review before spending quota: see the [unsent permissions inquiry](2GIS_PERMISSIONS_INQUIRY.md) and [proposed ten-attempt probe](2GIS_PROBE_PLAN.md). See also [source feasibility and live Wikidata sample evidence](DATA_SOURCE_FEASIBILITY.md), the [proposed Python boundary](DATA_INTERFACE_PROPOSAL.md), and [handoff](MEMBER_1_HANDOFF.md). No production collector, normalized demo snapshot, or shared application contract is complete.
+## Why the probe did not produce a dataset
 
-User priority (2026-10-18): make **2GIS a main POI source**, prioritizing its evaluation and collector before alternatives. This expresses the team's preferred source, not verified access or permissions. Wikidata/OSM are fallback or supplementary candidates for concrete blockers or measured gaps. Keep the 2GIS map decision separate from the data-use agreement.
+The probe used transient inspection and aggregate reporting while storage/reuse terms were unresolved. Source records were discarded when its processes ended. This verified access, field gaps and a composite-ID validation defect, but prevents offline reprocessing of those responses. The ledger cannot reconstruct them. The collector must save permitted response bodies before normalization so parser fixes and review cost no new requests.
 
-Offline implementation checkpoint: `scripts/data/probe_2gis.py` now prints the plan without networking by default and enforces a fixed ten-attempt ledger in its gated live mode. `tests/data/test_2gis_probe.py` uses synthetic responses only. See [probe usage and limitations](2GIS_PROBE_PLAN.md). No live access, source data collection or production retrieval is claimed.
+## User direction: focus on visitor hubs
 
-## 2GIS feasibility check — member 1
-1. Obtain access through the official platform and test Astana categories/locations needed for the demo.
-2. Inspect actual returned fields, missing descriptions/amenities/hours, geographic coverage, pagination, and account limits.
-3. Verify applicable rights for automated collection, storage, retrieval indexing, sending data to OpenAI, and any public dataset redistribution. API access alone does not establish these permissions.
-4. Document the permitted collection/refresh process and attribution. Do not assume live queries alone satisfy the brief's collected-dataset requirement.
-5. If the source is unsuitable, propose a permitted alternative without changing the confirmed 2GIS map decision.
+Allocate roughly 80% of the proposed request budget near major visitor destinations and 20% to neighborhood discovery. This is a sampling decision, not a measured popularity ranking.
 
-Starting references: [Places API](https://docs.2gis.com/en/api/search/places/overview), [map APIs](https://docs.2gis.com/en/maps/overview), and [directory API pricing including storage rights](https://law.2gis.ru/catalog-pay). These references do not establish the permissions of the team's eventual subscription.
+Start with **Bayterek monument** and **EXPO / Mega Silk Way**, using the already reviewed source coordinates and retaining their provenance. No new anchor lookup is needed. Collect smaller cafes, parks, museums and sights around these destinations, not just the landmarks themselves.
 
-## Source selection gate
-Before integration, verify the source's current documentation, geographic/category coverage, access method, rate limits, attribution, license/reuse terms, and snapshot redistribution rights. Record direct source links and date checked. Prefer a documented API or export where available. Do not treat the brief's sample recommendations as factual source records.
+Initial geographic radii: coffee 1,500 m; parks, museums and sights 2,000 m. Geographic distance is not a verified walking route. Select one additional residential walking area and include its exact simulated center in the manifest before execution. Do not use a personal location or choose an arbitrary center mid-run.
 
-## Proposed normalized record
-| Field | Meaning |
+Add other hubs only to address a measured scenario gap, replacing lower-priority work inside the budget. Do not spread a small initial dataset across the whole city.
+
+## Proposed ceiling: 12 new attempts
+
+This is a proposal, not live execution approval. All ten historical attempts remain counted; fully spending this ceiling would make 22 project attempts. Check actual dashboard usage before running; do not assume 990 requests remain.
+
+| Stage | Maximum attempts | Purpose |
+|---|---:|---|
+| Saved Bayterek pilot | 4 | One first page each for coffee, parks, museums and sights. The first response also verifies durable saving and offline replay. |
+| Second hub and targeted gaps | 6 | Up to four first pages around EXPO/Mega Silk Way; up to two category refinements, metadata lookups or extra pages. |
+| Neighborhood sample | 2 | Coffee and green-space discovery around the selected residential center. |
+| Total | **12** | At most ten hub-related attempts and two neighborhood attempts. Failures and uncertain timeouts count. |
+
+Metadata discovery, adjusted queries and pagination all consume this ceiling; none are free setup. Use verified category/region IDs from documentation or saved responses where available. Otherwise allocate a metadata lookup from the hub allowance or stop and revise the manifest; never invent IDs.
+
+Use one locale (`ru_KZ`) and one ranking initially. The [items reference](https://docs.2gis.com/en/api/search/places/reference/3.0/items) documents `page_size` up to 50; propose 50 subject to actual key support. This does not promise 50 usable places per response. Avoid repeating language/ranking experiments or fetching per-place details initially.
+
+Start with **one saved coffee page**. Before dispatching another request, verify that the response can be reloaded, normalized and reported offline without secrets in the stored artifact. Then finish the four-query pilot and assess real unique/category coverage before proceeding.
+
+Request another page only when more results exist, a category/area still lacks coverage, and the last page added useful unique records. Stop on a short/empty page, zero useful new IDs, or adequate category coverage. Do not exhaust a large coffee result set simply because it exists. Use category/type evidence: a name containing “Park” does not establish a public park.
+
+## Build and test offline first
+
+Build a normal resumable collector separately from the one-off probe recovery scripts. Its default dry run prints the exact manifest, destinations, maximum attempts and unresolved inputs. Do not add dependencies or change the shared application contract without member 2.
+
+Synthetic tests must cover response persistence before normalization, malformed records, disk failures, interrupted writes, crash/resume, cached-page reuse, duplicate queries, concurrent runners, budget exhaustion, composite IDs and secret redaction. No API key or networking is needed for these tests.
+
+## Save first, normalize later
+
+The offline engine implements these outputs, but no real collection dataset exists yet:
+
+| Output | Proposed path |
 |---|---|
-| `id`, `source_id` | Stable internal identifier and original source identifier |
-| `name` | Sourced place name |
-| `latitude`, `longitude` | Valid approximate POI coordinates; not user tracking data |
-| `description`, `description_kind` | Source text or explicitly labeled generated summary |
-| `categories`, `tags` | Source-supported classifications |
-| `opening_hours`, `contacts`, `rating`, `popularity` | Optional; null/unknown when absent; preserve rating scale/source if present |
-| `amenities` | Evidence-backed attributes such as sockets or accessibility; unknown remains unknown |
-| `source_url`, `collected_at`, `source_updated_at` | Provenance and collection/update dates; source update date can be unknown |
-| `field_evidence` | Source support where fields come from different sources or require qualification |
-| `attribution`, `reuse_terms` | Required credit and recorded reuse basis |
+| Source response pages | `data/raw/2gis/<collection-id>/responses/<request-id>.json` |
+| Key-free query manifest and checksums | `data/raw/2gis/<collection-id>/manifest.json` |
+| Durable reservations and resumable state | `data/runtime/2gis-collection/ledger.jsonl` |
+| Normalized places | `data/private/2gis/<snapshot-id>/pois.jsonl` |
+| Quality and rejection report | `data/private/2gis/<snapshot-id>/quality.json` |
 
-## Collector requirements
-1. Fetch real Astana POI records automatically from the selected permitted source.
-2. Handle pagination if needed, timeouts, source rate limits, and bounded retries. Report failures and partial coverage.
-3. Normalize records; validate coordinate ranges and intended city coverage; reject invalid mandatory fields.
-4. Deduplicate using stable source IDs and documented cross-source matching rules where applicable.
-5. Preserve missing optional values; never fabricate descriptions, amenities, hours, ratings, or contacts.
-6. Produce a validation summary with counts, rejected/duplicate records, source dates, and missing-field coverage.
-7. Keep a small redistributable snapshot under `data/demo/` when permitted. Otherwise document authorized fetch/setup; never commit prohibited source data.
-8. Document exact collection and refresh commands once implemented. Verify repeatability on fixed source input and separately demonstrate successful real collection.
+These directories are ignored by Git. Public sharing or copying to `data/demo/` requires appropriate redistribution terms. Git exclusion alone does not establish storage or AI-processing rights.
 
-## Coverage review
-Check that actual collected records support short walks, first-time visitor discovery, and coffee/rest stops in the chosen demo area. Prioritize nearby parks, landmarks, museums, and cafes with sufficient source descriptions to explain their relevance to someone unfamiliar with Astana. Do not invent historical/cultural context. If sockets/quietness or attributes in secondary child-outing checks are not documented, preserve that limitation and demonstrate honest unknown handling. Do not manufacture positive evidence to make the demo succeed.
+Under one exclusive lock, reserve each attempt durably **before dispatch**. Save the bounded, credential-scrubbed response body through a temporary file and atomic finalization; record the stored-body checksum before normalization. Preserve permitted source rows even when normalization rejects them. Do not save key-bearing URLs/headers or uncontrolled exception text. A save failure stops further requests.
 
-## Evidence to capture
-Source documentation and terms links; date checked; collector command; collection date; dataset counts; validation report; attribution; refresh behavior; live-source failures; approved snapshot version/hash. Exclude credentials and personal user coordinates.
+Fingerprint canonical endpoint/parameters without the key. Cache successful pages by request identity, preserving their collection/provider context. A parser/schema change reprocesses the saved body instead of invalidating the network cache. Resumes reconcile stored files/checksums, then issue only unsent manifest entries. Reserved requests with no recoverable body remain spent/uncertain; never resend them automatically. No automatic retries, silent fallback requests, periodic refresh or counter resets.
+
+Stop the whole run on authentication/permission failure, throttling, an unexpected API envelope or an uncertain network outcome. Keep that attempt charged and preserve any permitted response; do not continue spending the remaining allowance on likely systematic failures. Individual malformed rows are excluded and reported separately without discarding valid rows or the saved source page.
+
+## Record format and quality
+
+Preserve exact opaque source ID, sourced name, coordinates, object type, source and mapped categories, available address, optional source description/language, raw hours, collection time, provider date/revision when supplied, attribution/reuse basis, and field provenance back to saved response/item. Missing values stay unknown. Source text and generated summaries remain separate.
+
+Deduplicate by exact source-namespaced ID, retaining differing versions and all request provenance. Similar names/coordinates are review candidates, not automatic merges. Do not truncate composite-ID suffixes. Reject malformed records from usable output, but retain their permitted evidence and fixed rejection reasons for offline repair.
+
+Initial target: **50–100 distinct useful places**, with coffee, green spaces and cultural/sightseeing categories represented. This is an aspiration, not a guaranteed yield. Stop early when each of the three core scenarios has at least three supported candidates within its constraints and enough variety to demonstrate adaptation. Report shortfalls instead of automatically expanding the budget.
+
+## Description gaps and the member 2 contract
+
+No descriptions appeared in the probe summaries. Do not keep requesting the same field hoping it will become populated. Preserve `source_description=null`; clearly labeled search text built from name/category/address is derived text, not a sourced narrative description or historical evidence.
+
+The [interface proposal](DATA_INTERFACE_PROPOSAL.md) currently requires a nonempty source description for demo eligibility. It is not an agreed contract; `docs/CONTRACTS.md` is still absent. Member 2 must decide how structured-only records are handled. Save incomplete records without silently marking them demo-eligible.
+
+For a small set of landmark/museum explanations, first inspect the already saved Wikidata sample. Match identity using evidence and coordinates, not name alone, and preserve per-field provenance/terms. New supplementary collection needs its own reviewed scope and budget. Never label model-written prose as a source description.
+
+## Data-use basis before persistent collection
+
+Check the terms attached to the Kazakhstan account for raw/normalized storage, retention/expiry, indexing, attribution, and separately OpenAI processing and redistribution. The user declined outreach; email is not mandatory if applicable published/account terms establish the needed uses. No inquiry will be sent without instruction.
+
+The [Russian directory offer](https://law.2gis.ru/webapi-offer), section 3.1, restricts extraction/storage outside its contract and says caching is not provided. Its directory definition refers to Russia, so it does not establish this Kazakhstan account's agreement. Record the actual applicable basis; neither “all storage is forbidden” nor “private storage is automatically permitted” has been established for this account.
+
+## Next action and completion evidence
+
+Offline collector, persistence/resume tests and dry-run manifest are implemented; see the [operating notes and verification](2GIS_COLLECTOR.md). Next resolve the account's storage basis and member 2's record/description contract, finalize unresolved manifest entries as needed, and review live adapter/approval binding before the first saved pilot call. Keep the first-page checkpoint and 12-attempt ceiling.
+
+Completion evidence still needed: actual saved source files and checksums; real unique usable POIs by area/category/scenario; missing-field, duplicate and rejection reports; exact attempt counts; attribution/reuse evidence; and a permitted integration snapshot. Offline engine behavior is verified with synthetic fixtures; a live collector run, real dataset and working RAG remain unverified.
