@@ -1,7 +1,7 @@
 # Prompt — Final submission audit
 
 ```text
-Freeze optional feature development and audit QWERTY for Build with AI using CASE.md, ACCEPTANCE_TESTS.md, and docs/SUBMISSION_CHECKLIST.md.
+Freeze optional feature development and audit Qadam for Build with AI using CASE.md, ACCEPTANCE_TESTS.md, and docs/SUBMISSION_CHECKLIST.md.
 
 Verify real automated collection and RAG, useful contextual recommendations, explanations, source/idea labels, honest unknown handling, privacy, failure behavior, and actual acceptance evidence. Verify clean setup and any applicable build checks.
 

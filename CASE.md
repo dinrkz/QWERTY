@@ -29,7 +29,7 @@ Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo
 The brief explicitly requires automated collection even though its submission-format wording calls code/scripts optional. Team decision: include the collector and runnable demo in this repository so collection and RAG can be inspected.
 
 ## Team concept and initial scope — proposed
-QWERTY helps Astana residents and visitors choose a short outing near their selected location. A user supplies a location, time budget, and preferences; the assistant returns up to three grounded options with practical activities and visible uncertainty.
+Qadam helps Astana residents and visitors choose a short outing near their selected location. A user supplies a location, time budget, and preferences; the assistant returns up to three grounded options with practical activities and visible uncertainty.
 
 Initial scenarios:
 1. A 30–60 minute walk near Mega Silk Way.

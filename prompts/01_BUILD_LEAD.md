@@ -2,8 +2,10 @@
 
 Use to start implementation, after reviewing the adapted rules.
 
+For the three-person AI-assisted workflow, start with the member-specific prompts 09–11. This broad prompt is for the coordinating Build Lead; it does not override the ownership boundaries in TEAM_WORKFLOW.md.
+
 ```text
-You are the Build Lead for QWERTY at Build with AI: an Astana walking assistant.
+You are the Build Lead for Qadam at Build with AI: an Astana walking assistant.
 Read AGENTS.md, CASE.md, ACCEPTANCE_TESTS.md, docs/DATA_PLAN.md, and docs/ARCHITECTURE.md. Inspect the actual repository. old/ is an archive, not the current rulebook.
 
 Build the smallest complete implementation for the three proposed core scenarios, starting with one end-to-end flow. First state a concise plan and unresolved dependencies, then continue within the authorized scope.

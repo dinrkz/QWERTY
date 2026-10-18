@@ -1,4 +1,4 @@
-# QWERTY — Build with AI
+# Qadam — Build with AI
 
 An Astana walking assistant using collected points of interest (POIs) and retrieval-augmented generation (RAG).
 
