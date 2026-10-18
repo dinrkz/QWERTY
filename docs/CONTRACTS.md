@@ -51,7 +51,7 @@ The normalized request adds `limit: 10`, `now` (server ISO UTC), `query_terms` (
 
 ### POI and candidate
 
-Each candidate: `{poi, distance_m, distance_kind:"straight_line", travel_minutes_estimate, visit_minutes_estimate, total_minutes_estimate}`. Numbers are finite and unrounded for eligibility. POI:
+Each candidate: `{poi, distance_m, distance_kind:"straight_line", travel_minutes_estimate, visit_minutes_estimate, total_minutes_estimate}`. Numbers are finite and unrounded for eligibility. Member 1 may also return `ranking_factors` for diagnostics, but v1 does not display or trust arbitrary ranking explanations. The app independently verifies category/preference matches before using those reasons; a category match is never described as proof of a specific historical/cultural interest. POI:
 
 ```json
 {
@@ -79,7 +79,7 @@ Evidence IDs are unique within a POI. Source URLs must be HTTPS/HTTP without cre
 
 ## Versioned estimate/evidence policy
 
-Team implementation assumptions, not source facts: Haversine earth radius 6,371,000 m; walking distance heuristic = straight-line × 1.3; speed = 4 km/h, or 2.5 km/h for a wheelchair requirement (a conservative planning assumption, not a personal ability claim). Travel = distance × 1.3 / metres per minute. Visit defaults: park 20, museum 45, landmark 15, cafe 25, event 30 minutes; first recognized category wins. Total = outward travel + visit + (outward travel if return requested) + explicit buffer. Values must fit both distance and total budget before rounding. Shared policy in `src/shared/policy.mjs` is the specification; Python should match within 1 metre / 0.05 minute tolerance.
+Team implementation assumptions, not source facts: Haversine earth radius 6,371,000 m; walking distance heuristic = straight-line × 1.3; speed = 4 km/h, or 2.5 km/h for a wheelchair requirement (a conservative planning assumption, not a personal ability claim). Travel = distance × 1.3 / metres per minute. Visit defaults: park 20, museum 45, landmark 15, cafe 25, event 30 minutes; use the maximum across a POI's categories, independent of tag order. Total = outward travel + visit + (outward travel if return requested) + explicit buffer. Values must fit both distance and total budget before rounding. Shared policy in `src/shared/policy.mjs` is the specification; Python should match within 1 metre / 0.05 minute tolerance.
 
 Each card is an alternative, not one stop of a combined route. Distance/time are estimates, not pedestrian routing. A wheelchair tag does not prove route accessibility. No safety/flight/access guarantees.
 
@@ -91,7 +91,7 @@ Use real OpenAI Responses requests with strict JSON schema and `store:false`; ex
 
 Grounding is structural: the model composes 1–3 recommendations by selecting retrieved `poi_id`, description `evidence_ids`, allowed `reason_codes` and an `activity_code` from an eligible category-specific vocabulary. The app renders short RU/KK/EN explanations and activities from this validated structure. No unrestricted model-authored factual prose is displayed. This is constrained recommendation generation, not fine-tuning or a general chat assistant. Source names/descriptions remain verbatim and are labeled with their source language. Human language/usefulness evaluation is still required.
 
-Model result: `{recommendations:[{poi_id,evidence_ids,reason_codes,activity_code}]}`. Reasons: `nearby|fits_time|interest|first_visit|amenity|event`; every reason must be true for the request/candidate. Activities: `stroll|observe|museum_visit|coffee_break|attend_event`, restricted by category and access; unknown access uses `observe` (look from a permitted public area, if reachable) rather than instructions to enter.
+Model result: `{recommendations:[{poi_id,evidence_ids,reason_codes,activity_code}]}`. Reasons: `nearby|fits_time|interest|first_visit|amenity|event`; every reason must be true for the request/candidate. The card also presents the place-specific original source description with attribution, not invented local context. Activities: `stroll|observe|museum_visit|coffee_break|attend_event`, restricted by category. All activities are conditional on confirming access; unknown access is clearly disclosed, not converted into an assertion that a venue can be entered. Restricted/closed places have already failed eligibility. Conditional coffee ideas are not evidence of open hours.
 
 Application result: `{status,language,message,context_used,recommendations,warnings}`. Status: `live_rag|retrieval_only|no_match|needs_clarification|error|synthetic_test`. Context excludes exact user coordinates and raw query; reports filters, language, time, return/buffer and location source (`manual_or_device_ephemeral`). Cards contain `poi_id,name,latitude,longitude,source_facts,why,activity,estimates,sources,caveats`. `source_facts` are source data; `why` is grounded composition; `activity` is labeled a generated suggestion in live mode and a template suggestion in fallback; estimates have their own label. Sources are reconstructed from records, never model URLs.
 
