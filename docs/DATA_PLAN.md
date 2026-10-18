@@ -2,6 +2,8 @@
 
 Status: **2GIS Places API is the candidate POI source**, not a final selection. Account access, applicable permissions, collector implementation, and actual records remain unverified. The map will use 2GIS regardless of whether this candidate is selected. The following is a team plan to satisfy R04/R05.
 
+Member 1 checkpoint (2026-10-18): Python backend confirmed by the user; no 2GIS access yet. See [source feasibility and live Wikidata sample evidence](DATA_SOURCE_FEASIBILITY.md), the [proposed Python boundary](DATA_INTERFACE_PROPOSAL.md), and [handoff](MEMBER_1_HANDOFF.md). A bounded alternate-source probe succeeded; no production collector, normalized demo snapshot, or shared application contract is complete.
+
 ## 2GIS feasibility check — member 1
 1. Obtain access through the official platform and test Astana categories/locations needed for the demo.
 2. Inspect actual returned fields, missing descriptions/amenities/hours, geographic coverage, pagination, and account limits.
