@@ -2,7 +2,17 @@
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main` commit `155b7e4`. The deliverable commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/MEMBER_1_HANDOFF.md`.
 
-## Current increment — offline collector saving, deduplication and resume
+## Current increment — live adapter and finalized plan, no execution
+
+2026-10-18. Branch `work/data/source-feasibility`; resolve this commit with `git log -1 --format=%H -- scripts/data/live_2gis_collector.py`. New owned files: `scripts/data/live_2gis_collector.py`, `scripts/data/2gis_collection_plan.json`, `tests/data/test_2gis_live_collector.py`, `docs/2GIS_LIVE_PLAN.md`; updated the collector's locked pre-dispatch hook/default displayed plan, collector operating notes, data plan and this handoff. No shared application contracts, dependency manifests or root configuration changed. Earlier probe recovery work remains local and excluded from this commit.
+
+The user selected Zhetysu Park / Shubar for two neighborhood queries. The finalized ceiling contains eight main-hub first pages, two neighborhood first pages, and two optional `сквер` hub refinements. All exact parameters and public/simulated anchor provenance are recorded. Manifest digest at preparation: `3eb0f080102f290fc6330154d7c5b80017dc1618386511f10b6da1cd26d31f3c`; adding a valid storage basis changes it and requires fresh approval.
+
+Prepared adapter requires exact manifest approval, one explicit request/one-attempt invocation, a recorded storage basis, current manually checked dashboard balance/date, ordered first-page execution and the current reviewed-snapshot token for continuation. Optional refinements additionally require a reviewed green-space gap. It loads a key only after locked state/quota/checkpoint checks, uses the existing twelve-attempt ledger, saves bounded HTTP error bodies, and never retries or follows redirects. Default commands remain offline and key-free.
+
+Verification: **21 new live-adapter tests passed**; the committed file set contains 98 data tests, and the full local workspace contains 136 including uncommitted probe recovery tests. All tests use synthetic data and block networking. Default prepared-plan dry run passed; no real key was read, no new Places/OpenAI request was sent, and the ten-attempt historical ledger remains unchanged. Review regressions reproduced incomplete-plan dispatch through direct runner use and report/token mismatch after concurrent progress; both were fixed and retested. Independent read-only review checked dispatch ordering, quota/credential boundaries and redirect/error persistence. No live success or application acceptance completion is claimed. Prepared storage basis is still null; actual dashboard balance and explicit execution approval remain required before running.
+
+## Published increment — offline collector saving, deduplication and resume
 
 2026-10-18. Branch `work/data/source-feasibility`; resolve the collector commit with `git log -1 --format=%H -- scripts/data/collect_2gis.py`. New owned paths: `scripts/data/collect_2gis.py`, `tests/data/test_2gis_collector.py`, `docs/2GIS_COLLECTOR.md`; updated `docs/DATA_PLAN.md` and this handoff. No application modules, shared contracts, dependency manifests or root configuration changed. Earlier probe recovery code/tests and supporting evidence remain local and are excluded from this collector commit.
 

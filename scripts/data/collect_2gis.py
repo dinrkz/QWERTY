@@ -1,7 +1,7 @@
-"""Save-first 2GIS collection engine; CLI is deliberately offline-only for now.
+"""Save-first 2GIS collection engine with an offline dry-run/replay CLI.
 
-No credentials are loaded and no network adapter is installed. An injected transport
-is the boundary exercised by synthetic tests. Live activation is a separate step.
+This module does not load credentials or implement networking. The separately gated
+live_2gis_collector.py adapter supplies transport only after explicit live approval.
 """
 
 import argparse
@@ -113,6 +113,7 @@ def fingerprint(params):
 
 
 def draft_manifest():
+    """Eight-query seed retained for offline fixtures; final plan is the JSON file."""
     requests = []
     for area, point in (("bayterek", "71.430456,51.128301"),
                         ("mega-silk-way", "71.405441,51.089347")):
@@ -463,12 +464,12 @@ class Collector:
                 raise CollectionError("NO_SAVED_COLLECTION")
             return self.publish(self.reconcile())
 
-    def collect_one(self, manifest, request_id, transport, *, secrets=()):
+    def collect_one(self, manifest, request_id, transport, *, secrets=(), before_dispatch=None):
         """One explicit entry per invocation; transport(params) -> (status, bytes).
 
-        Only intended for offline injected transports until live activation is
-        reviewed. A future live adapter must supply its key in `secrets` and bind
-        explicit execution approval to the complete manifest digest.
+        Live adapters supply the key in `secrets` and bind approval to the manifest.
+        The optional gate runs under the same lock, after cache/replay/budget checks
+        and before reservation. Cached requests do not invoke it or load credentials.
         """
         validate_manifest(manifest)
         request = next((r for r in manifest["requests"] if r["id"] == request_id), None)
@@ -496,6 +497,8 @@ class Collector:
             attempts = sum(e["kind"] == "reserve" for e in self.events())
             if attempts >= MAX_ATTEMPTS:
                 raise CollectionError("BUDGET_EXHAUSTED")
+            if before_dispatch is not None:
+                before_dispatch(self, responses)
             atomic_write(old_path, encoded(manifest) + b"\n")
             atomic_write(self.raw / "manifests" / (digest(manifest) + ".json"), encoded(manifest) + b"\n")
             reserved = self.append("reserve", fingerprint=fp, parameters=params,
@@ -537,7 +540,8 @@ def main(argv=None):
         if args.replay:
             print(json.dumps(Collector().replay(), indent=2, ensure_ascii=False))
         else:
-            manifest = draft_manifest()
+            manifest = validate_manifest(strict_json(
+                Path(__file__).with_name("2gis_collection_plan.json").read_bytes()))
             print(json.dumps({"manifest": manifest, "manifest_sha256": digest(manifest),
                               "live_enabled": False, "max_project_attempts": 22,
                               "destinations": {"raw": str(Collector().raw),

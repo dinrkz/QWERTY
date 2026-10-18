@@ -1,6 +1,6 @@
-# 2GIS collector — offline implementation
+# 2GIS collector — prepared adapter and verified offline engine
 
-Owner: member 1. Updated 2026-10-18. The persistence, normalization, deduplication and resume engine is implemented and tested with synthetic responses. **No new API requests were made.** There is no live CLI option, network adapter, or credential loading in this increment. The existing ten-attempt feasibility ledger is unchanged.
+Owner: member 1. Updated 2026-10-18. The persistence, normalization, deduplication and resume engine and a separate gated live adapter are implemented and tested with synthetic responses. **No new Places/OpenAI API requests were made.** Default commands stay offline; the prepared adapter requires separate execution approval. The existing ten-attempt feasibility ledger is unchanged. See [the concrete plan and execution gates](2GIS_LIVE_PLAN.md).
 
 ## Run locally
 
@@ -8,12 +8,13 @@ From the repository root, using Python 3.13 (the implementation uses only the st
 
 ```powershell
 python scripts/data/collect_2gis.py
+python scripts/data/live_2gis_collector.py
 python -m unittest discover -s tests/data
 ```
 
 On this machine the installed interpreter is `C:/Users/arlan/AppData/Local/Programs/Python/Python313/python.exe`; use `& 'C:/Users/arlan/AppData/Local/Programs/Python/Python313/python.exe'` in place of `python` if the Windows launcher points to the install manager.
 
-The default command prints the draft manifest, hash, paths and budget without creating collection state or reading `.env`. Eight first-page queries cover coffee, parks, museums and sights near Bayterek and Mega Silk Way. Four slots remain unresolved: two hub refinements and two neighborhood queries. A query's intent is not evidence that every returned place belongs to that category. No neighborhood coordinates or category IDs are invented.
+Default commands print the selected manifest/hash and budget without creating collection state or reading `.env`. Eight first-page queries cover coffee, parks, museums and sights near Bayterek and Mega Silk Way; two cover Zhetysu Park / Shubar; the final two are optional `сквер` refinements near the main hubs. A query's intent is not evidence that every returned place belongs to that category. Exact parameters and anchor provenance are in `scripts/data/2gis_collection_plan.json`; storage basis remains unset.
 
 After permitted pages have been saved, this command rebuilds derived records without requests:
 
@@ -27,9 +28,9 @@ It currently returns `NO_SAVED_COLLECTION` because this task did not collect rea
 
 The fixed campaign `qadam-2gis-v1` allows **12 new attempts**, plus the **10 historical probe attempts** (22 maximum combined). This is a software ceiling, not permission to send requests or a claim about dashboard billing. The production CLI has no root/campaign/reset/limit override. Do not delete, move or replace its accounting files to start another allowance; separate checkouts do not coordinate account-wide usage.
 
-`Collector.collect_one(manifest, request_id, transport, secrets=...)` is the injectable engine boundary. Tests supply local synthetic functions returning `(HTTP status, body bytes)`. No transport implementation in this module can contact 2GIS. A future reviewed live adapter must enforce the exact approved manifest hash, applicable storage basis, timeout/response bounds before buffering, credential redaction, fixed endpoint, no redirects/retries, and current account budget. These are not claimed as implemented live behavior.
+`Collector.collect_one(manifest, request_id, transport, secrets=..., before_dispatch=...)` is the injectable engine boundary. Tests supply local synthetic functions returning `(HTTP status, body bytes)`. The engine module has no network transport. `live_2gis_collector.py` supplies the prepared adapter, checking exact manifest approval, declared storage basis, current manual balance/date, ordering and reviewed snapshot before loading a key. The pre-dispatch gate runs under the existing lock before reservation. Its fixed-endpoint HTTP transport disables proxies/retries/redirects and bounds response reads. These controls are verified offline; successful real provider behavior remains untested.
 
-Each invocation processes at most one explicit entry. There is no batch loop, automatic pagination, retry or refresh. Before a new entry it verifies/replays all previous pages; parser or disk failure stops before dispatch. First-page quality and coverage decisions remain human-reviewed: the engine does not automatically authorize later pilot pages or calculate enough scenario coverage. Metadata endpoints/category filters are not implemented; adding them requires a reviewed manifest/schema extension and must use the same attempt budget.
+Each invocation processes at most one explicit entry. There is no batch loop, automatic pagination, retry or refresh. Before a new entry it verifies/replays all previous pages; parser or disk failure stops before dispatch. The live adapter requires the current snapshot token after the first page, plus a gap-review attestation for either optional refinement. Category and scenario coverage decisions still require actual evidence review; the code cannot prove that review occurred. Metadata endpoints/category filters are not implemented; adding them requires a reviewed manifest/schema extension and must use the same attempt budget.
 
 ## Files and consistency
 
@@ -60,9 +61,13 @@ The local staging format groups records by **exact `2gis:<source_id>`**. Composi
 
 Name, ID and coordinates are required. Bad rows are excluded from normalized output and counted; the raw page remains available for repair. Malformed optional values become null with warnings. Missing/empty descriptions remain `source_description=null`; no generated description or category inference is substituted. Original rubrics, object type, address, hours and administrative divisions are retained when structurally available. Descriptions are untrusted text and never executed.
 
-This is an internal staging format, **not member 2's agreed application contract**. All records are marked `demo_eligible=false` pending that contract; even complete records are not automatically published or indexed. Actual category mapping, geographic/scenario eligibility, freshness rules, and rights for storage/indexing/AI/redistribution remain separate work. An immutable manifest records the declared storage basis; the engine does not verify legal rights. Current draft basis is null and no live data collection is enabled.
+This is an internal staging format, **not member 2's agreed application contract**. All records are marked `demo_eligible=false` pending that contract; even complete records are not automatically published or indexed. Actual category mapping, geographic/scenario eligibility, freshness rules, and rights for storage/indexing/AI/redistribution remain separate work. An immutable manifest records the declared storage basis; the engine does not verify legal rights. The prepared plan's basis is null, so live execution is blocked until applicable evidence is recorded and the request is explicitly approved.
 
 ## Verification
+
+Live-adapter preparation adds 21 offline tests for approval/order/checkpoint/key gates, transport bounds, HTTP errors/redirects, fixed endpoint, timeout, optional refinements and final 12-attempt accounting. The committed scope contains 98 data tests; the full local workspace contains 136 including separate uncommitted probe recovery work. Tests run on Windows / Python 3.13.12. Two review regressions reproduced and fixed incomplete-plan dispatch through direct runner use and mismatched report/snapshot output after another writer advances. All transport is mocked, with socket connections blocked; the real `.env` is not read by preparation/tests. The tests do not verify current account rights, dashboard usage, or live API response behavior.
+
+Prior published collector increment:
 
 37 collector-specific tests passed on Python 3.13.12 / Windows. The collector commit contains 77 data tests (37 collector plus 40 previously committed probe tests); the local workspace additionally passes 115 tests including earlier uncommitted probe recovery work. Coverage includes save-before-parse, raw and derived disk failures, malformed rows/envelopes, exact-ID dedup/version provenance, cache reuse, deterministic replay, manifest integrity, interrupted journal/response handling, budget exhaustion across restarts, concurrency, secret redaction, and actual child-process exits before/after response persistence. Tests use synthetic transports; no API key is needed. Default CLI dry run passed. No configured type/lint/build command exists; application acceptance checks remain unrun.
 

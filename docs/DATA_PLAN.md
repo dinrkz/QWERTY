@@ -1,6 +1,6 @@
 # Automated POI collection plan
 
-Updated: 2026-10-18. Owner: member 1. **Live collection remains a proposal: no collection requests authorized or sent by this plan.** The [offline collector engine and tests](2GIS_COLLECTOR.md) are implemented; no network adapter/live CLI is enabled. 2GIS remains the preferred main source. The completed feasibility probe used all ten authorized attempts; its aggregate ledger stays intact. No reusable 2GIS place dataset was saved. See [probe evidence](2GIS_PROBE_PLAN.md).
+Updated: 2026-10-18. Owner: member 1. **Live execution is not authorized and no collection requests were sent.** The [collector engine](2GIS_COLLECTOR.md), gated live adapter and [concrete twelve-slot manifest](2GIS_LIVE_PLAN.md) are prepared and tested offline. The default command never loads credentials or calls a provider. 2GIS remains the preferred main source. The completed feasibility probe used all ten authorized attempts; its aggregate ledger stays intact. No reusable 2GIS place dataset was saved. See [probe evidence](2GIS_PROBE_PLAN.md).
 
 ## Why the probe did not produce a dataset
 
@@ -12,7 +12,7 @@ Allocate roughly 80% of the proposed request budget near major visitor destinati
 
 Start with **Bayterek monument** and **EXPO / Mega Silk Way**, using the already reviewed source coordinates and retaining their provenance. No new anchor lookup is needed. Collect smaller cafes, parks, museums and sights around these destinations, not just the landmarks themselves.
 
-Initial geographic radii: coffee 1,500 m; parks, museums and sights 2,000 m. Geographic distance is not a verified walking route. Select one additional residential walking area and include its exact simulated center in the manifest before execution. Do not use a personal location or choose an arbitrary center mid-run.
+Hub radii: coffee 1,500 m; parks, museums and sights 2,000 m. Geographic distance is not a verified walking route. The user selected Zhetysu Park / Shubar for the neighborhood sample; its sourced simulated center and narrower 750 m coffee / 1,000 m park radii are recorded in the [finalized request plan](2GIS_LIVE_PLAN.md). It is not a personal location. Overlap with Bayterek is expected and deduplicated.
 
 Add other hubs only to address a measured scenario gap, replacing lower-priority work inside the budget. Do not spread a small initial dataset across the whole city.
 
@@ -23,11 +23,11 @@ This is a proposal, not live execution approval. All ten historical attempts rem
 | Stage | Maximum attempts | Purpose |
 |---|---:|---|
 | Saved Bayterek pilot | 4 | One first page each for coffee, parks, museums and sights. The first response also verifies durable saving and offline replay. |
-| Second hub and targeted gaps | 6 | Up to four first pages around EXPO/Mega Silk Way; up to two category refinements, metadata lookups or extra pages. |
-| Neighborhood sample | 2 | Coffee and green-space discovery around the selected residential center. |
+| Second hub and targeted gaps | 6 | Four first pages around EXPO/Mega Silk Way, plus two optional `сквер` refinements (one per hub) only after a reviewed green-space gap. |
+| Neighborhood sample | 2 | Coffee and park discovery around Zhetysu Park / Shubar. |
 | Total | **12** | At most ten hub-related attempts and two neighborhood attempts. Failures and uncertain timeouts count. |
 
-Metadata discovery, adjusted queries and pagination all consume this ceiling; none are free setup. Use verified category/region IDs from documentation or saved responses where available. Otherwise allocate a metadata lookup from the hub allowance or stop and revise the manifest; never invent IDs.
+The current concrete manifest contains first-page text queries only: no metadata calls, category IDs, detail requests or pagination. Any future metadata lookup, adjusted query or extra page needs a reviewed plan change inside the same ceiling; none are free setup. Never invent IDs.
 
 Use one locale (`ru_KZ`) and one ranking initially. The [items reference](https://docs.2gis.com/en/api/search/places/reference/3.0/items) documents `page_size` up to 50; propose 50 subject to actual key support. This does not promise 50 usable places per response. Avoid repeating language/ranking experiments or fetching per-place details initially.
 
@@ -45,9 +45,9 @@ Synthetic tests must cover response persistence before normalization, malformed 
 
 The offline engine implements these outputs, but no real collection dataset exists yet:
 
-| Output | Proposed path |
+| Output | Implemented path |
 |---|---|
-| Source response pages | `data/raw/2gis/<collection-id>/responses/<request-id>.json` |
+| Source response pages | `data/raw/2gis/<collection-id>/responses/<request-fingerprint>.json` |
 | Key-free query manifest and checksums | `data/raw/2gis/<collection-id>/manifest.json` |
 | Durable reservations and resumable state | `data/runtime/2gis-collection/ledger.jsonl` |
 | Normalized places | `data/private/2gis/<snapshot-id>/pois.jsonl` |
@@ -85,6 +85,6 @@ The [Russian directory offer](https://law.2gis.ru/webapi-offer), section 3.1, re
 
 ## Next action and completion evidence
 
-Offline collector, persistence/resume tests and dry-run manifest are implemented; see the [operating notes and verification](2GIS_COLLECTOR.md). Next resolve the account's storage basis and member 2's record/description contract, finalize unresolved manifest entries as needed, and review live adapter/approval binding before the first saved pilot call. Keep the first-page checkpoint and 12-attempt ceiling.
+Collector, persistence/resume tests, gated adapter and exact twelve-slot manifest are prepared; see the [operating notes](2GIS_COLLECTOR.md) and [execution gates](2GIS_LIVE_PLAN.md). Before execution, record the account's applicable storage basis, check actual dashboard usage, and obtain fresh explicit approval for the manifest and first saved pilot call. Member 2's record/description contract remains separate from raw staging collection. Keep the saved-page checkpoint and 12-attempt ceiling.
 
 Completion evidence still needed: actual saved source files and checksums; real unique usable POIs by area/category/scenario; missing-field, duplicate and rejection reports; exact attempt counts; attribution/reuse evidence; and a permitted integration snapshot. Offline engine behavior is verified with synthetic fixtures; a live collector run, real dataset and working RAG remain unverified.

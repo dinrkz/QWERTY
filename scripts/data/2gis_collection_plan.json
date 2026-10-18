@@ -1,0 +1,191 @@
+{
+  "campaign": "qadam-2gis-v1",
+  "max_attempts": 12,
+  "historical_attempts": 10,
+  "storage_basis": null,
+  "requests": [
+    {
+      "id": "bayterek-coffee",
+      "area": "bayterek",
+      "intent": "coffee",
+      "parameters": {
+        "q": "кофейня",
+        "point": "71.430456,51.128301",
+        "radius": 1500,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "bayterek-parks",
+      "area": "bayterek",
+      "intent": "parks",
+      "parameters": {
+        "q": "парк",
+        "point": "71.430456,51.128301",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "bayterek-museums",
+      "area": "bayterek",
+      "intent": "museums",
+      "parameters": {
+        "q": "музей",
+        "point": "71.430456,51.128301",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "bayterek-sights",
+      "area": "bayterek",
+      "intent": "sights",
+      "parameters": {
+        "q": "достопримечательности",
+        "point": "71.430456,51.128301",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "mega-silk-way-coffee",
+      "area": "mega-silk-way",
+      "intent": "coffee",
+      "parameters": {
+        "q": "кофейня",
+        "point": "71.405441,51.089347",
+        "radius": 1500,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "mega-silk-way-parks",
+      "area": "mega-silk-way",
+      "intent": "parks",
+      "parameters": {
+        "q": "парк",
+        "point": "71.405441,51.089347",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "mega-silk-way-museums",
+      "area": "mega-silk-way",
+      "intent": "museums",
+      "parameters": {
+        "q": "музей",
+        "point": "71.405441,51.089347",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "mega-silk-way-sights",
+      "area": "mega-silk-way",
+      "intent": "sights",
+      "parameters": {
+        "q": "достопримечательности",
+        "point": "71.405441,51.089347",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "zhetysu-coffee",
+      "area": "zhetysu-shubar",
+      "intent": "coffee",
+      "parameters": {
+        "q": "кофейня",
+        "point": "71.439453,51.135968",
+        "radius": 750,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "zhetysu-parks",
+      "area": "zhetysu-shubar",
+      "intent": "parks",
+      "parameters": {
+        "q": "парк",
+        "point": "71.439453,51.135968",
+        "radius": 1000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "bayterek-green-space",
+      "area": "bayterek",
+      "intent": "green-space-refinement",
+      "parameters": {
+        "q": "сквер",
+        "point": "71.430456,51.128301",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    },
+    {
+      "id": "mega-silk-way-green-space",
+      "area": "mega-silk-way",
+      "intent": "green-space-refinement",
+      "parameters": {
+        "q": "сквер",
+        "point": "71.405441,51.089347",
+        "radius": 2000,
+        "page_size": 50,
+        "page": 1,
+        "sort": "distance",
+        "locale": "ru_KZ",
+        "fields": "items.point,items.rubrics,items.description,items.schedule,items.adm_div"
+      }
+    }
+  ],
+  "pending": [],
+  "anchor_provenance": "Bayterek and Mega Silk Way: reviewed local probe transcript, 2026-10-18. Zhetysu/Shubar: simulated search center at the Tanbaly tas landmark inside Zhetysu Park; public 2GIS listing https://2gis.kz/astana/geo/70030076166202443/tab/reviews displays lat 51.135968, lon 71.439453 (web search verified 2026-10-18). This is not a park centroid or device location.",
+  "status": "Prepared 12-slot ceiling; requests 11-12 optional after green-space evidence review; no execution authorization; storage basis unresolved."
+}
