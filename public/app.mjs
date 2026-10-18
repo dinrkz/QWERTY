@@ -198,7 +198,14 @@ function renderCard(card, index, status) {
   article.setAttribute('aria-labelledby', title.id);
   titleArea.append(title, element('p', strings(card.source_facts?.categories).map(category).join(' · '), 'category-line'));
   heading.append(number, titleArea);
-  article.append(heading, element('p', t('why'), 'card-section-label'));
+  article.append(heading);
+  const description = string(card.source_facts?.description);
+  if (description) {
+    const excerpt = element('p', description.length > 220 ? `${description.slice(0, 217)}…` : description, 'source-excerpt');
+    if (['ru', 'kk', 'en'].includes(card.source_facts.description_language)) excerpt.lang = card.source_facts.description_language;
+    article.append(element('p', t('facts'), 'card-section-label'), excerpt);
+  }
+  article.append(element('p', t('why'), 'card-section-label'));
   const why = element('ul', '', 'why-list');
   for (const reason of strings(card.why)) why.append(element('li', reason));
   article.append(why);
