@@ -1,6 +1,8 @@
-# Proposed RAG architecture
+# RAG architecture and implementation boundary
 
-Status: design only. Team choices: **2GIS map** and **OpenAI API generation**. The user reports available OpenAI API credits; no credentials, balance, or live integrations have been verified. 2GIS Places API is a candidate dataset source. Framework, generation model, embedding approach/model if needed, index, and database remain undecided.
+Status: member 2 application implemented with Node.js 22.14+ and browser JavaScript, approved by the user on 2026-10-18. The exact boundary is in [CONTRACTS.md](CONTRACTS.md); member 1's Python retrieval is connected through JSON stdin/stdout when implemented. There are no npm dependencies or separate database in this increment. OpenAI interpretation and constrained recommendation composition adapters, server validation and the opt-in 2GIS UI adapter exist. Credentials, model access, balance, map operation and live RAG remain unverified. A permitted dataset/retrieval is still pending. The flow below is the overall integration target, not an assertion that every component works.
+
+The application displays original source descriptions, structured model-selected reasons and conditional activity ideas through RU/KK/EN templates. It does not display unrestricted generated factual prose or translate source descriptions. See the contract for deterministic grounding, error handling and the explicit retrieval-only fallback. Automated collection, ranking and data refresh remain member 1's responsibility; acceptance and submission evidence remain member 3's.
 
 ## Provider responsibilities
 - 2GIS map: display the selected location and recommended places. Planned web integration: MapGL JS API; exact access/configuration remains to be implemented.

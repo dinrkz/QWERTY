@@ -6,6 +6,8 @@ import { createOpenAI } from './app/openai.mjs';
 import { createService } from './app/service.mjs';
 import { parseRetrievalCommand, retrieveFromProcess } from './app/retrieval.mjs';
 import { errorResult } from './app/presentation.mjs';
+import { validateInput } from './shared/validate.mjs';
+import { AppError, detectLanguage } from './shared/policy.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const files = new Map([['/', ['index.html','text/html; charset=utf-8']],
@@ -24,15 +26,24 @@ export function readConfig(env = process.env) {
 }
 
 async function bodyJson(req) {
-  if (!(req.headers['content-type'] ?? '').split(';')[0].trim().toLowerCase().startsWith('application/json')) throw new Error('INVALID_INPUT');
-  const chunks = [];
-  let length = 0;
-  for await (const chunk of req) {
-    length += chunk.length;
-    if (length > 16 * 1024) throw new Error('INVALID_INPUT');
-    chunks.push(chunk);
-  }
-  return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+  if ((req.headers['content-type'] ?? '').split(';')[0].trim().toLowerCase() !== 'application/json') { req.resume(); throw new Error('INVALID_INPUT'); }
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let length = 0;
+    let tooLarge = false;
+    req.on('data', chunk => {
+      length += chunk.length;
+      if (length > 16 * 1024) { tooLarge = true; chunks.length = 0; reject(new Error('INVALID_INPUT')); }
+      else if (!tooLarge) chunks.push(chunk);
+    });
+    req.on('end', () => {
+      if (tooLarge) return;
+      try { resolve(JSON.parse(Buffer.concat(chunks).toString('utf8'))); }
+      catch { reject(new Error('INVALID_INPUT')); }
+    });
+    req.on('aborted', () => reject(new Error('INVALID_INPUT')));
+    req.on('error', () => reject(new Error('INVALID_INPUT')));
+  });
 }
 
 export function createAppServer({ config = readConfig(), recommend } = {}) {
@@ -66,9 +77,14 @@ export function createAppServer({ config = readConfig(), recommend } = {}) {
       try {
         let body;
         try { body = await bodyJson(req); } catch { json(errorResult('INVALID_INPUT'), 400); return; }
+        let validated;
+        try { validated = validateInput(body); } catch (error) {
+          json(errorResult(error instanceof AppError ? error.code : 'INVALID_INPUT',
+            detectLanguage(typeof body?.query === 'string' ? body.query : '', body?.language)), 400); return;
+        }
         // Preflight avoids a paid interpretation request when data is not configured.
-        const result = !config.command && !recommend ? errorResult('DATA_UNAVAILABLE', body.language)
-          : (!config.apiKey || !config.model) && !recommend ? errorResult('PROVIDER_NOT_CONFIGURED', body.language)
+        const result = !config.command && !recommend ? errorResult('DATA_UNAVAILABLE', validated.language)
+          : (!config.apiKey || !config.model) && !recommend ? errorResult('PROVIDER_NOT_CONFIGURED', validated.language)
           : await service(body);
         json(result, result.status === 'error' ? 400 : 200);
       } finally { inFlight--; }

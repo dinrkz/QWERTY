@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ee">
+  <meta name="referrer" content="no-referrer">
+  <title>Qadam — прогулки по Астане</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#walk-form" data-i18n="skip">Перейти к поиску</a>
+  <header class="site-header shell">
+    <a class="brand" href="/" aria-label="Qadam"><span class="brand-mark" aria-hidden="true">q</span>qadam<span class="brand-dot">.</span></a>
+    <div class="header-controls"><span class="city-label" data-i18n="city">Астана · пешком</span><label class="sr-only" for="language" data-i18n="language">Язык</label><select id="language"><option value="ru">Русский</option><option value="kk">Қазақша</option><option value="en">English</option></select></div>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div><p class="eyebrow" data-i18n="eyebrow">Қадам — значит «шаг»</p><h1 id="hero-title" data-i18n="hero">Ваш следующий<br>шаг по Астане.</h1><p class="hero-copy" data-i18n="heroCopy">Небольшая прогулка, новое место или пауза на кофе. Найдите то, что рядом и подходит именно вам.</p></div>
+      <div class="hero-note"><span class="step-symbol" aria-hidden="true">↗</span><p data-i18n="heroNote">Меньше планирования.<br>Больше открытий.</p><span class="tiny-label" data-i18n="heroFoot">До 3 вариантов • с источниками</span></div>
+    </section>
+    <div class="workspace">
+      <section class="planner panel" aria-labelledby="planner-title">
+        <div class="section-heading"><span class="step-number">01</span><h2 id="planner-title" data-i18n="plannerTitle">Какая сегодня прогулка?</h2></div>
+        <form id="walk-form" autocomplete="off">
+          <fieldset class="scenario-fieldset"><legend class="sr-only" data-i18n="scenario">Идея прогулки</legend><div class="scenario-grid"><button type="button" class="scenario active" data-scenario="walk"><span aria-hidden="true">↗</span><span data-i18n="walk">Прогуляться</span></button><button type="button" class="scenario" data-scenario="discover"><span aria-hidden="true">◇</span><span data-i18n="discover">Открыть город</span></button><button type="button" class="scenario" data-scenario="coffee"><span aria-hidden="true">☕</span><span data-i18n="coffee">Выпить кофе</span></button></div></fieldset>
+          <label class="field-label" for="query" data-i18n="queryLabel">Что вам хочется?</label><textarea id="query" name="query" rows="3" required maxlength="1000" data-i18n-placeholder="queryPlaceholder" aria-describedby="query-hint"></textarea><p id="query-hint" class="field-hint" data-i18n="queryHint">Добавьте интересы и важные ограничения. Названия мест знать не нужно.</p>
+          <div class="field-row"><div><label class="field-label" for="minutes" data-i18n="timeLabel">Сколько у вас времени?</label><div class="unit-input"><input id="minutes" name="available_minutes" type="number" min="5" max="480" step="1" value="60" required><span data-i18n="minutes">мин</span></div></div><div><label class="field-label" for="radius" data-i18n="radiusLabel">Радиус по прямой</label><select id="radius" name="max_distance_m"><option value="1000">1 km</option><option value="2000">2 km</option><option value="3000" selected>3 km</option><option value="5000">5 km</option></select></div></div>
+          <div class="location-heading"><h3 data-i18n="locationTitle">Откуда начнём?</h3><span class="tag" id="location-mode" data-i18n="simulated">Демо-точка</span></div>
+          <div class="field-row"><div><label class="field-label" for="latitude" data-i18n="latitude">Широта</label><input id="latitude" name="latitude" type="number" min="-90" max="90" step="any" value="51.100" required inputmode="decimal"></div><div><label class="field-label" for="longitude" data-i18n="longitude">Долгота</label><input id="longitude" name="longitude" type="number" min="-180" max="180" step="any" value="71.400" required inputmode="decimal"></div></div>
+          <p class="field-hint" data-i18n="locationHint">Сейчас выбрана условная точка в Астане, не достопримечательность. Можно изменить координаты вручную.</p><button id="locate" class="text-button" type="button"><span aria-hidden="true">⌖</span> <span data-i18n="locate">Использовать моё местоположение</span></button><p id="location-status" class="field-hint" role="status"></p>
+          <label class="check-line"><input id="first-visit" type="checkbox" name="first_visit"><span data-i18n="firstVisit">Я впервые в Астане</span></label>
+          <details class="constraints"><summary data-i18n="constraints">Важные условия</summary><div class="constraints-body"><p class="field-hint" data-i18n="constraintsHint">Обязательные условия требуют подтверждения в источнике. Если данных нет, место не подойдёт.</p><fieldset><legend data-i18n="requiredAmenities">Обязательно</legend><label class="check-line"><input type="checkbox" name="required_amenities" value="wheelchair"><span data-i18n="wheelchair">Доступ для кресла-коляски</span></label><label class="check-line"><input type="checkbox" name="required_amenities" value="sockets"><span data-i18n="sockets">Розетки</span></label><label class="check-line"><input type="checkbox" name="required_amenities" value="quiet"><span data-i18n="quiet">Тихое место</span></label><label class="check-line"><input type="checkbox" name="required_amenities" value="child_friendly"><span data-i18n="child_friendly">Подходит детям</span></label></fieldset><label class="check-line"><input id="require-open" type="checkbox" name="require_open"><span data-i18n="requireOpen">Подходит по имеющемуся расписанию</span></label><label class="check-line"><input id="events-only" type="checkbox" name="events_only"><span data-i18n="eventsOnly">Только события на время прогулки</span></label><p class="field-hint" data-i18n="scheduleHint">Расписание не гарантирует доступ. События показываются только при наличии свежих подтверждений.</p><label class="check-line"><input id="return" type="checkbox" name="return_to_start"><span data-i18n="return">Учесть возвращение к началу</span></label><label class="field-label" for="buffer" data-i18n="buffer">Дополнительный запас времени</label><div class="unit-input narrow"><input id="buffer" type="number" min="0" max="480" step="1" value="0" name="buffer_minutes"><span data-i18n="minutes">мин</span></div></div></details>
+          <button class="primary-button" id="submit" type="submit"><span data-i18n="submit">Найти следующий шаг</span><span aria-hidden="true">↗</span></button><p class="submit-note" data-i18n="submitNote">Без аккаунта. Локация используется только для этого запроса.</p>
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+        </form>
+      </section>
+      <section class="results-column" aria-labelledby="results-title">
+        <div class="results-heading"><div class="section-heading"><span class="step-number">02</span><h2 id="results-title" data-i18n="resultsTitle">Места для вашего шага</h2></div><span class="walking-pill" data-i18n="walking">Пешком</span></div>
+        <div id="connection" class="connection" role="status"></div>
+        <div id="result-status" class="result-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
+        <div id="empty-state" class="empty-state panel"><div class="empty-art" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="point point-one"></span><span class="point point-two"></span><span class="step-center">↗</span></div><p class="eyebrow" data-i18n="emptyEyebrow">Хорошая прогулка начинается с любопытства</p><h3 data-i18n="emptyTitle">Куда ведёт настроение?</h3><p data-i18n="emptyCopy">Укажите пожелания, время и точку старта. Здесь появятся подходящие места, причины выбора и всё, что пока неизвестно.</p></div>
+        <div id="context" class="context-box" hidden></div><p id="alternatives-note" class="alternatives-note" data-i18n="alternatives" hidden>Каждая карточка — отдельный вариант прогулки, а не остановка общего маршрута.</p><div id="recommendations" class="recommendations"></div><ul id="warnings" class="warning-list" hidden></ul>
+        <section class="map-panel panel" aria-labelledby="map-title"><div class="map-heading"><div><p class="eyebrow">2GIS</p><h3 id="map-title" data-i18n="mapTitle">Посмотреть на карте</h3></div><span class="map-symbol" aria-hidden="true">⌘</span></div><p class="field-hint" data-i18n="mapPrivacy">После включения 2GIS получает область карты и сведения о соединении. Карта показывает точки, а не проверенный пеший маршрут.</p><button id="enable-map" class="secondary-button" type="button" data-i18n="enableMap">Включить карту 2GIS</button><p id="map-status" class="field-hint" role="status"></p><div id="map" aria-label="2GIS" hidden></div></section>
+      </section>
+    </div>
+    <section class="privacy-panel" aria-labelledby="privacy-title"><span class="privacy-icon" aria-hidden="true">◎</span><div><h2 id="privacy-title" data-i18n="privacyTitle">Понятно, откуда берётся совет</h2><p data-i18n="privacySummary">Поиск использует точку старта, текст запроса, интересы, время и выбранные условия. Факты о местах отделены от идей и оценок.</p><details><summary data-i18n="privacyDetails">Как обрабатываются данные</summary><p data-i18n="privacyBody">Координаты округляются до 3 знаков (около 100 м по широте) и передаются нашему серверу для поиска. Qadam не сохраняет историю, запросы или координаты. OpenAI получает текст для понимания запроса без полей координат; адреса, которые вы напишете, могут остаться в тексте. Для рекомендаций передаются интересы, условия и записи мест. Запросы отправляются с store:false; это не означает нулевое хранение у провайдера. Геолокация устройства запрашивается только кнопкой, карта 2GIS — только после включения.</p></details></div></section>
+  </main>
+  <footer class="shell"><span>qadam.</span><p data-i18n="footer">Астана, шаг за шагом. Прототип Build with AI.</p></footer>
+</body>
+</html>
