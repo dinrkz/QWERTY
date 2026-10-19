@@ -1,5 +1,7 @@
 # Member 1 → member 2: implemented offline retrieval handoff
 
+**2026-10-19 interface follow-up:** the user subsequently authorized scoped application integration and publication through PR #4. The dedicated offline service, launcher, UI and tests now connect saved records without providers. See [OFFLINE_INTERFACE.md](OFFLINE_INTERFACE.md) for setup, changed files, verification and commit lookup. The history below describes the earlier retrieval increment, whose pending UI task is now implemented. Live RAG and source permissions remain pending.
+
 Prepared 2026-10-19. Status: implemented and reviewed for the user-authorized update to [PR #4](https://github.com/dinrkz/QWERTY/pull/4); private application integration remains pending. Branch `work/data/source-feasibility`; implementation commit `6a8ad7f26a1892242fadf19def69c93ee786f3e9`, based on `4d0971b`. Publication synchronizes `origin/main` at `b6c1e85608be426edb2c8db7dd747753513f5547`, including member 2's application commit `1661770e7e1310b40e696b20570be67818f12f6b` ([PR #5](https://github.com/dinrkz/QWERTY/pull/5)). The merge was conflict-free and its combined code passed the checks below. No direct message or PR comment was sent; the authorized PR update changes branch content and its description.
 
 ## Completed member 1 scope

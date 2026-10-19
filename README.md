@@ -2,11 +2,13 @@
 
 Qadam (қадам, “step”) helps walkers and first-time visitors choose their next worthwhile stop in Astana. The three core scenarios are a short walk, discovering nearby sights, and a coffee/rest stop. See [the case](CASE.md) and [original competition brief](docs/HACKATHON_BRIEF_RU.txt).
 
-**Current status: member 2 application increment, not a completed live demo.** The local web interface, OpenAI adapter, request interpretation, structured recommendation generation, output validation and failure states are implemented. Member 1's real collector/snapshot/retrieval, source permissions and cross-language adapter are not integrated. OpenAI account/model/balance and the 2GIS map key have not been verified. Tests use clearly labeled synthetic records and provider doubles; they are not evidence of live RAG. Slides, YouTube recording and submission remain pending.
+**Current status: the interface can search the saved private dataset offline.** Collection, reviewed snapshots, Python retrieval and the JSON adapter are implemented. The offline path uses local records and template activities; it disables OpenAI, the map and device geolocation. The separate live adapters exist, but real RAG, provider access, source reuse permissions and submission artifacts remain unverified or pending.
+
+For the configured private dataset, run `npm.cmd run start:offline` and open the URL printed at startup (**http://127.0.0.1:3002** on the current computer). See [offline setup and limits](docs/OFFLINE_INTERFACE.md). The dataset and configuration stay outside Git; a clean clone runs synthetic tests and requires authorized local data provisioning for real offline searches.
 
 ## Run locally
 
-Node.js **22.14+**; development checks run with Node.js 24.21.0. No third-party npm dependencies, framework, database or build step. From the repository root:
+Node.js **22.14+**; this integration was checked with Node.js 24.12 and Python 3.13. No third-party npm dependencies, framework, database or build step. For the separate live application setup, from the repository root:
 
 ```powershell
 npm.cmd ci --ignore-scripts --offline
@@ -33,15 +35,17 @@ Copy-Item .env.example .env.local
 
 Restart after changing configuration. The UI reports configuration presence only, not verified account access. A single request can make two paid OpenAI calls (interpretation and recommendation composition), with output limits and no automatic retries. The remaining account budget must be checked by the team.
 
-## Data integration — next dependency
+## Data integration
 
-Member 1 owns automated collection, normalization, provenance, snapshot and retrieval. Its source-feasibility branch proposes Python; this application's Node server supports a **one-request JSON stdin/stdout process adapter**, preserving Python ownership. The executable does not exist in this branch. Do not point it at a hand-written canned answer.
+Member 1 owns collection, normalization, provenance and Python retrieval. The Node server uses a **one-request JSON stdin/stdout process adapter**. The implementation is `scripts/data/retrieval_json_adapter.py`; its default live-app projection rejects saved private records. A separate isolated entry point and offline service consume its private envelope without provider interpretation or generation.
 
-[CONTRACTS.md](docs/CONTRACTS.md) specifies every request/POI/result field, units, evidence, errors, time/freshness assumptions and exact file ownership. Member 1 must review it and implement the adapter. It accepts one normalized request on stdin and returns retrieved candidates from a real permitted snapshot on stdout. The server independently checks IDs, provenance, estimated distance/time and hard constraints before generation. It rejects synthetic datasets in normal runtime. No competing collector/search implementation has been added here.
+[CONTRACTS.md](docs/CONTRACTS.md) specifies the live protocol and offline extension. The server independently checks IDs, provenance, distance/time and hard constraints. The live validator remains strict; private nullable records are accepted only by the offline validator. Synthetic test records remain separately labeled.
 
-The existing member 1 branch contains feasibility research and a Wikidata probe, not a finished permitted snapshot/retrieval service. 2GIS remains the map choice and priority candidate POI source; access and storage/indexing/OpenAI-processing/redistribution rights must be established by member 1 before integration. No ingestion/refresh command is claimed here because that deliverable is absent.
+2GIS is the prioritized source used for the saved collection. Access was exercised in earlier authorized probes/collection, but storage/indexing/OpenAI-processing/redistribution permissions remain unresolved. Offline evaluation does not authorize publication or external processing. See [retrieval setup](docs/OFFLINE_RETRIEVAL.md) and its collection/review references; starting the interface requires no new collection requests.
 
-## How recommendations work
+## Separate live recommendation flow
+
+The following describes the implemented live-mode pipeline, whose real-provider acceptance remains pending. Private offline mode skips interpretation, generation and external map/device-location access; follow the offline setup above for saved records.
 
 Manual/simulated location + text + available time → validated input → model interpretation of constraints → member 1 retrieval/filtering → deterministic output checks → real model composition over retrieved candidates → ID/evidence/activity validation → up to three alternative cards.
 
@@ -51,15 +55,15 @@ Cards distinguish source facts, generated ideas (or template ideas in an explici
 
 Travel uses straight-line distance × 1.3 at an assumed 4 km/h (2.5 km/h for a wheelchair requirement), category visit estimates, explicit return travel and buffer. These are planning assumptions, not verified routes or promised arrival times. Each card is an alternative, not a combined itinerary. Price/dietary/stairs/flight-destination constraints that cannot be represented require clarification.
 
-## Try the interface
+## Try the separately configured live interface
 
 1. Keep the clearly labeled simulated location or enter approximate coordinates. Device location is optional and requested only by a button.
 2. Select RU/KK/EN, a short walk, a first visit, or coffee; enter your available time.
 3. Try a mandatory quiet/socket/wheelchair requirement, return time or an event filter. Empty/uncertain results must remain honest.
 4. Enable the map only if you want to send the map viewport to 2GIS. Without its public key the rest of the form remains usable.
-5. Once member 1 and provider configuration are ready, run [the acceptance scenarios](ACCEPTANCE_TESTS.md) with real data and record actual outcomes through member 3.
+5. Once permitted live-data and provider integration are ready, run [the acceptance scenarios](ACCEPTANCE_TESTS.md) with real data and record actual outcomes through member 3.
 
-## Privacy and provider boundaries
+## Live-mode privacy and provider boundaries
 
 No application accounts, conversation history, analytics, cookies, localStorage or request/provider logging. Location and query are transient. The browser rounds coordinates to three decimals before submission; manual callers can send more precision, which the server does not persist. The local retrieval child receives the request, but no OpenAI/map credentials; its stderr is discarded. The child must also follow the no-logging contract.
 
@@ -69,6 +73,6 @@ OpenAI receives the query (coordinate-like decimals redacted) for interpretation
 
 ## Verification and team handoff
 
-`npm test` runs member 2 unit tests. `npm run check` checks JavaScript syntax; this is not a separate linter/type checker. No compiler or bundler is configured. Unit tests do not establish recommendation quality, permitted data collection, real API access or completion of project acceptance checks.
+`npm test` runs application tests, including the offline extension. `npm run check` checks JavaScript syntax; this is not a separate linter/type checker. No compiler or bundler is configured. Unit tests do not establish recommendation quality, permitted data collection, real API access or completion of project acceptance checks. Current offline verification evidence is in [OFFLINE_INTERFACE.md](docs/OFFLINE_INTERFACE.md).
 
 See [member 2 handoff](docs/MEMBER_2_HANDOFF.md), [team workflow](TEAM_WORKFLOW.md), [contracts](docs/CONTRACTS.md), [scenario specification](docs/TEST_SCENARIOS_AND_LIMITATIONS.md) and [submission checklist](docs/SUBMISSION_CHECKLIST.md). Work goes through task branches and PR review; no direct main push. `old/` remains an archive.

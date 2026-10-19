@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createOpenAI } from './app/openai.mjs';
 import { createService } from './app/service.mjs';
+import { createOfflineService, validateOfflineInput } from './app/offline.mjs';
 import { parseRetrievalCommand, retrieveFromProcess } from './app/retrieval.mjs';
 import { errorResult } from './app/presentation.mjs';
 import { validateInput } from './shared/validate.mjs';
@@ -47,23 +48,29 @@ async function bodyJson(req) {
 }
 
 export function createAppServer({ config = readConfig(), recommend } = {}) {
-  const provider = createOpenAI({ apiKey: config.apiKey, model: config.model });
-  const service = recommend ?? createService({ ...provider,
-    retrieve: request => retrieveFromProcess(request, { command: config.command, cwd: root }) });
+  const offline = config.mode === 'offline';
+  const retrieve = request => retrieveFromProcess(request, { command: config.command, cwd: root });
+  // The offline branch does not construct a provider or enter interpretation or
+  // generation. Private envelopes never pass through the live RAG validator.
+  const service = recommend ?? (offline ? createOfflineService({ retrieve, expected: config.expected })
+    : createService({ ...createOpenAI({ apiKey: config.apiKey, model: config.model }), retrieve }));
   let inFlight = 0;
   const server = createServer(async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'no-referrer');
-    res.setHeader('Permissions-Policy', 'geolocation=(self)');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' https://mapgl.2gis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.2gis.com https://*.2gis.ru; connect-src 'self' https://*.2gis.com https://*.2gis.ru; worker-src blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+    res.setHeader('Permissions-Policy', offline ? 'geolocation=()' : 'geolocation=(self)');
+    res.setHeader('Content-Security-Policy', offline
+      ? "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+      : "default-src 'self'; script-src 'self' https://mapgl.2gis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.2gis.com https://*.2gis.ru; connect-src 'self' https://*.2gis.com https://*.2gis.ru; worker-src blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
     const json = (value, status = 200) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify(value)); };
     try {
       const allowedHosts = new Set([`127.0.0.1:${server.address()?.port}`, `localhost:${server.address()?.port}`]);
       if (!allowedHosts.has(req.headers.host)) { json(errorResult('INVALID_INPUT'), 403); return; }
       const target = new URL(req.url, `http://${req.headers.host}`);
       if (req.method === 'GET' && target.pathname === '/api/config') {
-        json({ map_public_key: config.mapKey, generation_configured: Boolean(config.apiKey && config.model), retrieval_configured: Boolean(config.command) }); return;
+        json(offline ? { mode: 'offline', map_public_key: '', generation_configured: false, retrieval_configured: Boolean(config.command) }
+          : { map_public_key: config.mapKey, generation_configured: Boolean(config.apiKey && config.model), retrieval_configured: Boolean(config.command) }); return;
       }
       if (req.method === 'GET' && files.has(target.pathname)) {
         const [name, mime] = files.get(target.pathname);
@@ -78,13 +85,13 @@ export function createAppServer({ config = readConfig(), recommend } = {}) {
         let body;
         try { body = await bodyJson(req); } catch { json(errorResult('INVALID_INPUT'), 400); return; }
         let validated;
-        try { validated = validateInput(body); } catch (error) {
+        try { validated = (offline ? validateOfflineInput : validateInput)(body); } catch (error) {
           json(errorResult(error instanceof AppError ? error.code : 'INVALID_INPUT',
             detectLanguage(typeof body?.query === 'string' ? body.query : '', body?.language)), 400); return;
         }
         // Preflight avoids a paid interpretation request when data is not configured.
         const result = !config.command && !recommend ? errorResult('DATA_UNAVAILABLE', validated.language)
-          : (!config.apiKey || !config.model) && !recommend ? errorResult('PROVIDER_NOT_CONFIGURED', validated.language)
+          : !offline && (!config.apiKey || !config.model) && !recommend ? errorResult('PROVIDER_NOT_CONFIGURED', validated.language)
           : await service(body);
         json(result, result.status === 'error' ? 400 : 200);
       } finally { inFlight--; }

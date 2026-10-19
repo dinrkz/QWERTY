@@ -3,7 +3,7 @@
 ## Source and status
 Source: [user-supplied Russian brief](docs/HACKATHON_BRIEF_RU.txt), preserved verbatim. Organizer named in that brief: School of AI and Data Science; task partners: Smart City Research Center and GDG Astana. This document summarizes that supplied text; it is not independent verification of organizer rules.
 
-Current repository status: member 2 has implemented a local application increment; see README and `docs/CONTRACTS.md` for the actual boundary and limitations. A collected POI dataset, integrated retrieval, verified live generation and completed demo are still pending. The requirement map below remains the competition specification, not a results report.
+Current repository status (2026-10-19): automated POI collection, a private reviewed dataset, Python retrieval and a local offline interface are implemented; see README and `docs/OFFLINE_INTERFACE.md` for verified scope. Permitted external data use, real-provider RAG, map operation and a completed submission demo remain pending. The requirement map below remains the competition specification, not a results report.
 
 ## Official objective
 Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo that recommends where to go and what to do in Astana based on current location, preferences, and context. Recommendations should be useful, safe, concrete, and understandable.
@@ -28,7 +28,7 @@ Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo
 
 The brief explicitly requires automated collection even though its submission-format wording calls code/scripts optional. Team decision: include the collector and runnable demo in this repository so collection and RAG can be inspected.
 
-## Team concept and audience — confirmed focus; implementation pending
+## Team concept and audience — confirmed focus; live demo pending
 Qadam helps people discover Astana on foot, with primary attention to people taking a walk and first-time visitors. The team's naming rationale is Qadam (қадам, “step”): help someone choose their next worthwhile stop nearby. A user supplies a location, time budget, and preferences; the assistant returns up to three grounded options with practical activities, clear explanations, and visible uncertainty.
 
 Residents can discover something nearby during an ordinary walk. First-time visitors need plain-language context about why a place is worth seeing without assumed knowledge of landmarks or city layout. Walking is the default travel mode; distance and time estimates retain the evidence/uncertainty rules.
@@ -71,6 +71,6 @@ Group planning, a three-stop mini-route, multilingual responses, local events, a
 
 ## Open facts and limitations
 - Hackathon date, build duration, deadline, exact weights, and upload destination are absent from the supplied brief.
-- Data source access, reuse rights, POI coverage, and freshness need verification before implementation.
+- Earlier authorized 2GIS access and collection were exercised. Reuse rights, broader POI coverage, freshness and permitted live integration still need verification.
 - The example museum, rooftop, distances, and exhibition in the brief are not verified facts and must not be copied into the dataset as evidence.
 - Hosting is not stated as mandatory. A reliable locally runnable demo is our engineering target; the YouTube upload is explicitly required.

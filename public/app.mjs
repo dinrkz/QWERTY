@@ -16,7 +16,8 @@ let markers = [];
 let mapState = '';
 let mapLoading = false;
 let mapScriptPromise = null;
-const statuses = new Set(['live_rag', 'retrieval_only', 'no_match', 'needs_clarification', 'error', 'synthetic_test']);
+const statuses = new Set(['live_rag', 'retrieval_only', 'no_match', 'needs_clarification', 'error', 'synthetic_test', 'offline_evaluation']);
+const isOffline = () => config?.mode === 'offline';
 const t = (key) => translate(language, key);
 const string = (value) => typeof value === 'string' ? value : '';
 const strings = (value) => Array.isArray(value) ? value.filter((item) => typeof item === 'string') : [];
@@ -73,6 +74,20 @@ function translatePage() {
   byId('connection').textContent = t(configState);
   byId('map-status').textContent = mapState ? t(mapState) : '';
   byId('submit').querySelector('[data-i18n]').textContent = t(pending ? 'searching' : 'submit');
+  byId('submit').disabled = pending || !config;
+  byId('locate').disabled = !config || isOffline();
+  byId('locate').hidden = isOffline();
+  byId('enable-map').disabled = !config || isOffline();
+  byId('enable-map').hidden = isOffline();
+  byId('query').required = !isOffline();
+  byId('offline-start').hidden = !isOffline();
+  if (isOffline()) {
+    for (const [key, replacement] of Object.entries({ queryLabel: 'offlineQueryLabel', queryHint: 'offlineQueryHint',
+      privacyBody: 'offlinePrivacy', privacySummary: 'offlineSummary', mapPrivacy: 'offlineMap', firstVisit: 'offlineFirstVisit' })) {
+      document.querySelector(`[data-i18n="${key}"]`).textContent = t(replacement);
+    }
+    byId('query').placeholder = t('offlineQueryPlaceholder');
+  }
 }
 
 function showStatus(status, message = '') {
@@ -86,7 +101,7 @@ function showStatus(status, message = '') {
 
 function setPending(value) {
   pending = value;
-  byId('submit').disabled = value;
+  byId('submit').disabled = value || !config;
   byId('submit').querySelector('[data-i18n]').textContent = t(value ? 'searching' : 'submit');
   byId('recommendations').setAttribute('aria-busy', String(value));
 }
@@ -173,6 +188,11 @@ function sourceDetails(card) {
   const sources = element('ul', '', 'source-links');
   for (const source of Array.isArray(card.sources) ? card.sources : []) {
     if (!source || typeof source !== 'object') continue;
+    if (isOffline()) {
+      sources.append(element('li', `${string(source.attribution)} · ID: ${string(source.source_id)}`),
+        element('li', `${t('sourceVersion')}: ${string(source.source_version)}`, 'source-meta'));
+      continue;
+    }
     const url = safeSourceUrl(source.url);
     if (!url) continue;
     const item = element('li');
@@ -184,6 +204,16 @@ function sourceDetails(card) {
     sources.append(item);
   }
   details.append(sources);
+  if (isOffline()) {
+    if (strings(facts.source_rubrics).length) details.append(element('p', `${t('sourceRubrics')}: ${facts.source_rubrics.join('; ')}`));
+    if (strings(facts.source_categories).length) details.append(element('p', `${t('reviewCategories')}: ${facts.source_categories.join(', ')}`));
+    if (facts.source_schedule_comment) details.append(element('p', `${t('scheduleComment')}: ${facts.source_schedule_comment}`));
+    if (card.review) {
+      details.append(element('p', t('offlineReview'), 'card-section-label'), element('p', string(card.review.reason)));
+      for (const caveat of strings(card.review.caveats)) details.append(element('p', caveat));
+      details.append(element('p', strings(card.uncertainty_codes).join(' · '), 'source-meta'));
+    }
+  }
   return details;
 }
 
@@ -204,7 +234,7 @@ function renderCard(card, index, status) {
     const excerpt = element('p', description.length > 220 ? `${description.slice(0, 217)}…` : description, 'source-excerpt');
     if (['ru', 'kk', 'en'].includes(card.source_facts.description_language)) excerpt.lang = card.source_facts.description_language;
     article.append(element('p', t('facts'), 'card-section-label'), excerpt);
-  }
+  } else if (status === 'offline_evaluation') article.append(element('p', t('descriptionMissing'), 'source-excerpt'));
   article.append(element('p', t('why'), 'card-section-label'));
   const why = element('ul', '', 'why-list');
   for (const reason of strings(card.why)) why.append(element('li', reason));
@@ -235,7 +265,10 @@ function renderCard(card, index, status) {
 
 function validResponse(value) {
   if (!value || !statuses.has(value.status) || !Array.isArray(value.recommendations) || value.recommendations.length > 3) return false;
-  if (!['live_rag', 'retrieval_only', 'synthetic_test'].includes(value.status) && value.recommendations.length) return false;
+  if (!['live_rag', 'retrieval_only', 'synthetic_test', 'offline_evaluation'].includes(value.status) && value.recommendations.length) return false;
+  if (value.status === 'offline_evaluation' && (!isOffline() || value.dataset?.demo_eligible !== false
+    || value.dataset?.external_processing_allowed !== false)) return false;
+  if (isOffline() && !['offline_evaluation', 'error', 'needs_clarification'].includes(value.status)) return false;
   if (value.status === 'live_rag' && !value.recommendations.length) return false;
   return value.recommendations.every((card) => card && typeof card.name === 'string' && typeof card.poi_id === 'string' && Array.isArray(card.why) && card.activity && typeof card.activity.text === 'string' && card.source_facts && card.estimates && Array.isArray(card.sources) && card.sources.length > 0);
 }
@@ -264,14 +297,14 @@ function readRequest() {
   const available = byId('minutes').valueAsNumber;
   const buffer = byId('buffer').valueAsNumber;
   const query = byId('query').value.trim();
-  if (!query || query.length > 1000 || !Number.isFinite(latitude) || !Number.isFinite(longitude) || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180 || !Number.isInteger(available) || available < 5 || available > 480) throw new Error(t('invalidInput'));
+  if ((!query && !isOffline()) || query.length > 1000 || !Number.isFinite(latitude) || !Number.isFinite(longitude) || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180 || !Number.isInteger(available) || available < 5 || available > 480) throw new Error(t('invalidInput'));
   if (!Number.isInteger(buffer) || buffer < 0 || buffer >= available) throw new Error(t('bufferInvalid'));
   byId('latitude').value = roundCoordinate(latitude).toFixed(3);
   byId('longitude').value = roundCoordinate(longitude).toFixed(3);
   return {
     latitude: roundCoordinate(latitude), longitude: roundCoordinate(longitude), query,
     available_minutes: available, language, travel_mode: 'walking',
-    categories: scenario === 'coffee' ? ['cafe'] : scenario === 'discover' ? ['park', 'museum', 'landmark'] : [],
+    categories: scenario === 'coffee' ? ['cafe'] : scenario === 'discover' ? ['park', 'museum', 'landmark'] : isOffline() ? ['park', 'landmark'] : [],
     required_amenities: [...form.querySelectorAll('[name="required_amenities"]:checked')].map((node) => node.value),
     preferred_amenities: [], max_distance_m: Number(byId('radius').value),
     return_to_start: byId('return').checked, buffer_minutes: buffer,
@@ -321,6 +354,7 @@ form.addEventListener('submit', async (event) => {
 form.addEventListener('input', (event) => {
   if (event.target.id === 'latitude' || event.target.id === 'longitude') {
     locationMode = 'manual';
+    byId('offline-start-point').value = '';
     updateLocationLabel();
     byId('location-status').textContent = '';
   }
@@ -335,7 +369,7 @@ for (const button of document.querySelectorAll('[data-scenario]')) {
       other.classList.toggle('active', other === button);
       other.setAttribute('aria-pressed', String(other === button));
     }
-    byId('query').value = t(`sample_${scenario}`);
+    byId('query').value = isOffline() ? '' : t(`sample_${scenario}`);
     byId('first-visit').checked = scenario === 'discover';
     byId('minutes').value = scenario === 'discover' ? '90' : scenario === 'coffee' ? '45' : '60';
     clearResults({ changed: true });
@@ -345,7 +379,7 @@ for (const button of document.querySelectorAll('[data-scenario]')) {
 byId('language').addEventListener('change', () => {
   const previousSample = t(`sample_${scenario}`);
   language = byId('language').value;
-  if (byId('query').value === previousSample) byId('query').value = t(`sample_${scenario}`);
+  if (!isOffline() && byId('query').value === previousSample) byId('query').value = t(`sample_${scenario}`);
   translatePage();
   clearResults({ changed: true });
   byId('location-status').textContent = '';
@@ -353,6 +387,7 @@ byId('language').addEventListener('change', () => {
 });
 
 byId('locate').addEventListener('click', () => {
+  if (!config || isOffline()) return;
   if (!navigator.geolocation) {
     byId('location-status').textContent = t('locationUnavailable');
     return;
@@ -382,10 +417,11 @@ async function loadConfig() {
     const value = await response.json();
     if (typeof value.generation_configured !== 'boolean' || typeof value.retrieval_configured !== 'boolean') throw new Error('Config invalid');
     config = value;
-    configState = !config.retrieval_configured ? 'configMissingData' : !config.generation_configured ? 'configMissingAI' : 'configReady';
+    configState = !config.retrieval_configured ? 'configMissingData' : isOffline() ? 'configOffline' : !config.generation_configured ? 'configMissingAI' : 'configReady';
+    if (isOffline() && byId('query').value === t(`sample_${scenario}`)) byId('query').value = '';
   } catch { configState = 'configError'; } finally {
     clearTimeout(timeout);
-    byId('connection').textContent = t(configState);
+    translatePage();
   }
 }
 
@@ -416,6 +452,7 @@ function updateMapMarkers() {
 }
 
 function loadMapScript() {
+  if (!config || isOffline()) return Promise.reject(new Error('Map disabled'));
   if (globalThis.mapgl) return Promise.resolve();
   if (mapScriptPromise) return mapScriptPromise;
   mapScriptPromise = new Promise((resolve, reject) => {
@@ -441,6 +478,7 @@ function loadMapScript() {
 }
 
 byId('enable-map').addEventListener('click', async () => {
+  if (!config || isOffline()) return;
   if (mapLoading) return;
   mapLoading = true;
   byId('enable-map').disabled = true;
@@ -483,6 +521,17 @@ byId('enable-map').addEventListener('click', async () => {
     mapLoading = false;
     byId('enable-map').disabled = false;
   }
+});
+
+byId('offline-start-point').addEventListener('change', () => {
+  if (!isOffline()) return;
+  const point = byId('offline-start-point').value.split(',').map(Number);
+  if (point.length !== 2 || !point.every(Number.isFinite)) return;
+  byId('latitude').value = point[0].toFixed(3);
+  byId('longitude').value = point[1].toFixed(3);
+  locationMode = 'simulated';
+  updateLocationLabel();
+  clearResults({ changed: true });
 });
 
 translatePage();

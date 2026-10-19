@@ -6,6 +6,7 @@
   "engines": { "node": ">=22.14.0" },
   "scripts": {
     "start": "node --env-file-if-exists=.env.local src/server.mjs",
+    "start:offline": "node scripts/app/start-offline.mjs",
     "test": "node --test tests/app/*.test.mjs",
     "check": "node scripts/app/check.mjs"
   }

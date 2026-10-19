@@ -1,5 +1,7 @@
 # Saved-place retrieval and member 2 JSON adapter
 
+**Interface follow-up:** the user subsequently authorized application integration and its PR #4 update. The implementation now has a dedicated private offline UI; see [OFFLINE_INTERFACE.md](OFFLINE_INTERFACE.md). Historical integration-pending statements below refer to the earlier retrieval-only publication. The live validator and data-use restrictions remain unchanged.
+
 Implemented on 2026-10-19, based on member 1 commit `4d0971b` and member 2 commit `1661770e7e1310b40e696b20570be67818f12f6b` ([PR #5](https://github.com/dinrkz/QWERTY/pull/5)). Publication preflight found the application merged into `origin/main` at `b6c1e85`. This document supersedes the executable-boundary proposals in [the earlier plan](OFFLINE_RETRIEVAL_PLAN.md) and [interface proposal](DATA_INTERFACE_PROPOSAL.md). Member 1 has not edited member 2's shared/application implementation; the private offline extension still needs their integration review.
 
 ## Implemented behavior

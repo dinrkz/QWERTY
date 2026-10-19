@@ -1,5 +1,18 @@
 # Qadam application contract v1
 
+## Private offline extension — 2026-10-19
+
+The user authorized scoped interface integration after `510a8e5`. [OFFLINE_INTERFACE.md](OFFLINE_INTERFACE.md) documents the implemented extension and local setup. The original live contract below remains unchanged.
+
+- Select offline mode only through `scripts/app/start-offline.mjs` and its ignored JSON configuration (`python`, `snapshot`, `annotations`, `binding`, optional `port`). It fixes `--mode offline` and isolated Python arguments. No dotenv/provider configuration is read.
+- `GET /api/config` in this mode returns `{mode:"offline",map_public_key:"",generation_configured:false,retrieval_configured:true}` when the command is configured. Presence is not proof the snapshot is usable; search validates its binding.
+- `POST /api/recommend` accepts the normal structured input fields, with empty `query` additionally allowed. Query text is lexical ranking only; constraints are exclusively structured controls. No interpretation or generation occurs. Requests/clocks/paths cannot be configured by client-supplied extra fields.
+- The private Python envelope is `{status:"offline_evaluation",contract:"qadam-private-retrieval-v1",result}`. Its snapshot/review/policy/binding hashes must match local configuration. Nullable facts and version evidence are checked by a separate validator; broad/fine categories must agree and unverified hard requirements cannot pass. The strict live validator still rejects this envelope.
+- Browser results use `status:"offline_evaluation"`, including empty matches. Existing card fields remain, with null source descriptions/URLs, `activity.kind:"template_suggestion"`, source/version/evidence IDs, reviewer metadata, uncertainty codes and false eligibility flags in `dataset`. No input coordinates/raw query or local paths are returned. Synthetic kind, where used by tests, is visibly labeled; the production launcher accepts collected bindings only.
+- Maps/device geolocation/external source links are disabled; offline CSP allows local resources. No private record enters an OpenAI call. This mode does not resolve storage, redistribution or external AI-processing permission.
+
+## Original live contract
+
 Member 2 implementation boundary, 2026-10-18. The user approved Node.js + JavaScript for member 2 in this session. Member 1's `work/data/source-feasibility` (559b6e7) proposes Python for data/retrieval; keep that work in Python and exchange JSON. Member 1 must review/implement this boundary before live integration. This is not a claim of team-wide acceptance or working retrieval.
 
 ## Ownership
