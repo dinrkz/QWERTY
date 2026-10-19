@@ -3,7 +3,7 @@
 ## Source and status
 Source: [user-supplied Russian brief](docs/HACKATHON_BRIEF_RU.txt), preserved verbatim. Organizer named in that brief: School of AI and Data Science; task partners: Smart City Research Center and GDG Astana. This document summarizes that supplied text; it is not independent verification of organizer rules.
 
-Current repository status: planning and operating rules only. No application, collected POI dataset, or completed demo exists yet.
+Current repository status: member 2 has implemented a local application increment; see README and `docs/CONTRACTS.md` for the actual boundary and limitations. A collected POI dataset, integrated retrieval, verified live generation and completed demo are still pending. The requirement map below remains the competition specification, not a results report.
 
 ## Official objective
 Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo that recommends where to go and what to do in Astana based on current location, preferences, and context. Recommendations should be useful, safe, concrete, and understandable.
@@ -50,7 +50,7 @@ Initial scenarios:
 
 Select location from user input, a map/preset, or permission-based device location. Specific coordinates and venues must come from collected sources; none are asserted here. Russian is the proposed first demo language; the brief does not require a particular language.
 
-Team decisions: **2GIS for the map; OpenAI API for generation**, using API credits reported available by the user. **2GIS Places API remains a candidate data source**, conditional on access, coverage, and applicable collection/storage/indexing/AI-processing/redistribution permissions. The stack, model, final dataset source, exact available budget, and schedule remain undecided. Credentials and live integrations have not been verified. These are team choices, not organizer requirements.
+Team decisions: **2GIS for the map; OpenAI API for generation**, using API credits reported available by the user. **2GIS Places API remains a candidate data source**, conditional on access, coverage, and applicable collection/storage/indexing/AI-processing/redistribution permissions. The user approved Node.js/JavaScript for member 2; the JSON adapter preserves member 1's proposed Python data component. Model, final dataset source, exact available budget, and schedule remain undecided. Credentials and live integrations have not been verified. These are team choices, not organizer requirements.
 
 ## Main flow — proposed
 Location + request + available time → validate and interpret constraints → retrieve relevant collected POIs → filter/rank using geographic and contextual evidence → generate explanations and activity ideas grounded in retrieved records → validate IDs/claims → display recommendations, sources, estimates, and unknowns.
