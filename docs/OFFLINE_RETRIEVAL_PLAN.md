@@ -1,5 +1,7 @@
 # Offline retrieval from saved places — proposed next increment
 
+Historical proposal, superseded for implementation on 2026-10-19 by [Saved-place retrieval and member 2 JSON adapter](OFFLINE_RETRIEVAL.md). Python retrieval and the process adapter now exist; member 2 timing/vocabulary were adopted, with an enforced private offline protocol. The proposal below preserves earlier decision context; it is not the current executable contract.
+
 Prepared 2026-10-18 against code baseline `66d06f612e55b4a26ee135eff0e2c70d7cc15acf` on `work/data/source-feasibility`, for review in PR #4. This is a reviewed implementation proposal, not an implemented retrieval service or agreed contract. The documentation publication commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/OFFLINE_RETRIEVAL_PLAN.md`. Preparing and publishing these documents makes no data-provider calls, builds no index, changes no source data and sends no message to member 2. Member 2 owns `docs/CONTRACTS.md`, which is absent at this checkpoint.
 
 Start with an in-process Python scan of the existing private snapshot. Apply evidence-based category and constraint filters, then deterministic lexical ranking. The first increment needs no new collection, embeddings, database, credentials or generation call. Use [the interface proposal](DATA_INTERFACE_PROPOSAL.md) for the proposed request/result boundary and [the member 2 handoff](MEMBER_2_RETRIEVAL_HANDOFF.md) for decisions and ownership.

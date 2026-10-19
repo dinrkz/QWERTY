@@ -1,74 +1,49 @@
-# Member 1 → member 2: offline retrieval handoff
+# Member 1 → member 2: implemented offline retrieval handoff
 
-Prepared 2026-10-18. Status: **proposal for PR review; member 2 agreement pending; no direct message sent**. Baseline code commit: `66d06f612e55b4a26ee135eff0e2c70d7cc15acf`, branch `work/data/source-feasibility`, [PR #4](https://github.com/dinrkz/QWERTY/pull/4). The user authorized publishing the four planning documents to this PR. Resolve the documentation commit with `git log -1 --format=%H -- docs/MEMBER_2_RETRIEVAL_HANDOFF.md`; it is separate from the code baseline. No merge or accepted application contract is implied.
+Prepared 2026-10-19. Status: implemented and reviewed for the user-authorized commit and update to [PR #4](https://github.com/dinrkz/QWERTY/pull/4); private application integration remains pending. Branch `work/data/source-feasibility`, implementation base `4d0971b6f88b2dfe3cc7d906e0fab53990215bc3`. Resolve the implementation commit with `git log -1 --format=%H -- scripts/data/retrieve_saved_places.py`. Tested consumer: member 2 commit `1661770e7e1310b40e696b20570be67818f12f6b` ([PR #5](https://github.com/dinrkz/QWERTY/pull/5)). Publication preflight fetched `origin/main` at `b6c1e85`, which includes that application. No direct message or PR comment was sent; the authorized PR update changes branch content and its description.
 
-Recommended next step: agree a small in-process Python retrieval contract, then let member 1 implement deterministic offline filtering/ranking over the saved private snapshot. Use [the detailed plan](OFFLINE_RETRIEVAL_PLAN.md) and [interface proposal](DATA_INTERFACE_PROPOSAL.md). No new API call, embedding service, database or model call is needed for this increment.
+## Completed member 1 scope
 
-## What is ready
-
-- Collector, durable accounting, normalized snapshots, offline replay and version-bound walking audit are implemented. Previous code verification: **156 offline tests passed** at `66d06f6`.
-- A read-only check in this planning task confirms 73 unique saved records: 45 relevance candidates, seven held for review, 21 excluded. There are 69 missing descriptions. Every record remains `demo_eligible=false`.
-- The private input is a pinned `pois.jsonl` + `quality.json` snapshot with all source versions/provenance, plus the matching review annotations. Local paths and fingerprints are in the plan. These files are not in Git and are not attached to this handoff.
-- Collection remains 11/12 attempts plus ten historical probe attempts. No further request is authorized. The current source data and review are unchanged.
-
-The audit is not production retrieval. There is no `docs/CONTRACTS.md` or agreed retrieval module in this checkout. A snapshot candidate is not a verified accessible destination or a completed recommendation. Source permissions and application integration remain unresolved.
-
-## Decisions for the integration lead
-
-| Decision | Member 1 recommendation |
+| Files | Deliverable |
 |---|---|
-| Missing descriptions | Allow structured-only records for **offline evaluation**; preserve null descriptions and `demo_eligible=false`. Keep the existing description requirement for demo eligibility pending a separate decision. Never generate source facts to fill gaps. |
-| Retrieval boundary | `load_snapshot(snapshot_dir, review_annotations, policy)` then `retrieve(structured_request, snapshot, policy)`, in-process Python; agree import paths/types before implementation |
-| Intent and categories | Explicit `short_walk`, `first_visit` or `coffee_stop`; optional categories constrained to the scenario; unresolved free-text intent/requirements return to the UI for clarification |
-| Time policy | Start from audit assumptions: 2 km default straight-line radius, 80 m/min, 1.3 multiplier, explicit return flag and buffer; category visit estimates remain labeled heuristics |
-| Ranking and output size | Hard filters first; supported preferences, lexical matches, full-precision distance, then stable ID; integer limit 1–20, default ten; display up to three alternatives |
-| Hours and amenities | No open-now evaluation in v1. Unknown does not satisfy hard requirements. The present sample cannot support required sockets, quietness or seating. |
-| Ownership/configuration | Member 2 records shared contract, Python minimum, configuration and application paths; member 1 owns retrieval implementation/tests; member 3 owns integration/acceptance review |
+| `scripts/data/retrieve_saved_places.py` | Bounded snapshot/review loader, explicit code/policy binding, source-backed relevance, deterministic filters/estimates/ranking |
+| `scripts/data/retrieval_json_adapter.py` | UTF-8 stdin/stdout transport; typed errors exit zero; default app mode rejects collected records; distinct private offline envelope |
+| `scripts/data/evaluate_saved_retrieval.py` | Explicit private binding and 72-case evaluation; aggregate output, network traps, unchanged-input checks |
+| `scripts/data/verify_retrieval_bridge.py` | Actual local Node consumer → Python child → Node validator checks with synthetic data |
+| `tests/data/test_saved_places_retrieval.py`, `saved_retrieval_fixtures.py`, `saved_retrieval_bridge.mjs`, `retrieval_child_offline.py` | Synthetic regression fixtures, bridge checks and child network guard |
+| `docs/OFFLINE_RETRIEVAL.md`, this handoff, prior plan/interface and member 1 handoff pointers | Current setup/contract reconciliation; prior proposals clearly superseded |
 
-Record accepted decisions in member-2-owned `docs/CONTRACTS.md`; respond with the contract commit, exact module paths and any changes to this proposal. This is the next dependency, not a request to build all of member 1's scope.
+No shared contract, dependency manifest, environment file, application module, collector or private source/review/ledger changed.
 
-## Division of the next increment
+## Decisions implemented on our side
 
-Member 1 implements the agreed loader, conservative review/category gate, deterministic filters/ranking, typed results/errors and offline tests. Proposed owned files are `scripts/data/retrieve_saved_places.py` and `tests/data/test_saved_places_retrieval.py`; neither exists yet. Source snapshots, annotations and ledger files stay untouched.
+1. Keep Node app and Python retrieval; adopt existing subprocess JSON transport and `QADAM_RETRIEVAL_COMMAND` argv configuration. Data paths are arguments because custom child environment variables are stripped.
+2. Adopt app timing: 4km/h, detour1.3, maximum visit estimate across all mapped categories, return/buffer, radius default3km and limit1–10. Historical audit assumptions are labeled separately.
+3. Use app vocabulary, retaining original fine categories/rubrics. Coffee points do not imply seating. Gallery remains unmapped, never falsely labelled museum. No accessibility→wheelchair inference.
+4. `first_visit` remains context. Explicit offline `scenario` and `fine_categories` add intersecting filters. Empty interpreted app categories allow all supported reviewed categories; upstream unresolved constraints still need clarification.
+5. Keep missing facts null. All amenities/hours/access remain unknown. Hard unknown requirements yield no match. Exact source versions, review reasons/caveats and uncertainty remain distinct.
+6. Collected snapshots fail in default app-v1 mode with `DATA_UNAVAILABLE`. Private output is `{status:"offline_evaluation",contract:"qadam-private-retrieval-v1",result:...}`. The actual current validator rejects it. Extra flags on a normal v1 success would not enforce privacy.
 
-Member 2 owns structured request construction, shared types, UI and eventual generation/output validation. Initially consume synthetic fixtures and surface unknowns, no-match and invalid-input states. For any later generation step, enforce the returned ID/version allowlist and keep raw response paths, annotations and internal provenance out of browser/model payloads. Retrieval must precede generation; no live generation or source transfer is authorized by this plan.
+These choices reconcile member 1's side without editing member 2-owned files. The private protocol is an application extension awaiting review, not an already accepted shared contract.
 
-Member 3 checks scenario adaptation, unknown facts, time budgets, privacy and grounding against the acceptance checks. No application acceptance check is marked complete by this handoff.
+## Next scoped member 2 task
 
-## Minimal synthetic contract example
+Review [the implementation/setup](OFFLINE_RETRIEVAL.md), then define an explicit **offline evaluation path before interpretation or generation** in your shared contract and application-owned tests. Validate the private envelope, nullable facts, version/review/policy identifiers and data-use eligibility; display uncertainty/review caveats; prevent provider processing. Keep the normal live path's source-description/evidence requirements. Decide gallery support and how the UI handles seated-rest requests without supporting evidence.
 
-Illustrative only: coordinates and request are synthetic, no real POI is embedded, and this is not executable retrieval output. A fixture snapshot with unknown socket evidence must yield the empty result below.
+First reproduce the synthetic bridge against your local checkout. It needs no real dataset. Do not weaken the live validator or route the private envelope through the existing normal recommendation service. Later real-source generation requires a separate data-use decision and authorization. This handoff requests no API call, data transfer or merge.
 
-```json
-{
-  "request": {
-    "latitude": 0.0, "longitude": 0.0,
-    "query": "coffee with required sockets",
-    "scenario": "coffee_stop", "categories": ["coffeehouse"],
-    "available_minutes": 45, "travel_mode": "walking",
-    "max_distance_m": 2000,
-    "required_amenities": ["sockets"], "preferred_amenities": [],
-    "return_to_start": true, "buffer_minutes": 0, "limit": 10
-  },
-  "expected_result_subset": {
-    "status": "no_match",
-    "candidates": [],
-    "reason_codes": ["REQUIRED_AMENITY_UNVERIFIED"],
-    "mode": "offline_evaluation"
-  }
-}
-```
+## Verification evidence
 
-The full agreed response must also carry snapshot/review/policy identifiers, uncertainty and estimate labels as specified in the proposal. Invalid inputs, unavailable data and stale reviews are errors, not no-match results.
+- `python -m unittest discover -s tests/data -q`: **186 passed** (156 prior +30 retrieval), rerun after final code fixes.
+- `python scripts/data/verify_retrieval_bridge.py --app-root data/runtime/member2-review-1661770 --node node`: **63 checks passed**, including 48 estimate cases, synthetic success/no-match/typed failures, collected-data blocking and private-envelope rejection by the unchanged app validator; rerun after final fixes.
+- `python scripts/data/evaluate_saved_retrieval.py ...`: **72 cases passed**; 73 source records, 45 candidates/seven held/21 excluded; **seven original source/review/accounting files unchanged**. Final private aggregate report/binding: `data/runtime/retrieval-evaluation/report-v2.json` and `binding-v2.json`. Exact commands are in the setup document. Earlier v1 evaluation artifacts remain preserved.
 
-## Verification, privacy and blockers
+Three independent final reviewers checked relevance/contract, privacy/reliability and setup/test behavior. Accepted fixes cover timezone offsets/ID controls, contextual first-visit behavior, opening/event no-match semantics, preserving review qualifications, common-category filter evidence, isolation of mutable returned data, UTF-16 app string limits and streamed integrity hashing. Tests exercise each behavioral fix. All three reviewers confirmed their final findings resolved by targeted follow-up inspection; the projection reviewer also reran the boundary regression.
 
-Preparation used two read-only subagents for design and dataset readiness; publication received separate design and privacy reviews. Local documentation checks verify 21 links, two synthetic JSON examples, unchanged fingerprints for five private artifacts, and the four-document scope. No new application tests were run for these prose changes. The 156-test result above belongs to the existing code baseline; the proposed retrieval remains unimplemented.
+No data-provider API requests, provider credential reads or private-data uploads. GitHub access is limited to the authorized repository/PR publication. Python3.13 and Node24.12 tested. No new lint/build/type configuration exists in member 1's scope. The app's earlier 205-test result is separate prior evidence until the synchronized branch's checks are recorded. No full app/provider/UI acceptance check is marked complete.
 
-Planning files: new `docs/OFFLINE_RETRIEVAL_PLAN.md`, new `docs/MEMBER_2_RETRIEVAL_HANDOFF.md`, revised `docs/DATA_INTERFACE_PROPOSAL.md`, and a pointer in `docs/MEMBER_1_HANDOFF.md`. No agreed contract, dependency, environment variable or application file changes.
+## Remaining limits and data handling
 
-Keep this handoff limited to code/design and aggregate evidence. A fresh clone lacks the dataset; member 2 can work with synthetic fixtures first. No actual source pages, place identities, coordinates, hours, detailed reviews, credentials or dataset files are provided here. Dataset transfer to another machine or provider is not part of this handoff. Rights for storage/indexing/AI processing/redistribution remain unresolved; the project owner's earlier local-save instruction does not establish them. No outreach is requested.
+All saved places remain `demo_eligible=false`; 69/73 descriptions and 42/45 candidate descriptions are missing. Verified source links, description languages and reuse references are also absent. Real app-v1 projection remains unavailable. Offline retrieval does not resolve rights, provide missing descriptions, verify pedestrian routes/access or prove recommendation quality.
 
-## Message to paste to member 2's agent
-
-> Please review member 1's offline retrieval plan and interface proposal in PR #4, prepared against code baseline `66d06f6`. Read `docs/OFFLINE_RETRIEVAL_PLAN.md`, `docs/DATA_INTERFACE_PROPOSAL.md` and this handoff from the PR branch. You own `docs/CONTRACTS.md`; record the approved Python request/result schema, exact module ownership and the decisions listed above, especially structured-only offline evaluation with missing descriptions. Return the contract commit and import paths to member 1. Scope this step to contract review and synthetic application fixtures; do not implement member 1's retrieval module, copy or upload the private dataset, read provider keys, make data-provider API calls or merge the PR as part of this request. Treat the 73 saved records and their 45 relevance candidates as private evidence, not demo-ready recommendations. Keep source facts, estimates, reviewer judgments and generated ideas separate.
+Snapshot/review files, binding and aggregate report stay ignored. A clean clone runs synthetic tests; real evaluation requires separate authorized local provisioning. No dataset transfer is included. Existing accounting remains collector11/12 plus historical probe10/10; this increment used zero requests and grants no additional collection budget.

@@ -2,7 +2,11 @@
 
 Date: 2026-10-18. Branch: `work/data/source-feasibility`, based on `origin/main` commit `155b7e4`. The deliverable commit is the commit containing this file; resolve it with `git log -1 --format=%H -- docs/MEMBER_1_HANDOFF.md`.
 
-## Current increment — offline retrieval plan and member 2 handoff
+## Current increment — implemented offline retrieval and JSON adapter
+
+2026-10-19, implementation based on `4d0971b`, reviewed for the user-authorized commit and PR #4 update. Resolve the implementation commit with `git log -1 --format=%H -- scripts/data/retrieve_saved_places.py`. See [implementation/setup](OFFLINE_RETRIEVAL.md) and [member 2 integration handoff](MEMBER_2_RETRIEVAL_HANDOFF.md). Member 1 now has a validated private snapshot loader, deterministic filtering/ranking, JSON subprocess adapter and executable offline evaluation/consumer checks. Shared/app files remain owned by member 2; publication synchronization brings in their reviewed main-branch changes without editing their implementation. No data-provider calls, provider credential reads or private-data transfer occurred. Verification and integration status are in the linked handoff.
+
+## Published increment — offline retrieval plan and member 2 handoff
 
 The user authorized review, commit and PR #4 update of the [retrieval plan](OFFLINE_RETRIEVAL_PLAN.md), [member 2 handoff](MEMBER_2_RETRIEVAL_HANDOFF.md), updated [interface proposal](DATA_INTERFACE_PROPOSAL.md), and this handoff. Code baseline: `66d06f6`; the documentation commit is the commit containing this section. Member 2's next dependency is the approved schema/module ownership and structured-only offline evaluation policy. No retrieval implementation, shared contract, dependency, configuration or application file changed; no direct handoff message was sent.
 

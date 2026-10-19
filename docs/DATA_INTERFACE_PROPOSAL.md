@@ -1,5 +1,7 @@
 # Member 1 interface proposal
 
+Historical proposal: the [implemented offline boundary](OFFLINE_RETRIEVAL.md), prepared 2026-10-19 against member 2 commit `1661770e`, supersedes the request defaults, mapping, timing and module paths below. Shared application changes and the private offline extension still need member 2 review; member 2's `docs/CONTRACTS.md` remains unchanged.
+
 Updated 2026-10-18 against code baseline `66d06f6`. Status: proposal for member 2, not the agreed application contract. Python backend was confirmed by member 1. Framework and Python minimum version remain for the integration lead to record. `docs/CONTRACTS.md` does not exist at this checkpoint. See the [offline retrieval plan](OFFLINE_RETRIEVAL_PLAN.md) and [member 2 handoff](MEMBER_2_RETRIEVAL_HANDOFF.md); this update implements no retrieval or provider calls.
 
 ## Ownership for this increment
