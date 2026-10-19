@@ -1,5 +1,11 @@
 # Qadam application contract v1
 
+## Local generation evidence extension — 2026-10-19
+
+The user authorized an evidence contract and mocked generation increment. [GENERATION_EVIDENCE.md](GENERATION_EVIDENCE.md) defines implemented `qadam-generation-evidence-v1`: up to five validated private candidates, request-local aliases, field-specific source/derived evidence, nullable facts and strict selection validation. It is explicitly `local_mock` with `external_processing_allowed:false`; its result statuses are `mock_generation`, `mock_no_match` and `mock_retrieval_only`, never `live_rag`.
+
+Projection follows the existing private validation on the Node side; Python and the original contracts below are unchanged. The service is not mounted in the production server or browser. Collected records can use only its fixed local test double; injected mocks require synthetic data. No live authorization, provider transport or request budget is added. See the extension document for exact fields, bounds, evidence rules, setup and verification.
+
 ## Private offline extension — 2026-10-19
 
 The user authorized scoped interface integration after `510a8e5`. [OFFLINE_INTERFACE.md](OFFLINE_INTERFACE.md) documents the implemented extension and local setup. The original live contract below remains unchanged.

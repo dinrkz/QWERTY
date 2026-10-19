@@ -6,6 +6,8 @@ Qadam (қадам, “step”) helps walkers and first-time visitors choose thei
 
 For the configured private dataset, run `npm.cmd run start:offline` and open the URL printed at startup (**http://127.0.0.1:3002** on the current computer). See [offline setup and limits](docs/OFFLINE_INTERFACE.md). The dataset and configuration stay outside Git; a clean clone runs synthetic tests and requires authorized local data provisioning for real offline searches.
 
+A separate [evidence contract and mocked generation flow](docs/GENERATION_EVIDENCE.md) is implemented for local development. Run `node scripts/app/demo-mock-generation.mjs` for an authored synthetic example. It uses no API, key or private dataset and is not connected to the browser interface.
+
 ## Run locally
 
 Node.js **22.14+**; this integration was checked with Node.js 24.12 and Python 3.13. No third-party npm dependencies, framework, database or build step. For the separate live application setup, from the repository root:
