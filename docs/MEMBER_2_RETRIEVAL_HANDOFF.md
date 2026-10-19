@@ -1,6 +1,6 @@
 # Member 1 → member 2: implemented offline retrieval handoff
 
-Prepared 2026-10-19. Status: implemented and reviewed for the user-authorized commit and update to [PR #4](https://github.com/dinrkz/QWERTY/pull/4); private application integration remains pending. Branch `work/data/source-feasibility`, implementation base `4d0971b6f88b2dfe3cc7d906e0fab53990215bc3`. Resolve the implementation commit with `git log -1 --format=%H -- scripts/data/retrieve_saved_places.py`. Tested consumer: member 2 commit `1661770e7e1310b40e696b20570be67818f12f6b` ([PR #5](https://github.com/dinrkz/QWERTY/pull/5)). Publication preflight fetched `origin/main` at `b6c1e85`, which includes that application. No direct message or PR comment was sent; the authorized PR update changes branch content and its description.
+Prepared 2026-10-19. Status: implemented and reviewed for the user-authorized update to [PR #4](https://github.com/dinrkz/QWERTY/pull/4); private application integration remains pending. Branch `work/data/source-feasibility`; implementation commit `6a8ad7f26a1892242fadf19def69c93ee786f3e9`, based on `4d0971b`. Publication synchronizes `origin/main` at `b6c1e85608be426edb2c8db7dd747753513f5547`, including member 2's application commit `1661770e7e1310b40e696b20570be67818f12f6b` ([PR #5](https://github.com/dinrkz/QWERTY/pull/5)). The merge was conflict-free and its combined code passed the checks below. No direct message or PR comment was sent; the authorized PR update changes branch content and its description.
 
 ## Completed member 1 scope
 
@@ -13,7 +13,7 @@ Prepared 2026-10-19. Status: implemented and reviewed for the user-authorized co
 | `tests/data/test_saved_places_retrieval.py`, `saved_retrieval_fixtures.py`, `saved_retrieval_bridge.mjs`, `retrieval_child_offline.py` | Synthetic regression fixtures, bridge checks and child network guard |
 | `docs/OFFLINE_RETRIEVAL.md`, this handoff, prior plan/interface and member 1 handoff pointers | Current setup/contract reconciliation; prior proposals clearly superseded |
 
-No shared contract, dependency manifest, environment file, application module, collector or private source/review/ledger changed.
+The retrieval increment edits no shared contract, dependency manifest, environment file, application module, collector or private source/review/ledger. The publication merge incorporates member 2's existing main-branch files unchanged.
 
 ## Decisions implemented on our side
 
@@ -40,7 +40,11 @@ First reproduce the synthetic bridge against your local checkout. It needs no re
 
 Three independent final reviewers checked relevance/contract, privacy/reliability and setup/test behavior. Accepted fixes cover timezone offsets/ID controls, contextual first-visit behavior, opening/event no-match semantics, preserving review qualifications, common-category filter evidence, isolation of mutable returned data, UTF-16 app string limits and streamed integrity hashing. Tests exercise each behavioral fix. All three reviewers confirmed their final findings resolved by targeted follow-up inspection; the projection reviewer also reran the boundary regression.
 
-No data-provider API requests, provider credential reads or private-data uploads. GitHub access is limited to the authorized repository/PR publication. Python3.13 and Node24.12 tested. No new lint/build/type configuration exists in member 1's scope. The app's earlier 205-test result is separate prior evidence until the synchronized branch's checks are recorded. No full app/provider/UI acceptance check is marked complete.
+Publication verification used an isolated export of the exact staged Git blobs after incorporating main: **186 Python tests, 205 application tests, 63 Node–Python bridge checks and syntax checks for 20 application JavaScript modules plus the bridge passed**. The bridge consumed the application from the same combined export, not a separately cached checkout. The application tests used synthetic fixtures, mocked providers and localhost HTTP; external provider calls were blocked and child environments excluded provider credentials. No actual provider/UI acceptance check is marked complete.
+
+The saved-data evaluation was repeated separately against the unchanged local inputs: **72 cases passed, seven original files unchanged**, with aggregate evidence in ignored `data/runtime/retrieval-evaluation/report-publication.json`. Earlier reports/bindings remain intact. Code publication checks also verified the explicit file scope, local documentation links and synthetic JSON examples. All three publication subagents reported no actionable code/privacy defect; their status, estimate-case wording and exact-byte-binding clarifications were incorporated.
+
+No data-provider API requests, provider credential reads or private-data uploads. GitHub access is limited to the authorized repository/PR publication. Python3.13 and Node24.12 tested. The combined repository uses member 2's existing `scripts/app/check.mjs`; no new dependency/build/type configuration was introduced.
 
 ## Remaining limits and data handling
 

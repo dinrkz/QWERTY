@@ -63,10 +63,10 @@ From the repository root:
 
 ```powershell
 python -m unittest discover -s tests/data -q
-python scripts/data/verify_retrieval_bridge.py --app-root data/runtime/member2-review-1661770 --node node
+python scripts/data/verify_retrieval_bridge.py --app-root . --node node
 ```
 
-`--app-root` may point to a separately provisioned local checkout of the reviewed member 2 commit, or `.` after approved integration. The ignored local export is absent in a clean clone. The helper fetches nothing and installs nothing. It imports member 2's actual retrieval transport, validator and policy; Node/Python child network traps remain active. All fixtures are synthetic. Child environments contain only required OS variables. Scratch fixtures are isolated under ignored `data/runtime/retrieval-bridge-tests/`; failures retain a synthetic-only diagnostic file there.
+The synchronized PR branch includes member 2's application, so `--app-root .` works from its clean checkout. It can also point to a separately provisioned local checkout of the reviewed member 2 commit. The helper fetches nothing and installs nothing. It imports member 2's actual retrieval transport, validator and policy; Node/Python child network traps remain active. All fixtures are synthetic. Child environments contain only required OS variables. Scratch fixtures are isolated under ignored `data/runtime/retrieval-bridge-tests/`; failures retain a synthetic-only diagnostic file there.
 
 Private evaluation requires local snapshot/review provisioning. No dataset is provided by a clean clone. Existing local inputs:
 
