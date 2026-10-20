@@ -1,84 +1,131 @@
-# Qadam — Build with AI
+# Qadam — your next worthwhile stop in Astana
 
-Qadam (қадам, “step”) helps walkers and first-time visitors choose their next worthwhile stop in Astana. The three core scenarios are a short walk, discovering nearby sights, and a coffee/rest stop. See [the case](CASE.md) and [original competition brief](docs/HACKATHON_BRIEF_RU.txt).
+**Qadam (қадам, “step”) is an AI walking assistant for residents and first-time visitors.** Tell it what you want to do and how much time you have. It searches saved local places and suggests up to three options, with reasons, activities, estimated time and sources.
 
-**Current status: the main interface runs real RAG over saved places.** Three live browser checks passed: two walk options, three first-visit options and three coffee options. See [scenario results and eight-attempt accounting](docs/LIVE_INTERFACE_REVIEW.md). Collection, reviewed snapshots, Python retrieval and the JSON adapter work. Full human acceptance, source reuse permissions and final submission artifacts remain pending.
+Built for the **Build with AI** hackathon. [Project brief](CASE.md) · [Scenarios and limitations](docs/TEST_SCENARIOS_AND_LIMITATIONS.md) · [Submission checklist](docs/SUBMISSION_CHECKLIST.md)
 
-For the configured private dataset, run `npm.cmd run start:offline` and open the URL printed at startup (**http://127.0.0.1:3002** on the current computer). See [offline setup and limits](docs/OFFLINE_INTERFACE.md). The dataset and configuration stay outside Git; a clean clone runs synthetic tests and requires authorized local data provisioning for real offline searches.
+## What the user sees
 
-For the current private live demo, use the [explicit activation command](docs/BOUNDED_INTERFACE.md#start) and open **http://127.0.0.1:3003**. The [map interface](docs/MAP_INTERFACE.md) has sidebar search, matching suggestion pins and pedestrian routes on selection. The main button retrieves saved places and asks AI to select grounded suggestions. [OpenStreetMap](docs/OPENSTREETMAP.md) loads on opening; choosing a suggestion sends rounded endpoints to FOSSGIS / Valhalla for a walking route. The verified model is `gpt-5.4-mini`.
+1. **Choose a starting point** from a preset or by clicking the map.
+2. **Describe the outing** in the sidebar: a short walk, nearby sights, or a coffee stop. Set the time available and any essential filters.
+3. **Compare suggestions** below the input and on matching numbered map pins.
+4. **Select a place** to see a pedestrian route and updated time estimate.
 
-A separate [evidence contract and mocked generation flow](docs/GENERATION_EVIDENCE.md) is implemented for local development. Run `node scripts/app/demo-mock-generation.mjs` for an authored synthetic example. It uses no API, key or private dataset and is not connected to the browser interface.
+Each suggestion is an alternative outing, not a stop in a combined itinerary. The interface supports English, Russian and Kazakh; source names and descriptions stay in their original language.
 
-**AI stays enabled by default for the current private demo. Start it with `node scripts/app/start-ai.mjs`.** Its [bounded connector](docs/BOUNDED_INTERFACE.md) uses the saved 100-request allowance, one in flight and no automatic retries. All 11 prior attempts remain counted. Starting or restarting never creates a new allowance. Historical pilot commands retain three-attempt defaults. The explicitly local `start-bounded.mjs` command without activation and the synthetic demo remain available for offline development; neither replaces the user's AI-default startup choice. The legacy live setup below does not use this budget.
+## What works today
 
-## Run locally
+The interface has completed all three basic scenarios using **real OpenAI responses grounded in our saved places**:
 
-Node.js **22.14+**; this integration was checked with Node.js 24.12 and Python 3.13. No third-party npm dependencies, framework, database or build step. For the separate live application setup, from the repository root:
+| Scenario | Starting area | Available time | Actual result |
+|---|---|---:|---|
+| Short walk | Mega Silk Way | 60 minutes | 2 suggestions |
+| First visit | Bayterek | 90 minutes | 3 suggestions |
+| Coffee stop | Bayterek | 45 minutes | 3 suggestions |
 
-```powershell
-npm.cmd ci --ignore-scripts --offline
-npm.cmd test
-npm.cmd run check
-npm.cmd start
+All displayed alternatives fit their individual planning budgets in the October 19 checks. These results demonstrate the working flow; they do not establish recommendation quality for every request. See the [dated live results](docs/LIVE_INTERFACE_REVIEW.md).
+
+The team has also prepared:
+
+- **A 4:40 English-captioned demo video**, showing three live AI searches and two walking routes. [Recording workflow](scripts/demo/README.md)
+- **A 10-slide English presentation**, editable PowerPoint, PDF and speaker notes targeting **6:15**. [Presentation outline](docs/PRESENTATION_OUTLINE.md)
+
+These artifacts are saved locally, outside Git. The video has not been uploaded; presentation rehearsal and final submission are still pending.
+
+## Try the project
+
+### Preview from a clean clone — no API key needed
+
+Requires **Node.js 22.14 or newer**. From the repository root:
+
+```sh
+node tests/app/fixtures/offline-ui-server.mjs
 ```
 
-On other shells use `npm` instead of `npm.cmd`. Open **http://127.0.0.1:3000**. The app binds to loopback only. Without configuration it shows the input UI and an honest unavailable-data/AI state; no fake recommendation is substituted.
+Open **http://127.0.0.1:3001**. This preview uses clearly labeled **synthetic test places**, not our collected dataset or live AI. Stop it with `Ctrl+C`.
 
-To configure locally, copy the secret-free example once if `.env.local` does not already exist, then edit that ignored file in your editor. Never paste credentials into chat or Git:
+### Run the real AI demo — configured team computer
 
-```powershell
-Copy-Item .env.example .env.local
+```sh
+node scripts/app/start-ai.mjs
 ```
 
-| Variable | Purpose |
+Open the URL printed in the terminal, normally **http://127.0.0.1:3003**. AI is enabled for the main search button. Starting the server does not send an AI request; submitting a search can use one request. The map loads external tiles when opened, and selecting a suggestion can request a route.
+
+**The real demo is not plug-and-play from a fresh clone.** Private place data, review files, a valid AI authorization/request allowance and a server-side OpenAI key must already be configured. These files are intentionally excluded from Git. Follow [saved-data setup](docs/OFFLINE_INTERFACE.md#another-authorized-local-checkout), then [AI configuration](docs/BOUNDED_INTERFACE.md#start). Missing configuration produces an explicit startup error.
+
+To search configured saved places without any AI, external map or routing requests:
+
+```sh
+npm run start:offline
+```
+
+Use the URL printed at startup. This mode labels its activities as templates rather than AI output.
+
+> `npm start` launches an older, separate integration pipeline. Use `node scripts/app/start-ai.mjs` for the current demo; its configuration and request accounting differ from the legacy `.env.example` setup.
+
+## How the AI uses our data
+
+Qadam uses **retrieval-augmented generation (RAG)**: it finds relevant records first, then asks AI to work within that evidence.
+
+```text
+Saved places → Python filtering and ranking → Up to 5 candidate records
+            → OpenAI selection → Evidence validation → Up to 3 suggestions
+```
+
+- **Collection:** scripts fetch, validate and deduplicate place records, preserving their source and collection details.
+- **Retrieval:** Python filters and ranks places using location, category, available time and supported constraints. A small local parser recognizes common request categories and durations; it is not unrestricted language understanding.
+- **Generation:** OpenAI selects places, supported reasons and activity ideas from the retrieved evidence. The verified demo model is `gpt-5.4-mini`.
+- **Validation:** the server rejects unknown place IDs and unsupported selections. Interface templates turn validated choices into readable explanations; the model does not freely invent venue facts.
+- **Routing:** after a selection, a separate routing service supplies a pedestrian path. Earlier distance/time estimates remain distinct from provider route estimates.
+
+The stack is a **Node.js server, plain JavaScript interface, Python retrieval, Leaflet/OpenStreetMap and OpenAI**. No database, embedding service, third-party npm dependency or application build step is required. Leaflet assets are included locally. See [data contracts](docs/CONTRACTS.md) and [map behavior](docs/OPENSTREETMAP.md).
+
+## Data, privacy and limitations
+
+Our automated 2GIS collection contains **73 unique places**. Offline review identified **45 relevance candidates**, seven needing further review and 21 excluded from the walking scenarios. Further distance, category and time filters determine which candidates can appear. [Dataset review](docs/WALKING_DATASET_REVIEW.md)
+
+**Coverage and evidence are limited.** Descriptions are missing for 42 of the 45 candidates. Opening hours, seating, sockets, quietness and accessibility are not established by this dataset. Unknown facts remain unknown; an essential requirement without evidence can produce no matches. Routes do not guarantee entrances, accessibility or current conditions.
+
+The current AI demo shares only the information needed by each provider:
+
+| Destination | Information sent |
 |---|---|
-| `OPENAI_API_KEY` | Existing server-only OpenAI key. User chose to configure it locally. |
-| `OPENAI_MODEL` | Explicit account-accessible model supporting Responses API strict structured output. No model/access/balance is presumed or silently selected. |
-| `QADAM_MAP_PUBLIC_KEY` | Separate 2GIS key intended for browser map use; restrict it in the provider account. Never reuse the OpenAI or a secret Places key. |
-| `QADAM_RETRIEVAL_COMMAND` | JSON array containing member 1's retrieval executable and arguments. See contract below. No shell interpretation. |
-| `PORT` | Local port; default `3000`. |
+| OpenAI | At most five selected places' names, categories, available descriptions, coarse estimates and structured filters. Raw query, coordinate fields, stable IDs and full dataset are excluded. Place names can still reveal the area. |
+| OpenStreetMap tile service | Map viewport and browser connection information when the map loads. |
+| FOSSGIS / Valhalla routing | Rounded start/destination coordinates and server connection information when a suggestion is selected. |
 
-Restart after changing configuration. The UI reports configuration presence only, not verified account access. A single request can make two paid OpenAI calls (interpretation and recommendation composition), with output limits and no automatic retries. The remaining account budget must be checked by the team.
+The full dataset and API keys stay outside Git; keys stay on the server. The application does not persist user prompts, location histories or routes. Device geolocation is disabled in the current demo. OpenAI requests use `store:false`, but this is not a promise of zero provider retention. [Provider boundaries](docs/BOUNDED_INTERFACE.md)
 
-## Data integration
+AI requests have a persistent finite allowance, one request in flight and no automatic retries. Restarting does not reset the allowance. Provider failures and retrieval-only fallbacks are labeled.
 
-Member 1 owns collection, normalization, provenance and Python retrieval. The Node server uses a **one-request JSON stdin/stdout process adapter**. The implementation is `scripts/data/retrieval_json_adapter.py`; its default live-app projection rejects saved private records. A separate isolated entry point and offline service consume its private envelope without provider interpretation or generation.
+**Remaining work:** resolve 2GIS storage/reuse/AI-processing and redistribution permissions, improve descriptions and coverage, complete human relevance testing, verify clean setup with authorized data, rehearse the presentation and upload the demo. Private use or operator approval does not settle source rights. The dataset is not distributed with this repository.
 
-[CONTRACTS.md](docs/CONTRACTS.md) specifies the live protocol and offline extension. The server independently checks IDs, provenance, distance/time and hard constraints. The live validator remains strict; private nullable records are accepted only by the offline validator. Synthetic test records remain separately labeled.
+## Verify the code without provider calls
 
-2GIS is the prioritized source used for the saved collection. Access was exercised in earlier authorized probes/collection, but storage/indexing/OpenAI-processing/redistribution permissions remain unresolved. Offline evaluation does not authorize publication or external processing. See [retrieval setup](docs/OFFLINE_RETRIEVAL.md) and its collection/review references; starting the interface requires no new collection requests.
+Python **3.13** and Node.js **24.12** were used for the recorded engineering checks. From the repository root:
 
-## Separate live recommendation flow
+```sh
+node --import ./scripts/app/offline-network-guard.mjs --test tests/app/*.test.mjs
+python -B -m unittest discover -s tests/data -p "test_*.py" -q
+npm run check
+```
 
-The following describes the implemented live-mode pipeline, whose real-provider acceptance remains pending. Private offline mode skips interpretation, generation and external map/device-location access; follow the offline setup above for saved records.
+On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`. The application suite uses synthetic fixtures and permits local loopback connections while blocking external fetch/HTTPS calls. No private dataset or provider key is needed for these tests.
 
-Manual/simulated location + text + available time → validated input → model interpretation of constraints → member 1 retrieval/filtering → deterministic output checks → real model composition over retrieved candidates → ID/evidence/activity validation → up to three alternative cards.
+The latest recorded checks passed **381 application tests, 188 Python tests and syntax checks for 60 JavaScript modules**. Syntax checking is not a separate linter or type checker. Automated tests do not replace [human acceptance checks](ACCEPTANCE_TESTS.md).
 
-This is RAG and constrained composition, **not model fine-tuning**. The model selects retrieved places, evidence, supported reasons and safe activity ideas through a strict schema. Local RU/KK/EN templates render these choices; unrestricted model-authored factual prose is not displayed. Source names and descriptions remain in their original language. Human evaluation of relevance, wording and multilingual usefulness is still pending; template localization is not a claim that source descriptions are translated.
+## Project guide
 
-Cards distinguish source facts, generated ideas (or template ideas in an explicitly labeled retrieval-only fallback), distance/time estimates and uncertainty. Known closed/restricted places, expired/cancelled events and unsupported hard amenities cannot pass. Missing hours are unknown. A full visit must fit fresh schedule intervals when opening is required. Neither a venue's wheelchair tag nor geometric proximity proves an accessible walking route.
+| Find out about… | Start here |
+|---|---|
+| Hackathon requirements and product scope | [CASE.md](CASE.md) |
+| Current AI demo setup and request limits | [Saved-place AI interface](docs/BOUNDED_INTERFACE.md) |
+| Saved-data setup and retrieval | [Offline interface](docs/OFFLINE_INTERFACE.md), [Python retrieval](docs/OFFLINE_RETRIEVAL.md) |
+| Collection and source feasibility | [Data plan](docs/DATA_PLAN.md) |
+| Member integration and JSON contracts | [Contracts](docs/CONTRACTS.md), [member 2 handoff](docs/MEMBER_2_RETRIEVAL_HANDOFF.md) |
+| Scenario evidence and remaining limitations | [Live results](docs/LIVE_INTERFACE_REVIEW.md), [scenario document](docs/TEST_SCENARIOS_AND_LIMITATIONS.md) |
+| Demo, slides and submission progress | [Video workflow](scripts/demo/README.md), [presentation outline](docs/PRESENTATION_OUTLINE.md), [checklist](docs/SUBMISSION_CHECKLIST.md) |
+| Team responsibilities and contribution process | [TEAM_WORKFLOW.md](TEAM_WORKFLOW.md) |
 
-Travel uses straight-line distance × 1.3 at an assumed 4 km/h (2.5 km/h for a wheelchair requirement), category visit estimates, explicit return travel and buffer. These are planning assumptions, not verified routes or promised arrival times. Each card is an alternative, not a combined itinerary. Price/dietary/stairs/flight-destination constraints that cannot be represented require clarification.
-
-## Try the separately configured live interface
-
-1. Keep the clearly labeled simulated location or enter approximate coordinates. Device location is optional and requested only by a button.
-2. Select RU/KK/EN, a short walk, a first visit, or coffee; enter your available time.
-3. Try a mandatory quiet/socket/wheelchair requirement, return time or an event filter. Empty/uncertain results must remain honest.
-4. Enable the map only if you want to send the map viewport to 2GIS. Without its public key the rest of the form remains usable.
-5. Once permitted live-data and provider integration are ready, run [the acceptance scenarios](ACCEPTANCE_TESTS.md) with real data and record actual outcomes through member 3.
-
-## Live-mode privacy and provider boundaries
-
-No application accounts, conversation history, analytics, cookies, localStorage or request/provider logging. Location and query are transient. The browser rounds coordinates to three decimals before submission; manual callers can send more precision, which the server does not persist. The local retrieval child receives the request, but no OpenAI/map credentials; its stderr is discarded. The child must also follow the no-logging contract.
-
-OpenAI receives the query (coordinate-like decimals redacted) for interpretation, then interpreted context and selected public POI descriptions/evidence identifiers for composition. It does not receive the dedicated user-coordinate fields. Free text can still contain addresses or personal information; avoid entering them. `store:false` is sent, but provider abuse-monitoring retention can still apply; no zero-retention promise is made. See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data).
-
-2GIS loads only after opt-in and receives map viewport/connection information. The browser-facing map key is intentionally public; backend keys are not served. Source text is rendered as text, not HTML. [2GIS setup](https://docs.2gis.com/en/mapgl/start/first-steps) and [OpenAI structured output](https://developers.openai.com/api/docs/guides/structured-outputs) were consulted for the adapters. Live access, key restrictions, provider network requests and real retention/account settings still need verification.
-
-## Verification and team handoff
-
-`npm test` runs application tests, including the offline extension. `npm run check` checks JavaScript syntax; this is not a separate linter/type checker. No compiler or bundler is configured. Unit tests do not establish recommendation quality, permitted data collection, real API access or completion of project acceptance checks. Current offline verification evidence is in [OFFLINE_INTERFACE.md](docs/OFFLINE_INTERFACE.md).
-
-See [member 2 handoff](docs/MEMBER_2_HANDOFF.md), [team workflow](TEAM_WORKFLOW.md), [contracts](docs/CONTRACTS.md), [scenario specification](docs/TEST_SCENARIOS_AND_LIMITATIONS.md) and [submission checklist](docs/SUBMISSION_CHECKLIST.md). Work goes through task branches and PR review; no direct main push. `old/` remains an archive.
+Verification reports preserve dated checkpoints, including earlier behavior and test counts. This README describes the current demo. `old/` contains superseded material.
