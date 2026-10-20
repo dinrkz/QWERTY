@@ -80,3 +80,7 @@ Changed: offline validator/presenter, explicit server branch, startup/network gu
 | `CASE.md`, `README.md`, `docs/ARCHITECTURE.md`, `CONTRACTS.md`, `OFFLINE_INTERFACE.md`, `OFFLINE_RETRIEVAL.md`, `MEMBER_2_RETRIEVAL_HANDOFF.md` | Current scope, configuration, evidence and handoff |
 
 Full live RAG, map operation, permitted dataset reuse, multilingual recommendation quality and submission evidence remain pending. See [the shared contract](CONTRACTS.md) and [member 2 handoff](MEMBER_2_RETRIEVAL_HANDOFF.md).
+
+### Windows checkout integrity — 2026-10-20
+
+The retrieval policy fingerprints the exact bytes of `retrieve_saved_places.py` and `review_walking_dataset.py`. A Git checkout that converts these files to CRLF can therefore produce `DATA_INVALID` even when the dataset is intact. `.gitattributes` pins these two files to LF. The October 20 repair restored their LF bytes and reproduced the existing policy fingerprint exactly; no binding, authorization, dataset or allowance was regenerated. All 45 private offline integration cases passed with eight source/review/binding/accounting files unchanged and zero external requests. The running application's Mega Silk Way coffee search returned three places through its retrieval-only endpoint; AI remained ready with 94 requests remaining at that check. This verifies the data path, not a new provider generation call.

@@ -16,3 +16,18 @@ Routing uses FOSSGIS / Valhalla via the local server, with rounded endpoint coor
 - Read-only accounting after the user's interactive testing showed all three interactive attempts used (11 total including eight earlier attempts), with 4,557 reported tokens for that allowance. The original eight source/review/accounting files matched their fingerprints. Restarting preserved the exhausted allowance; the interface now offers explicitly labeled saved-place search.
 
 This checkpoint does not establish full multilingual usability, data redistribution rights, live-provider availability, or hackathon submission completion. Work remains uncommitted until requested.
+
+## Strict UI/UX review — 2026-10-20
+
+Two independent subagents reviewed accessibility and the map/search flow. Fixes:
+
+- Completed results now scroll into view instead of returning the sidebar to the top.
+- Phone layouts use document scrolling with a 300px map and route/status sections below it; route selection reveals the map. Desktop zoom controls sit on the right, away from the route summary.
+- Supporting text is larger and darker; key buttons have 44px minimum hit areas. Map-selection buttons wrap instead of overflowing.
+- Connection failure exposes an explicit configuration retry. Routing failure exposes a route-only retry; unavailable routes no longer display the successful-route disclaimer.
+- Route retry keeps keyboard focus on status; closing a route returns focus to its recommendation. Connection recovery returns focus to search.
+- Failed map initialization no longer enters start-picking mode or overwrites its error. Invalid hidden settings expand before browser validation.
+- The sidebar accessible name follows RU/KK/EN. Clicking the already selected scenario preserves input; switching scenarios preserves a nondefault custom time. Switching to another scenario still replaces search text with that scenario's intent.
+- Strict offline mode no longer shows an irrelevant external-routing disclosure.
+
+Verification: 381 guarded application tests and 60 JavaScript syntax checks passed. Chrome checks at 390×844 verified visible completed results, no horizontal overflow, preserved custom time, route-error retry and keyboard focus restoration. Desktop visual inspection confirmed separate route and zoom controls. Tests used authored synthetic places; the optional `node tests/app/fixtures/offline-ui-server.mjs --map-preview` serves them at port 3004. Its server network guard intentionally blocks routing/AI calls so route recovery can be inspected; the browser loads normal OpenStreetMap tiles. It is not a live RAG demo. No OpenAI or 2GIS requests were made for this review; private data were not used. Successful live routing and screen-reader speech were not reverified in this pass.

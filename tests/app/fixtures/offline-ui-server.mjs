@@ -22,6 +22,11 @@ const retrieve = async request => {
   }
   return e;
 };
-const server = createAppServer({ config: { mode: 'offline', command: ['synthetic-not-executed'], expected },
+// Optional map preview exercises the real UI with synthetic places. The imported
+// network guard blocks server-side OpenAI/routing calls; browser OSM tiles can load.
+const mapPreview = process.argv.includes('--map-preview');
+const port = mapPreview ? 3004 : 3001;
+const server = createAppServer({ config: { mode: mapPreview ? 'bounded' : 'offline', generation: { enabled: false },
+  command: ['synthetic-not-executed'], expected },
   recommend: createOfflineService({ retrieve, expected, now: () => '2026-10-19T00:00:00Z' }) });
-server.listen(3001, '127.0.0.1', () => process.stdout.write('Synthetic offline UI check: http://127.0.0.1:3001\n'));
+server.listen(port, '127.0.0.1', () => process.stdout.write(`Synthetic UI check: http://127.0.0.1:${port}\n`));

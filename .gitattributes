@@ -1,0 +1,4 @@
+# These source bytes form the reviewed retrieval policy fingerprint.
+# Keep checkouts identical across Windows and Unix; never bypass saved bindings.
+scripts/data/retrieve_saved_places.py text eol=lf
+scripts/data/review_walking_dataset.py text eol=lf

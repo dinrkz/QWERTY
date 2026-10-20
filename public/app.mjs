@@ -24,6 +24,7 @@ let mapLoading = false;
 let mapScriptPromise = null;
 let osmEnabled = false;
 let pickingStart = false;
+let currentRouteState = null;
 const osm = createOSMController({ container: byId('map'), onStatus: mapStatus, onPick: selectMapStart,
   onSelect: id => selectPlace(id), canPick: () => pickingStart && !pending && !review.isSending() });
 const statuses = new Set(['live_rag', 'retrieval_only', 'no_match', 'needs_clarification', 'error', 'synthetic_test', 'synthetic_provider_test', 'offline_evaluation']);
@@ -40,7 +41,10 @@ const routes = createRouteSelection({ getToken: () => config?.preview_token, onC
   draw: geometry => osm.setRoute(geometry), clear: () => osm.clearRoute() });
 
 function renderRouteState(state) {
+  currentRouteState = state;
   byId('route-panel').hidden = !state;
+  byId('retry-route').hidden = state?.state !== 'error';
+  document.querySelector('.route-disclaimer').hidden = state?.state !== 'ready';
   osm.select(state?.card.poi_id ?? null);
   for (const card of byId('recommendations').querySelectorAll('[data-poi-id]')) {
     const selected = card.dataset.poiId === state?.card.poi_id;
@@ -52,6 +56,9 @@ function renderRouteState(state) {
   byId('route-status').textContent = state.state === 'loading' ? t('routeLoading')
     : state.state === 'error' ? t(state.code === 'ROUTE_BUSY' ? 'routeBusy' : state.code === 'ROUTE_TOO_CLOSE' ? 'routeTooClose' : 'routeFailed')
     : `${distance(state.route.distance_m)} · ${minutes(state.route.duration_minutes)} ${t('walking').toLowerCase()} · ${t('total')}: ${minutes(state.total)}${state.overBudget ? ` — ${t('routeOverBudget')}` : ''}`;
+  if (state.state === 'loading' && window.matchMedia('(max-width: 800px)').matches) {
+    document.querySelector('.map-panel').scrollIntoView({ behavior: 'auto', block: 'start' });
+  }
 }
 async function selectPlace(id) {
   if (pending || config?.mode !== 'bounded') return;
@@ -62,7 +69,22 @@ async function selectPlace(id) {
   if (!osmEnabled || !result?.recommendations.includes(card)) return;
   await routes.select(card, mapCoordinates(), result.context_used);
 }
-byId('clear-route').addEventListener('click', () => routes.reset());
+byId('clear-route').addEventListener('click', () => {
+  const id = currentRouteState?.card.poi_id;
+  routes.reset();
+  const card = [...byId('recommendations').querySelectorAll('[data-poi-id]')].find(node => node.dataset.poiId === id);
+  card?.querySelector('.route-select')?.focus();
+});
+byId('retry-route').addEventListener('click', () => {
+  if (currentRouteState?.state === 'error') {
+    byId('route-status').focus({ preventScroll: true });
+    selectPlace(currentRouteState.card.poi_id);
+  }
+});
+byId('retry-connection').addEventListener('click', async () => {
+  await loadConfig();
+  if (configState !== 'configError') byId('query').focus();
+});
 
 function element(tag, text = '', className = '') {
   const node = document.createElement(tag);
@@ -111,6 +133,8 @@ function translatePage() {
   document.title = `Qadam — ${t('city')}`;
   for (const node of document.querySelectorAll('[data-i18n]')) node.textContent = t(node.dataset.i18n);
   for (const node of document.querySelectorAll('[data-i18n-placeholder]')) node.placeholder = t(node.dataset.i18nPlaceholder);
+  document.querySelector('.discovery-sidebar').setAttribute('aria-label', t('searchRegion'));
+  byId('retry-connection').hidden = configState !== 'configError';
   for (const node of byId('radius').options) node.textContent = distance(Number(node.value));
   updateLocationLabel();
   byId('connection').textContent = t(configState);
@@ -128,6 +152,7 @@ function translatePage() {
   byId('map-pick-controls').hidden = config?.mode !== 'bounded' || !osmEnabled;
   byId('map-pick-controls').hidden ||= !pickingStart;
   byId('map-placeholder').hidden = osmEnabled;
+  document.querySelector('[data-i18n="routePrivacy"]').hidden = config?.mode !== 'bounded';
   byId('clear-route').setAttribute('aria-label', t('closeRoute'));
   byId('use-map-center').disabled = pending;
   byId('first-visit-hint').hidden = !usesSavedPlaces() || !byId('first-visit').checked;
@@ -143,7 +168,7 @@ function translatePage() {
   }
   if (config?.mode === 'bounded') {
     byId('map-title').textContent = t('city');
-    byId('connection').textContent = t(`ai_${config.ai?.state ?? 'disabled'}`)
+    byId('connection').textContent = configState === 'configError' ? t('configError') : t(`ai_${config.ai?.state ?? 'disabled'}`)
       + (config.ai?.state === 'ready' ? ` · ${t('aiRequestsLeft')}: ${config.ai.remaining}` : '');
     document.querySelector('[data-i18n="submitNote"]').textContent = t(usesAI() ? 'aiSubmitDisclosure' : 'submitNote');
     byId('map').setAttribute('aria-label', 'OpenStreetMap');
@@ -383,7 +408,7 @@ function renderResult(value) {
   byId('warnings').hidden = warnings.length === 0;
   updateMapMarkers();
   byId('result-status').focus({ preventScroll: true });
-  document.querySelector('.discovery-sidebar').scrollTop = 0;
+  byId('result-status').scrollIntoView({ behavior: 'auto', block: 'start' });
 }
 
 function readRequest() {
@@ -464,6 +489,8 @@ form.addEventListener('submit', async (event) => {
 });
 
 form.addEventListener('invalid', event => {
+  document.querySelector('.discovery-sidebar').classList.add('show-settings');
+  byId('edit-search-settings').setAttribute('aria-expanded', 'true');
   for (let parent = event.target.parentElement; parent && parent !== form; parent = parent.parentElement) {
     if (parent.tagName === 'DETAILS') parent.open = true;
   }
@@ -482,6 +509,9 @@ form.addEventListener('input', (event) => {
 for (const button of document.querySelectorAll('[data-scenario]')) {
   button.setAttribute('aria-pressed', String(button.dataset.scenario === scenario));
   button.addEventListener('click', () => {
+    if (button.dataset.scenario === scenario) return;
+    const previousDefault = scenario === 'discover' ? '90' : scenario === 'coffee' ? '45' : '60';
+    const useDefaultTime = byId('minutes').value === previousDefault;
     scenario = button.dataset.scenario;
     for (const other of document.querySelectorAll('[data-scenario]')) {
       other.classList.toggle('active', other === button);
@@ -490,7 +520,7 @@ for (const button of document.querySelectorAll('[data-scenario]')) {
     byId('query').value = usesSavedPlaces() ? '' : t(`sample_${scenario}`);
     byId('first-visit').checked = scenario === 'discover';
     byId('first-visit-hint').hidden = !usesSavedPlaces() || scenario !== 'discover';
-    byId('minutes').value = scenario === 'discover' ? '90' : scenario === 'coffee' ? '45' : '60';
+    if (useDefaultTime) byId('minutes').value = scenario === 'discover' ? '90' : scenario === 'coffee' ? '45' : '60';
     clearResults({ changed: true });
   });
 }
@@ -528,6 +558,7 @@ byId('locate').addEventListener('click', () => {
 });
 
 async function loadConfig() {
+  byId('retry-connection').disabled = true;
   const initial = !config;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 8000);
@@ -549,6 +580,7 @@ async function loadConfig() {
     if (usesSavedPlaces() && byId('query').value === t(`sample_${scenario}`)) byId('query').value = '';
   } catch { configState = 'configError'; } finally {
     clearTimeout(timeout);
+    byId('retry-connection').disabled = false;
     translatePage();
   }
   if (initial && config?.mode === 'bounded') await enableOSM();
@@ -585,6 +617,7 @@ async function enableOSM() {
 byId('pick-start-map').addEventListener('click', async () => {
   if (pending || config?.mode !== 'bounded') return;
   await enableOSM();
+  if (!osmEnabled) return;
   pickingStart = true; document.querySelector('.map-panel').classList.add('picking'); mapStatus('mapPickHelp'); translatePage();
   const target = byId(osmEnabled ? 'map' : 'map-status');
   target.scrollIntoView({ behavior: 'auto', block: 'center' }); target.focus({ preventScroll: true });

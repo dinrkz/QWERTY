@@ -555,6 +555,13 @@ export const messages = {
   },
 };
 
+const interfaceLabels = {
+    ru: { retryConnection: 'Повторить подключение', retryRoute: 'Повторить поиск маршрута', searchRegion: 'Поиск и рекомендации' },
+    en: { retryConnection: 'Retry connection', retryRoute: 'Retry walking route', searchRegion: 'Search and recommendations' },
+    kk: { retryConnection: 'Қайта қосылу', retryRoute: 'Бағытты қайта іздеу', searchRegion: 'Іздеу және ұсыныстар' },
+};
+
 export function translate(language, key) {
+  if (interfaceLabels[language]?.[key]) return interfaceLabels[language][key];
   return messages[language]?.[key] ?? messages.ru[key] ?? key;
 }

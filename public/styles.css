@@ -8,3 +8,44 @@
 @media(max-width:800px){.site-header{height:54px;padding:0 16px;gap:14px}.brand{font-size:25px}.brand-mark{width:28px;height:28px}.city-label{border:0;padding:0;font-size:10px}.header-caption{display:none}.header-controls{gap:0}.header-controls select{font-size:11px;max-width:99px}.map-workspace{height:calc(100dvh - 54px);display:flex;flex-direction:column}.map-panel{order:0;flex:0 0 36%;min-height:205px}.discovery-sidebar{order:1;flex:1;min-height:0;border-right:0;border-top:1px solid #d7dfd3;border-radius:0;margin-top:0;z-index:500;box-shadow:0 -3px 15px #203d3012}.planner{padding:20px 20px 16px}.planner>.eyebrow{display:none}.planner h1{font-size:21px;margin-bottom:6px}.planner-intro{font-size:12px;margin-bottom:12px}.search-box textarea{min-height:70px}.map-topbar{top:10px;left:12px;right:12px}.map-heading{padding:9px 12px}.map-panel .leaflet-top{top:55px}.map-bottom{left:12px;bottom:20px;right:42px;max-width:calc(100% - 54px);padding:6px 9px}.map-privacy{display:none}.route-privacy{font-size:8px}.map-status{font-size:10px}.route-panel{top:53px;left:58px;padding:10px 12px;width:min(300px,calc(100% - 75px))}.route-heading h3{font-size:13px}.route-panel #route-status{font-size:12px;margin:7px 0 4px}.route-disclaimer{font-size:9px}.map-pick-controls .field-hint{font-size:10px}.map-bottom .map-actions button{font-size:10px;padding:5px 8px}.results-column{padding:17px 20px}.map-toggle{font-size:10px;padding:8px 10px}}
 #edit-search-settings{display:none;width:100%;text-align:left;margin:0 0 12px;font-size:11px}.has-results #edit-search-settings{display:block}.has-results .planner{padding-top:18px}.has-results .planner>.eyebrow,.has-results .planner-intro,.has-results .search-hint{display:none}.has-results .planner h1{font-size:18px;margin-bottom:12px}.has-results .scenario-grid{margin-top:10px;margin-bottom:10px}.has-results:not(.show-settings) .location-heading,.has-results:not(.show-settings) #offline-start,.has-results:not(.show-settings) #location-status,.has-results:not(.show-settings) .quick-options{display:none!important}.has-results .search-box textarea{min-height:65px}.has-results .planner .submit-note{font-size:9px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Readable supporting text and comfortable keyboard/touch controls. */
+:root{--muted:#52665b}
+.eyebrow,.tag,.submit-note,.card-section-label,.map-privacy,.route-privacy{color:#52665b}
+.caveats,.warning-list{color:#715a3c}
+.search-hint,.submit-note,.has-results .planner .submit-note,.connection,.result-status,
+.category-line,.card-section-label,.estimate-label,.estimate-note,.source-details summary,
+.source-details p,.source-details li,.caveats,.alternatives-note,.privacy-panel summary,
+.privacy-panel p,.map-privacy,.route-privacy,.route-disclaimer{font-size:12px;line-height:1.55}
+.scenario,.secondary-button,.text-button,.map-toggle,.route-select,.header-controls select{min-height:44px}
+.scenario{font-size:12px}.icon-button{width:44px;height:44px;min-height:44px}
+.check-line{min-height:36px}.map-actions{flex-wrap:wrap}.map-actions button{min-height:44px}
+.map-panel .leaflet-top.leaflet-left{left:auto;right:12px}
+.route-panel{max-height:calc(100% - 240px);overflow:auto}
+#retry-route{margin:6px 0 12px}#retry-connection{margin:0 4px 14px}
+#result-status{scroll-margin-top:16px}
+
+/* Small screens use document scrolling; route text never covers the map. */
+@media(max-width:800px){
+  body{overflow:auto}
+  .map-workspace{height:auto;min-height:calc(100dvh - 54px)}
+  .map-panel{flex:none;min-height:0;display:grid;grid-template-rows:300px auto auto;overflow:visible}
+  #map,.map-placeholder{height:300px;bottom:auto}
+  .route-panel{position:relative;grid-row:2;top:auto;left:auto;width:auto;max-height:none;margin:12px 12px 0;padding:14px;box-shadow:none}
+  .map-bottom{position:relative;grid-row:3;left:auto;right:auto;bottom:auto;width:auto;max-width:none;margin:12px;padding:10px 12px;box-shadow:none}
+  .map-privacy{display:block}
+  .map-status,.map-bottom .field-hint,.route-privacy,.route-disclaimer{font-size:12px}
+  .map-bottom .map-actions button{font-size:12px;padding:10px 12px}
+  .discovery-sidebar{overflow:visible;flex:none;min-height:0}
+  .map-panel .leaflet-top{top:66px}
+  .map-topbar{align-items:flex-start}
+  .map-heading{max-width:calc(100% - 110px)}
+  input,select,textarea,.search-box textarea{font-size:16px}
+  .start-row select{font-size:14px}
+  .site-header{gap:10px}.header-controls select{font-size:12px}
+}
+@media(max-width:360px){
+  .city-label{display:none}
+  .planner,.results-column{padding-inline:14px}
+  .scenario-grid{gap:4px}.scenario{font-size:11px;padding-inline:4px}
+}
