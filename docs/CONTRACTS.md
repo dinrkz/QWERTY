@@ -104,6 +104,14 @@ Each card is an alternative, not one stop of a combined route. Distance/time are
 
 Evidence freshness uses the older of collection and source-update timestamps (when supplied): hours 7 days, events 48 hours, amenities/access 30 days. These conservative product thresholds are not publisher guarantees. Unknown source-update time is disclosed. A source field with missing/stale evidence cannot satisfy a hard requirement. Raw historical description can remain displayed with its date. Member 2 revalidates member 1 eligibility before generation and rejects corrupt batches as `DATA_INVALID`.
 
+## Bounded saved-place generation extension
+
+The subsequent [interface contract](BOUNDED_INTERFACE.md) mounts this service only in an explicit `bounded` mode, disabled by default. Local preview and confirmation use a short-lived, one-use token bound to the exact retained request body. Ordinary search remains local. No real authorization/budget or live activation was created by this integration.
+
+The separately implemented [bounded OpenAI service](BOUNDED_OPENAI.md) consumes validated private retrieval through an explicit transfer decision. It sends `qadam-openai-evidence-v1` with up to five aliased candidates and approved fields; it never changes the local mock packet or saved false eligibility flags. A matching model, exact dataset/review/binding/policy pins, record/version allowlist, field allowlist, expiry, operator decision and preinitialized budget are required. It makes at most one generation attempt per eligible invocation, no interpretation call, and at most three attempts per run with one in flight, persistent reservations and no retries. Uncertain outcomes retain the run lock.
+
+Results distinguish `live_rag` (real provider selection with template wording), `synthetic_provider_test`, `retrieval_only`, `no_match` and `error`. Synthetic injected transport cannot consume collected data. The connection is disabled by default and not mounted in the server/browser; no real authorization/budget exists from this work. The legacy flow below remains unchanged and is not governed by this new budget. Detailed payload, accounting and handoff contracts are in [BOUNDED_OPENAI.md](BOUNDED_OPENAI.md).
+
 ## Generation and output
 
 Use real OpenAI Responses requests with strict JSON schema and `store:false`; explicit `OPENAI_MODEL`, no presumed access/balance. Interpretation precedes retrieval; recommendation generation follows retrieval. Requests do not send coordinate fields. Decimal coordinate-like text is redacted before interpretation; user-entered addresses can remain in text (disclosed). Generation receives only interpreted interests/context and up to 10 public POI descriptions/eligible evidence identifiers/estimates. No tools, external actions, secret values or raw instructions from POIs are accepted.

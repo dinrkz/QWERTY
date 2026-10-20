@@ -1,6 +1,8 @@
 # Saved places to OpenAI integration plan
 
-**Implementation follow-up, 2026-10-19:** [the local evidence contract and mock flow](GENERATION_EVIDENCE.md) now implement the first offline development slice. The bounded projection runs on the Node side after existing private validation, reusing Python unchanged. It has no external transport or browser integration. Live authorization, quality enrichment, attempt accounting and pilot activation below remain proposals.
+**Latest follow-up:** [LIVE_INTERFACE_REVIEW.md](LIVE_INTERFACE_REVIEW.md) records all three successful live browser scenarios and eight historical attempts. [BOUNDED_INTERFACE.md](BOUNDED_INTERFACE.md) and [OPENSTREETMAP.md](OPENSTREETMAP.md) describe the current demo and separately prepared interactive allowance. The plan below is historical and grants no further requests.
+
+**Implementation follow-up, 2026-10-19:** [the local evidence contract and mock flow](GENERATION_EVIDENCE.md) implement the first offline development slice. The subsequent [bounded OpenAI connector](BOUNDED_OPENAI.md) implements separate authorization checks, transport and persistent attempt accounting, tested with synthetic responders. Both remain unmounted; the new connector is disabled by default. No real transfer authorization or pilot budget was initialized. Browser integration, actual provider/model verification, quality enrichment and pilot activation below remain proposals. Python and saved data are unchanged.
 
 Prepared 2026-10-19 against local commit `be891a9e322355162319e31cba5f1fb5e7d332d2`. Status: proposal and member 2 handoff, not an implemented connection or permission to send data. This planning task makes no API requests and changes no runtime configuration, credentials or dataset files.
 
@@ -84,7 +86,7 @@ Use authored synthetic records and injected provider doubles. Block external net
 | Separation and integrity | Existing offline launcher remains network-free; legacy tests retain their protections; source/review/collector-ledger hashes remain unchanged |
 | User-facing labels | Live selection, retrieval-only fallback, synthetic tests and no match are distinguishable; sources, unknowns and estimates remain visible in RU/KK/EN |
 
-Run the relevant Node/Python suites, bridge checks and configured syntax checks after implementation. Reuse the existing 45-case private interface evaluation for scenario regression, keeping its aggregate-only output and integrity checks; do not build a duplicate evaluation framework. Member 3 reviews acceptance evidence for AT-02/03/06–11/14; fixture success does not establish live behavior, source rights or first-visitor usefulness. The completed local increment's test evidence is recorded in [GENERATION_EVIDENCE.md](GENERATION_EVIDENCE.md).
+Run the relevant Node/Python suites, bridge checks and configured syntax checks after implementation. Reuse the existing 45-case private interface evaluation for scenario regression, keeping its aggregate-only output and integrity checks; do not build a duplicate evaluation framework. Member 3 reviews acceptance evidence for AT-02/03/06–11/14; fixture success does not establish live behavior, source rights or first-visitor usefulness. Test evidence is recorded in [GENERATION_EVIDENCE.md](GENERATION_EVIDENCE.md) for the earlier local mock and [BOUNDED_OPENAI.md](BOUNDED_OPENAI.md) for the subsequent connector.
 
 ### 4. Review evidence quality for the three scenarios
 
@@ -115,9 +117,9 @@ Unlike the first slice, this sends user text to OpenAI. Existing decimal-coordin
 | Owner | Next scoped work |
 |---|---|
 | Member 1 | Data/evidence semantics, synthetic fixtures, private aggregate quality audit and immutable source checks; maintain existing Python retrieval. The user-authorized local evidence projection is implemented in Node; coordinate subsequent application changes with member 2 |
-| Member 2, integration lead | Approve shared contract; implement explicit service/provider gate, configuration, budget accounting, validation, UI/disclosure and application tests in owned paths |
+| Member 2, integration lead | Review/adopt the implemented bounded connector and shared contract; add disabled-by-default server/UI integration, configuration and provider disclosure with application tests |
 | Member 3 | Independent integration/privacy/grounding scenarios, clean setup and truthful live-demo/submission evidence |
 
 Follow [TEAM_WORKFLOW.md](../TEAM_WORKFLOW.md): separate implementation branches/worktrees and agreed ownership; each handoff records commit, files, contract/configuration changes, tests and outstanding limitations. No dataset transfer is included in this handoff. A clean checkout uses synthetic fixtures until separately provisioned with authorized local data.
 
-**Next integration deliverable:** member 2 reviews the implemented local contract and mock flow, then designs the separate provider authorization/transport boundary with outbound calls still disabled during development. The local implementation grants no external request budget.
+**Next integration deliverable:** member 2 reviews/adopts the implemented connector and preview/confirmation interface, then prepares provider/transfer preflight and a specifically authorized small pilot. Keep outbound calls disabled until that decision. The local implementation grants no external request budget.

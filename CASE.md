@@ -3,7 +3,7 @@
 ## Source and status
 Source: [user-supplied Russian brief](docs/HACKATHON_BRIEF_RU.txt), preserved verbatim. Organizer named in that brief: School of AI and Data Science; task partners: Smart City Research Center and GDG Astana. This document summarizes that supplied text; it is not independent verification of organizer rules.
 
-Current repository status (2026-10-19): automated POI collection, a private reviewed dataset, Python retrieval and a local offline interface are implemented; see README and `docs/OFFLINE_INTERFACE.md` for verified scope. Permitted external data use, real-provider RAG, map operation and a completed submission demo remain pending. The requirement map below remains the competition specification, not a results report.
+Current repository status (2026-10-19): automated collection, private reviewed data, Python retrieval, all three basic live RAG browser scenarios and an opt-in OpenStreetMap start picker work. See [interface evidence](docs/LIVE_INTERFACE_REVIEW.md) and [map verification](docs/OPENSTREETMAP.md). Source reuse permission, full human acceptance and completed submission artifacts remain pending. The requirement map below remains the competition specification, not a results report.
 
 ## Official objective
 Show a working Retrieval-Augmented Generation (RAG) concept and interactive demo that recommends where to go and what to do in Astana based on current location, preferences, and context. Recommendations should be useful, safe, concrete, and understandable.
@@ -52,7 +52,9 @@ Select location from user input, a map/preset, or permission-based device locati
 
 Team decisions: **2GIS for the map; OpenAI API for generation**, using API credits reported available by the user. **2GIS Places API remains a candidate data source**, conditional on access, coverage, and applicable collection/storage/indexing/AI-processing/redistribution permissions. The user approved Node.js/JavaScript for member 2; the JSON adapter preserves member 1's proposed Python data component. Model, final dataset source, exact available budget, and schedule remain undecided. Credentials and live integrations have not been verified. These are team choices, not organizer requirements.
 
-## Main flow — proposed
+The user subsequently authorized changing the map provider: the bounded demo uses OpenStreetMap with local Leaflet assets. Saved 2GIS records remain the data source. The verified generation model is `gpt-5.4-mini`; usable account balance is unknown. These dated implementation decisions supersede the earlier undecided/provider statements above.
+
+## Main flow — implemented within the bounded scope
 Location + request + available time → validate and interpret constraints → retrieve relevant collected POIs → filter/rank using geographic and contextual evidence → generate explanations and activity ideas grounded in retrieved records → validate IDs/claims → display recommendations, sources, estimates, and unknowns.
 
 ## Judging order

@@ -1,6 +1,6 @@
-# Privacy, factual integrity, and safety plan
+# Privacy, factual integrity, and safety
 
-Status: intended controls, not an assertion that protections are implemented. Verify with AT-06, AT-07, AT-10, and AT-11 before submission.
+Current checkpoint: 2026-10-19. Saved-place retrieval and all three basic live RAG browser scenarios work. [LIVE_INTERFACE_REVIEW.md](LIVE_INTERFACE_REVIEW.md) records the outcomes and eight historical attempts. The requirements below remain the manual acceptance checklist; full AT-06/07/10/11 acceptance is pending.
 
 ## Location and user context
 - Explain location, preferences, filters, and time constraints used for recommendations.
@@ -24,3 +24,15 @@ Status: intended controls, not an assertion that protections are implemented. Ve
 
 ## Verification evidence to add
 Actual input/provider disclosure; data-flow inspection; logging/retention configuration; permission-denial test; server-side secret check; unknown-hours test; grounding/prompt-injection test; limitations shown in demo. Record unimplemented controls honestly.
+
+## Implemented saved-place boundary
+
+In an activated interface, the main AI button retrieves locally and then calls OpenAI once. The local-search button shown when AI is unavailable uses no generation provider. Device geolocation is disabled. Structured controls carry hard constraints. Text recognizes a limited local RU/KK/EN category/duration vocabulary and supplies lexical ranking; it is not unrestricted language interpretation. A separate development preview retains one body in memory for up to two minutes; confirmation consumes its token once. Preview text is not persisted in browser storage.
+
+Explicitly activated and confirmed OpenAI calls send at most five selected names, categories, approved existing descriptions, coarse estimates, filters and evidence aliases. Dedicated user/POI coordinate fields, raw query, stable IDs and the full dataset are excluded. Names and relative distances can identify the area; aliases are not anonymity. Requests use store:false without promising zero provider retention; [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data) and account-specific settings govern handling.
+
+The bounded [OpenStreetMap view](OPENSTREETMAP.md) loads on opening and sends viewport tile requests, browser connection information/IP and origin Referer. Marker names and coordinates render locally, without geocoding or marker API calls. Tiles reveal the viewed area. Selecting a suggestion sends only start/destination coordinates rounded to three decimal places through the local server to FOSSGIS / Valhalla; the provider also sees the server connection/IP. No query, name, ID, credential or dataset is included. The application keeps route geometry only in memory and clears its cache when search inputs change; it makes no promise about provider retention. Hide map cannot retract completed requests. Strict offline mode keeps external maps and routing disabled.
+
+Credentials, raw source data, reviews and private authorizations stay outside Git. Normal recommendations do not persist coordinates or queries. Pilot plans retain deliberately simulated inputs, not personal location history. Reports store aggregate outcomes, numeric token usage and allowlisted error codes, never provider messages or raw bodies. Each attempt remains counted; explicit hash-bound recovery never refunds or resets it. Eight historical attempts remain spent; a separately prepared three-attempt interactive allowance is used only by explicit AI actions.
+
+Python retrieval and independent Node validation enforce geographic, category, time and hard-constraint eligibility. Source text is untrusted and rendered as text. Generation selects only retrieved aliases, supporting evidence and allowed codes; local templates render wording. Unknown amenities cannot satisfy mandatory requirements. Descriptions are missing for 42/45 candidates. Source-use/redistribution permission remains unresolved; operator approval is not a provider license. Changing the map does not change 2GIS record rights. Original eligibility flags remain unchanged. The legacy npm start pipeline has different behavior and does not use bounded accounting.

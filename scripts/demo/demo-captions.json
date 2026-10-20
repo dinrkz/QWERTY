@@ -1,0 +1,92 @@
+[
+  {
+    "start": 0,
+    "end": 15,
+    "text": "Qadam — your next worthwhile stop in Astana. A recorded live UI demonstration of a walking assistant for residents and first-time visitors."
+  },
+  {
+    "start": 15,
+    "end": 30,
+    "text": "Start with an idea, a starting point and the time you have. Suggestions appear beside the map."
+  },
+  {
+    "start": 30,
+    "end": 45,
+    "text": "Scenario 1: a 60-minute walk near Mega Silk Way. Choose Walk and set the starting point."
+  },
+  {
+    "start": 45,
+    "end": 60,
+    "text": "Qadam first retrieves saved places and checks distance, available time and selected constraints."
+  },
+  {
+    "start": 60,
+    "end": 75,
+    "text": "OpenAI receives a small set of retrieved evidence. The application validates its selection against those candidates."
+  },
+  {
+    "start": 75,
+    "end": 90,
+    "text": "Each suggestion includes a reason, an activity idea and approximate travel and visit time."
+  },
+  {
+    "start": 90,
+    "end": 105,
+    "text": "Select a suggestion or its numbered map pin to calculate a pedestrian route."
+  },
+  {
+    "start": 105,
+    "end": 120,
+    "text": "Route time is shown separately from the initial planning estimate. Entrances and current conditions remain unverified."
+  },
+  {
+    "start": 120,
+    "end": 135,
+    "text": "Scenario 2: a first visit near Bayterek, with 90 minutes available."
+  },
+  {
+    "start": 135,
+    "end": 150,
+    "text": "Change the starting point and choose Discover. Qadam searches the saved dataset for suitable nearby options."
+  },
+  {
+    "start": 150,
+    "end": 165,
+    "text": "Recommendations are alternatives. Compare their activities and estimated time before selecting a stop."
+  },
+  {
+    "start": 165,
+    "end": 180,
+    "text": "Source facts and generated activity ideas are distinguished. Missing details are not invented."
+  },
+  {
+    "start": 180,
+    "end": 195,
+    "text": "Scenario 3: a coffee break near Bayterek, with 45 minutes available."
+  },
+  {
+    "start": 195,
+    "end": 210,
+    "text": "Type a simple request or use the coffee shortcut. Supported categories and simple durations are interpreted locally."
+  },
+  {
+    "start": 210,
+    "end": 225,
+    "text": "Selected filters shape retrieval. Live AI selects grounded suggestions from the eligible candidates."
+  },
+  {
+    "start": 225,
+    "end": 240,
+    "text": "Choose a coffee suggestion to see its walking route and updated total time."
+  },
+  {
+    "start": 240,
+    "end": 260,
+    "text": "The full dataset stays local. Selected evidence is sent to OpenAI; rounded endpoints are sent to the routing provider."
+  },
+  {
+    "start": 260,
+    "end": 280,
+    "text": "Qadam helps you decide where to go next. This prototype covers three walking scenarios, with limited data coverage and clearly labeled uncertainty."
+  }
+]

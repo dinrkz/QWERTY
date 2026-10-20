@@ -1,6 +1,6 @@
 # Submission checklist
 
-Status: preparation documents exist; implementation and final deliverables are pending. Unchecked boxes are not completed.
+Status on 2026-10-19: collection, private retrieval and all three basic live RAG browser scenarios work. [Interface evidence](LIVE_INTERFACE_REVIEW.md) records the outcomes and eight historical attempts. Full manual acceptance and final deliverables are incomplete; unchecked boxes remain incomplete.
 
 ## Required by the supplied brief
 - [ ] Product concept and target-user scenarios match the implemented demo.
@@ -27,10 +27,12 @@ Status: preparation documents exist; implementation and final deliverables are p
 |---|---|
 | Repository | https://github.com/dinrkz/QWERTY — final submission content/access not yet verified |
 | Slides/PDF | Pending |
-| Scenarios and limitations | `TEST_SCENARIOS_AND_LIMITATIONS.md` — specification only; execution pending |
+| Scenarios and limitations | [TEST_SCENARIOS_AND_LIMITATIONS.md](TEST_SCENARIOS_AND_LIMITATIONS.md) — engineering evidence and pending manual acceptance |
 | YouTube demo | Pending |
-| Collector run and dataset provenance | Pending |
-| Acceptance results | Pending |
-| Known remaining issues | No application or dataset yet |
+| Local demo video | Recorded October 19: 4:40, 1080p, English captions, three live AI scenarios and two routes; full decoding and sampled visual review passed. Video remains private under ignored `data/runtime/`; reproducible scripts in [scripts/demo](../scripts/demo/README.md). Not uploaded. |
+| Collector run and dataset provenance | 73 private records; 45 reviewed candidates, seven held and 21 excluded; [handoff](MEMBER_2_RETRIEVAL_HANDOFF.md) |
+| Real RAG | Three browser scenarios passed: two walk, three first-visit and three coffee alternatives; [evidence](LIVE_INTERFACE_REVIEW.md) |
+| Acceptance results | Full manual checks pending; automated checks are not a substitute for relevance review |
+| Known remaining issues | 42/45 candidate descriptions missing; source-use/redistribution permission unresolved; clean setup, slides, rehearsal, YouTube upload and final judge access pending |
 
 Confirm the actual deadline, exact numerical weights, and submission destination from the organizers when available. Do not substitute the old HackAlem rules. Upload/publish only with user authorization for the relevant destination.

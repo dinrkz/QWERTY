@@ -2,11 +2,15 @@
 
 Qadam (қадам, “step”) helps walkers and first-time visitors choose their next worthwhile stop in Astana. The three core scenarios are a short walk, discovering nearby sights, and a coffee/rest stop. See [the case](CASE.md) and [original competition brief](docs/HACKATHON_BRIEF_RU.txt).
 
-**Current status: the interface can search the saved private dataset offline.** Collection, reviewed snapshots, Python retrieval and the JSON adapter are implemented. The offline path uses local records and template activities; it disables OpenAI, the map and device geolocation. The separate live adapters exist, but real RAG, provider access, source reuse permissions and submission artifacts remain unverified or pending.
+**Current status: the main interface runs real RAG over saved places.** Three live browser checks passed: two walk options, three first-visit options and three coffee options. See [scenario results and eight-attempt accounting](docs/LIVE_INTERFACE_REVIEW.md). Collection, reviewed snapshots, Python retrieval and the JSON adapter work. Full human acceptance, source reuse permissions and final submission artifacts remain pending.
 
 For the configured private dataset, run `npm.cmd run start:offline` and open the URL printed at startup (**http://127.0.0.1:3002** on the current computer). See [offline setup and limits](docs/OFFLINE_INTERFACE.md). The dataset and configuration stay outside Git; a clean clone runs synthetic tests and requires authorized local data provisioning for real offline searches.
 
+For the current private live demo, use the [explicit activation command](docs/BOUNDED_INTERFACE.md#start) and open **http://127.0.0.1:3003**. The [map interface](docs/MAP_INTERFACE.md) has sidebar search, matching suggestion pins and pedestrian routes on selection. The main button retrieves saved places and asks AI to select grounded suggestions. [OpenStreetMap](docs/OPENSTREETMAP.md) loads on opening; choosing a suggestion sends rounded endpoints to FOSSGIS / Valhalla for a walking route. The verified model is `gpt-5.4-mini`.
+
 A separate [evidence contract and mocked generation flow](docs/GENERATION_EVIDENCE.md) is implemented for local development. Run `node scripts/app/demo-mock-generation.mjs` for an authored synthetic example. It uses no API, key or private dataset and is not connected to the browser interface.
+
+**AI stays enabled by default for the current private demo. Start it with `node scripts/app/start-ai.mjs`.** Its [bounded connector](docs/BOUNDED_INTERFACE.md) uses the saved 100-request allowance, one in flight and no automatic retries. All 11 prior attempts remain counted. Starting or restarting never creates a new allowance. Historical pilot commands retain three-attempt defaults. The explicitly local `start-bounded.mjs` command without activation and the synthetic demo remain available for offline development; neither replaces the user's AI-default startup choice. The legacy live setup below does not use this budget.
 
 ## Run locally
 
