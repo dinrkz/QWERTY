@@ -1,0 +1,10 @@
+{
+  "source": "Wikidata",
+  "endpoint": "https://query.wikidata.org/sparql",
+  "checked_at": "2026-10-18T12:25:49.016073+00:00",
+  "query_sha256": "67100ccec588e58f7f67d8b18a65ee1651abfb7fedbf8c9ec8691d2a7a07199a",
+  "license": "CC0-1.0",
+  "license_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+  "status": "failed",
+  "error": "URLError"
+}

@@ -1,0 +1,15 @@
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+SELECT ?item ?itemLabel ?itemDescription ?location ?type ?typeLabel WHERE {
+  wd:Q1520 wdt:P625 ?center .
+  SERVICE wikibase:around {
+    ?item wdt:P625 ?location .
+    bd:serviceParam wikibase:center ?center ; wikibase:radius "15" .
+  }
+  OPTIONAL { ?item wdt:P31 ?type . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,en,kk" . }
+}
+ORDER BY ?item ?location ?type
+LIMIT 200

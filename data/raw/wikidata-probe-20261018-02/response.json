@@ -1,0 +1,5819 @@
+{
+  "head": {
+    "vars": [
+      "item",
+      "itemLabel",
+      "itemDescription",
+      "location",
+      "type",
+      "typeLabel"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104864810"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.411624 51.194046)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q494829"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Сапаржай"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "автовокзал на привокзальной площади Астаны, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "автостанция"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104866684"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.45 51.116667)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q22698"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Президентский парк (Нур-Султан)"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "recreational area"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "парк"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104866885"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.449722222 51.136111111)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q22746"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Триатлон парк Астана"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "triathlon Park in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "городской парк"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104866925"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.438611111 51.135833333)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q22698"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Жетысу"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "urban park in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "парк"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104866948"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416 51.106)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112128334"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Астанинский ботанический сад"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Достойный парк в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "особо охраняемая природная территория республиканского значения Казахстана"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104866948"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416 51.106)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q167346"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Астанинский ботанический сад"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Достойный парк в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ботанический сад"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q104866948"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416 51.106)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q473972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Астанинский ботанический сад"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Достойный парк в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "природоохранная зона"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1072092"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.405 51.10472222)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12019965"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Алау"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Ледовый дворец в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ледовый стадион"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1072092"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.405 51.10472222)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q641226"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Алау"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Ледовый дворец в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "арена"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1072092"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.405 51.105)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12019965"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Алау"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Ледовый дворец в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ледовый стадион"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1072092"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.405 51.105)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q641226"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Алау"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Ледовый дворец в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "арена"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1073433"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.427777777 51.122222222)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1497364"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Абу-Даби Плаза"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "многофункциональный комплекс"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "комплекс зданий"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1073439"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42239445 51.13071945)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1497364"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Изумрудный квартал"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "building complex"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "комплекс зданий"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q107451644"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.423111111 51.165472222)"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Demalys Promenade"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "pedestrian zone in Astana, Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1074528"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.412806 51.09125)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q172754"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Всемирная выставка 2017 года"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "выставка, прошедшая в столице Казахстана городе Астана"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Всемирная выставка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q107519962"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.447547 51.164642)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4287745"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Republican Center for Healthcare Development"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "healthcare organization in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "медицинская организация"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q108533991"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.3804 51.1107)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q23397"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Талдыколь"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "озеро в Нур-Султане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "озеро"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q10874268"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.410911 51.121515)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4164871"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "посол Китая в Казахстане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "должность"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q108783123"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42 51.15111111)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q18608583"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Astana Open (women)"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "women's tennis tournament"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "повторяющееся спортивное событие"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q108783909"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41972222 51.15277778)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q18608583"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Astana Open (men)"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "men's tennis tournament"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "повторяющееся спортивное событие"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q108785061"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.33389 51.18972)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Коктал"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q108785061"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.33389 51.18972)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Коктал"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q109715788"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.3928 51.1074)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q23397"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Малый Талдыколь"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "осушённое озеро в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "озеро"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113602"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42573 51.13954)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hostel Nomad 4x4"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113602"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4257729 51.1397946)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hostel Nomad 4x4"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113604"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4151736 51.1442473)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kapsula Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113606"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4406522 51.0975351)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hostel S size"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113606"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44196 51.09755)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hostel S size"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113608"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41691 51.14142)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hostel Forum"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111113608"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4169341 51.1413539)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q654772"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hostel Forum"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hostel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "хостел"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111402853"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41442 51.13407)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hilton Garden Inn Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862433"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.407811 51.082831)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Wyndham Garden Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862434"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.426506 51.100197)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hampton by Hilton Astana Triumphal Arch"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862435"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.424994 51.113747)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Royal Park Hotel & Spa"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862460"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4078 51.12894)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Astana Marriott Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862464"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.43171 51.12467)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "The Ritz-Carlton, Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862465"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.417152 51.137005)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Jumbaktas Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862466"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.437766 51.12537)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Best Western Plus Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862467"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41552 51.14975)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hotel Duman"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862468"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42536 51.14665)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Comfort Hotel Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862469"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41175 51.15968)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Radisson Hotel Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862470"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41149 51.16087)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Park Inn by Radisson Hotel Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862471"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42525 51.15294)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "The St. Regis Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862472"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.465475 51.138706)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ibis Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862474"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42147 51.16723)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ramada by Wyndham Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862475"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.47325 51.13637)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kazzhol Hotel Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862476"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44027 51.16493)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "King Hotel Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q111862477"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.43974 51.17115)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "G Empire"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q11187131"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.405 51.105)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q114609228"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Чемпионат мира по дзюдо 2015"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "judo competition"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "версия повторяющегося спортивного события"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112003940"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42752 51.09412)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "QonaQ Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004014"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.426526 51.122943)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Sheraton Astana Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004019"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4081 51.13884)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Boutique Hotel Traditional"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004020"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.40698 51.14635)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Astana Central Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004021"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.43774 51.131)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Versal Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004022"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.46978 51.12727)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Elite Apart-Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004023"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44893 51.14219)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hotel Monaco"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004024"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41229 51.16473)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Altyn Dala Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004025"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.46344 51.13996)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Alanda Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004026"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.47813 51.131136)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Come INN"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004027"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.43139 51.16648)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Brown Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004028"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.478531 51.139779)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Oasis Inn"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004029"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.40281 51.186573)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "O Azamat"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004030"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.47186 51.145657)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Torgay Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004031"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.47025 51.1467)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Goldman Empire"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004032"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.444315 51.164195)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Jelsomino Boutique Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112004033"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.50409 51.14968)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Red Village Hotel"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hotel in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q112584881"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4775 51.099444444)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q162602"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Зелёный"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "речной остров в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "речной остров"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q113119435"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.447812 51.15145)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q44539"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Церковь Святого Иосифа Обручника (Астана)"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "храм"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q113675887"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4095 51.0725)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Центральная мечеть города Астаны"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "mosque in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q114939688"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.427033 51.125731)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4654165"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Вики-встреча в Астане 26 апреля 2022 года"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "встреча викимедийцев в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Категория:Википедия:Викивстречи"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q115128634"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.427033 51.125731)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4654165"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Вики-встреча в Астане 4 ноября 2022"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "вики-встреча в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Категория:Википедия:Викивстречи"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q117835598"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.3782 51.1655)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Ырыскелды кажы"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть в Астане на правом берегу реки Есиль"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352579"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.278842 51.210216)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ЛПУ-10"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352579"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.278842 51.210216)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ЛПУ-10"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352581"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.355638 51.182526)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ПЧЛ-2"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352581"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.355638 51.182526)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "ПЧЛ-2"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352584"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.344231 51.191782)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Райавтодор"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352584"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.344231 51.191782)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Райавтодор"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352586"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.596822 51.125464)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Интернациональное"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352586"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.596822 51.125464)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Интернациональное"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352591"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.443132 51.110056)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Пригородное"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352591"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.443132 51.110056)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Пригородное"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352593"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.486561 51.094711)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Тельмана"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q118352593"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.486561 51.094711)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Тельмана"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1186465"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.46526 51.15581)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q811979"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "дворец спорта в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "сооружение"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q120785027"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.413013 51.19241)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Раиса ана (мечеть)"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q120868806"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.471089612 51.135029727)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Абиш ата Назарбай"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q120868807"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4397 51.0413)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Альжан ана"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть, расположенная в столице Казахстана городе Астана."
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q120868819"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.48996 51.14557)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q22698"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Парк Жеруйык"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "парк"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q120868821"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.369908 51.191523)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Шейх Кунта кажы"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q120868822"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42665 51.11857)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q22698"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Линейный парк"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "парк"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12104411"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.58333333 51.15)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "kk",
+          "type": "literal",
+          "value": "Железнодорожный"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12104411"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.58333333 51.15)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q486972"
+        },
+        "itemLabel": {
+          "xml:lang": "kk",
+          "type": "literal",
+          "value": "Железнодорожный"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "settlement in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q122104745"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.471981 51.156406)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q625994"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Казахская Вики-конференция 2023"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "конференция Викимедиа в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "собрание"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q122526919"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41939 51.09825)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q24354"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Театр Астана Балет"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "theatre in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "здание театра"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q124371412"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.432057941 51.151125551)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4989906"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Atatürk Monument"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Atatürk monument in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "памятник"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q124621727"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.432027777 51.151138888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q860861"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Q124621727"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "скульптура"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1247199"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.446682 51.179852)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q375928"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Мажилис"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "нижняя палата парламента Республики Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "нижняя палата парламента"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q124731313"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416388888 51.131388888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137794598"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство промышленности и строительства Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ministry of Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry of Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q124731313"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416388888 51.131388888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q6867185"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство промышленности и строительства Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ministry of Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство промышленности"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q124731313"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416388888 51.131388888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q811582"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство промышленности и строительства Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ministry of Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство строительства"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12528524"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.5 51.15)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q129675946"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Алматинский район"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "административно-территориальная единица города Астаны"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "район города республиканского значения Казахстана"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12530274"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.479657347 51.120591685)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q24354"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Казахский музыкально-драматический театр имени К. Куанышбаева"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "theatre in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "здание театра"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12535825"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.2705 51.1455)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q22674925"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Бозок"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "древнее городище в центральном Казахстане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "бывший населённый пункт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12572580"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.404638888 51.095055555)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q79007"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "проспект Кабанбай-батыра"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12572863"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4699218 51.1220556)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4989906"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Казак ели (монумент)"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "monument in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "памятник"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12573345"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.428357 51.142049)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q13226383"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Economic Research Institute"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "facility in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "площадка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12573359"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.426871 51.12813)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2122214"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Национальный архив Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "national archive"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "национальный архив"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q12573372"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.419978408 51.13135374)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q699386"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Qazaqstan Radio and Television Corporation"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kazakhstan state-owned media company"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "уставная корпорация"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q126810644"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416388888 51.131388888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137794598"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство транспорта Казахстана"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ministry of Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry of Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q126810644"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416388888 51.131388888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q192350"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство транспорта Казахстана"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ministry of Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q126810644"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416388888 51.131388888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2516426"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство транспорта Казахстана"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Ministry of Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство транспорта"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q127745"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4648 51.1602)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q45400320"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Евразийский национальный университет имени Л. Н. Гумилёва"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "university in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "издатель свободного доступа"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q127745"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4648 51.1602)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q3918"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Евразийский национальный университет имени Л. Н. Гумилёва"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "university in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "университет"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130062654"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.447 51.131)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q158438"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Arkar bridge"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "road bridge in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "арочный мост"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130062654"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.447 51.131)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q537127"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Arkar bridge"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "road bridge in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "автомобильный мост"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130062865"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.446 51.1206)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q158438"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Lion bridge"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "road bridge in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "арочный мост"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130062865"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.446 51.1206)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q537127"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Lion bridge"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "road bridge in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "автомобильный мост"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130080414"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4189 51.1602)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1068842"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Seruen Bridge"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Footbridge in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "пешеходный мост"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130081292"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4434 51.1381)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q537127"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Q130081292"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "автомобильный мост"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1316045"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.446682 51.179852)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2570643"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Сенат Парламента Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "верхняя палата бывшего парламента Казахстана"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "сенат"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q132133114"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.378329 51.139146)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q48204"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Związek Polaków w Kazachstanie"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "добровольная ассоциация"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q133821908"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.408 51.122)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16917"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Национальный Центр Нейрохирургии"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "healthcare facility in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "больница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q134479875"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4723402 51.1400963)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q87415039"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Agency for Recognition and Quality Assurance in Education"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Quality assurance organization in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "орган по аккредитации"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q134484453"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.464494 51.1377908)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q87415039"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Independent Agency for Accreditation and Rating"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "organization"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "орган по аккредитации"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q136090752"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.56225 51.143194)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q55488"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Сороковая"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "железнодорожная станция"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q13642209"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.569166666 51.050833333)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q130212458"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Кызылсуат"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Акмолинской области, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "село в Казахстане"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q13668712"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4 51.183333333)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q39614"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Караоткель (кладбище)"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "кладбище"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q136762132"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.38799 51.188789)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q79007"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица Кожахметова"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137321740"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.430980941 51.181807049)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q3918"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Turan-Astana University"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "university in Almaty, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "университет"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.439166666 51.123888888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1313096"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство науки и технологии"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.439166666 51.123888888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137794598"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry of Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.439166666 51.123888888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2269756"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство образования"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.439166666 51.123888888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q327333"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "орган публичной власти"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44201 51.12952)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1313096"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство науки и технологии"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44201 51.12952)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137794598"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry of Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44201 51.12952)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2269756"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство образования"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137427254"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44201 51.12952)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q327333"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство науки и высшего образования Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "орган публичной власти"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551659"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.458617 51.02813)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q11670533"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аэропорт"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "light metro station in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "приподнятая станция"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551659"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.458617 51.02813)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1335652"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аэропорт"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "light metro station in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "железнодорожная станция при аэропорте"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551659"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.458617 51.02813)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аэропорт"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "light metro station in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551659"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.458617 51.02813)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q928830"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аэропорт"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "light metro station in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "станция метрополитена"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551660"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.442215 51.041315)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Атамекен"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551661"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.429777 51.048997)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Есиль"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551662"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.418642 51.055865)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Мангилик ел"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551663"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.397859 51.07514)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Звезда Астаны"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551664"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.400077 51.08113)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Нура"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551665"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.402776 51.088775)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Университет"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551666"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.406803 51.099956)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Улы дала"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551668"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.409036 51.106153)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Астана Арена"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551669"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.411584 51.114559)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Дворец единоборств"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551670"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.413135 51.122035)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Сыганак"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551671"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.428489 51.123309)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Байтерек"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551672"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.437586 51.122215)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Дом министерств"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551673"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.468549 51.116981)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Национальный музей"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551674"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.481199 51.115008)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Театр"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551675"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.498298 51.112337)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аллея Мынжылдык"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551676"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.516221 51.109522)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Жибек жолы"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137551678"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.529021 51.112134)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2175765"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Нурлы жол"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "трамвайная остановка"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137802676"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.412222222 51.131111111)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q327333"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Agency of the Republic of Kazakhstan for Atomic Energy"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "орган публичной власти"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q138584253"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.43307 51.154213)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4164871"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "посол России в Казахстане"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "официальный дипломатический представитель России в Казахстане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "должность"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q138720876"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.414251 51.135185)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27686"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hilton Garden Inn Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hotel in Astana"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "гостиница"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q139821049"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.407 51.165)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q336532"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Daily Rent (Дейли Рент)"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Оператор краткосрочной аренды квартир в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "vacation rental"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q139821049"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.407 51.165)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4830453"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Daily Rent (Дейли Рент)"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Оператор краткосрочной аренды квартир в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "бизнес"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q140128847"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.421666666 51.121666666)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q327333"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Высший Судебный Совет Республики Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "орган публичной власти"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q140754065"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.417222222 51.088055555)"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Agency for Strategic Planning and Reforms"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q140771477"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.421952 51.132111)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q79007"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица Кунаева"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "улица"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1454511"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.417838 51.14937)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q756102"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Atameken miniature park"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "музей под открытым небом"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1454511"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.417838 51.14937)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q974968"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Atameken miniature park"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Парк миниатюр"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1516792"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416518 51.131356)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q11303"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Transport Tower"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "architectural structure"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "небоскрёб"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1519806"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44166667 51.12916667)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137794598"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство здравоохранения Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kazakh government agency"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry of Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1519806"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.44166667 51.12916667)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1519799"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство здравоохранения Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kazakh government agency"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство здравоохранения"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q15222529"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.453147 51.110945)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q423208"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Haileybury Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Независимая школа в Астане, Казахстан. Основана в 2011 году как филиал Haileybury, независимой школы в Англии."
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "частная школа"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1531443"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.421754 51.131013)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q811979"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Q1531443"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "architectural structure"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "сооружение"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1542507"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.419722222 51.161944444)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1497364"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Grand Alatau"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "building complex"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "комплекс зданий"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1590386"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.393055555 51.131111111)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q4830453"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Казатомпром"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "казахская компания, крупнейший в мире производитель природного урана"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "бизнес"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1590386"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.393055555 51.131111111)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q6881511"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Казатомпром"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "казахская компания, крупнейший в мире производитель природного урана"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "предприятие"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16433519"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.416311 51.165219)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q24354"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Русский драматический театр им. М. Горького"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "theatre in Astana (Nur-Sultan), Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "здание театра"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16538413"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.451842904 51.153673971)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2977"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Собор Божией Матери Неустанной Помощи (Астана)"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "католический собор в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "кафедральный собор"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16632800"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.394822222 51.109213888)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q483110"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Барыс Арена"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "строящийся спортивный комплекс в городе Астана"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "стадион"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16648877"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4167 51.1333)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q129675946"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Есильский район"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "административно-территориальная единица Астаны"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "район города республиканского значения Казахстана"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16694762"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4167 51.1833)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q129675946"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Сарыаркинский район"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "административно-территориальная единица города Астаны"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "район города республиканского значения Казахстана"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q174233"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.466944444 51.022222222)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q644371"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аэропорт Нурсултан Назарбаев"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "международный аэропорт в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "международный аэропорт"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q174233"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.466944444 51.022222222)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q94993988"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Аэропорт Нурсултан Назарбаев"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "международный аэропорт в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "коммерческий аэродром"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1804795"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42416667 51.16444444)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1364302"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство сельского хозяйства Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kazakh ministry responsible for agriculture"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство сельского хозяйства"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1804795"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.42416667 51.16444444)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q137794598"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство сельского хозяйства Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Kazakh ministry responsible for agriculture"
+        },
+        "typeLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ministry of Kazakhstan"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1813417"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.415737 51.126561)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32815"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Мечеть Нур Астана"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть в столице Казахстана"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "мечеть"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q18346184"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.38788889 51.14597222)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q3914"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "QSI International School of Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "private school in Astana, Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "школа"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q18405670"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4701 51.1178)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q33506"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Национальный музей Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "музей в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "музей"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q18411138"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.423626 51.146366)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q13406463"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Q18411138"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "статья-список в проекте Викимедиа"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "статья-список в проекте Викимедиа"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q18508934"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.449166666 51.169444444)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q484652"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "МЕЖДУНАРОДНАЯ ТЮРКСКАЯ АКАДЕМИЯ"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "международная организация"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1899549"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.481481 51.149603)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q56242225"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Кафедральный собор в честь Успения Пресвятой Богородицы"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "собор в Астане, Казахстан"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "кафедральный православный собор"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1916973"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.413879 51.145365)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q11315"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "MEGA Astana"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "торгово-развлекательный центр"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "торговый центр"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q19405533"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.441472222 51.129555555)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1519799"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Министерство здравоохранения и социального развития Республики Казахстан"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "health ministry in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "министерство здравоохранения"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q20036756"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.4201611 51.15236471)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1076486"
+        },
+        "itemLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Daulet National Tennis Center"
+        },
+        "itemDescription": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "sports venue in Kazakhstan"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "спортивное сооружение"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2119741"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.463611111 51.123055555)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1128637"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Дворец мира и согласия"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Нур-Султанский Дворец"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "национальный символ"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2119741"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.463611111 51.123055555)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q17537576"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Дворец мира и согласия"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Нур-Султанский Дворец"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "творческая работа"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2119741"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.463611111 51.123055555)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q2319498"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Дворец мира и согласия"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Нур-Султанский Дворец"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "памятник архитектуры"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q21371563"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.410916666 51.135555555)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q153562"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Астана опера"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "театр оперы и балета"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "оперный театр"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q21843144"
+        },
+        "location": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "Point(71.41901 51.14506)"
+        },
+        "type": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16889960"
+        },
+        "itemLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "Астанинский цирк"
+        },
+        "itemDescription": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "цирк в Астане"
+        },
+        "typeLabel": {
+          "xml:lang": "ru",
+          "type": "literal",
+          "value": "здание цирка"
+        }
+      }
+    ]
+  }
+}
