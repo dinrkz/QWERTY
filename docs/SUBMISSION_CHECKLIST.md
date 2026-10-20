@@ -1,6 +1,8 @@
 # Submission checklist
 
-Status on 2026-10-19: collection, private retrieval and all three basic live RAG browser scenarios work. [Interface evidence](LIVE_INTERFACE_REVIEW.md) records the outcomes and eight historical attempts. Full manual acceptance and final deliverables are incomplete; unchecked boxes remain incomplete.
+Status on 2026-10-20: acceptance remains incomplete. [Member 3 QA](MEMBER_3_QA_REPORT.md) records 381 passing application tests, 188 passing Python tests, 60 syntax-checked modules and 13 failing new acceptance cases across seven application defects. Dataset publication evidence and missing descriptions remain unresolved. [Interface evidence](LIVE_INTERFACE_REVIEW.md) records historical live runs, not a new verification. Unchecked boxes remain incomplete.
+
+The current Member 3 assignment excludes video and presentation creation/review/upload. These remain official submission requirements, with their status retained separately; exclusion from this assignment does not waive them.
 
 ## Required by the supplied brief
 - [ ] Product concept and target-user scenarios match the implemented demo.
@@ -26,13 +28,14 @@ Status on 2026-10-19: collection, private retrieval and all three basic live RAG
 | Artifact | Current status / location |
 |---|---|
 | Repository | https://github.com/dinrkz/QWERTY — final submission content/access not yet verified |
-| Slides/PDF | Pending |
-| Scenarios and limitations | [TEST_SCENARIOS_AND_LIMITATIONS.md](TEST_SCENARIOS_AND_LIMITATIONS.md) — engineering evidence and pending manual acceptance |
+| Slides/PDF | Previously reported locally in the README; not reviewed in this assignment |
+| Scenarios and limitations | [TEST_SCENARIOS_AND_LIMITATIONS.md](TEST_SCENARIOS_AND_LIMITATIONS.md) and [current QA results](MEMBER_3_QA_REPORT.md) — reproducible failures, historical live evidence and pending manual acceptance |
 | YouTube demo | Pending |
-| Local demo video | Recorded October 19: 4:40, 1080p, English captions, three live AI scenarios and two routes; full decoding and sampled visual review passed. Video remains private under ignored `data/runtime/`; reproducible scripts in [scripts/demo](../scripts/demo/README.md). Not uploaded. |
-| Collector run and dataset provenance | 73 private records; 45 reviewed candidates, seven held and 21 excluded; [handoff](MEMBER_2_RETRIEVAL_HANDOFF.md) |
-| Real RAG | Three browser scenarios passed: two walk, three first-visit and three coffee alternatives; [evidence](LIVE_INTERFACE_REVIEW.md) |
-| Acceptance results | Full manual checks pending; automated checks are not a substitute for relevance review |
-| Known remaining issues | 42/45 candidate descriptions missing; source-use/redistribution permission unresolved; clean setup, slides, rehearsal, YouTube upload and final judge access pending |
+| Local demo video | Previously reported for October 19: 4:40, 1080p, English captions, three live AI scenarios and two routes; decoding and sampled visual review passed then. Historical location: ignored `data/runtime/`; [workflow](../scripts/demo/README.md). Not inspected or uploaded in this assignment |
+| Collector run and dataset provenance | 73 collected records; tracked at inspected baseline. 45 reviewed candidates, seven held and 21 excluded; [handoff](MEMBER_2_RETRIEVAL_HANDOFF.md); publication-basis discrepancy in QA-01 |
+| Real RAG | Historical October 19 browser evidence: two walk, three first-visit and three coffee alternatives; [evidence](LIVE_INTERFACE_REVIEW.md). Current clean-checkout AI startup lacks ignored configuration; no provider call was repeated |
+| Acceptance results | New synthetic regressions: 3 pass / 13 fail, no skips; full manual relevance checks pending; [report](MEMBER_3_QA_REPORT.md) |
+| Clean setup | README synthetic server and six HTTP smoke cases passed. Live configured setup remains unverified; no visual/browser acceptance claimed |
+| Known remaining issues | QA-01 through QA-09: tracked source data versus unresolved publication evidence; optional/negative/time/distance request handling; first-visit category conflict; 42/45 descriptions missing; error language and timeout guidance. Final artifact availability and judge access remain unverified |
 
 Confirm the actual deadline, exact numerical weights, and submission destination from the organizers when available. Do not substitute the old HackAlem rules. Upload/publish only with user authorization for the relevant destination.
