@@ -1,6 +1,8 @@
 # Test scenarios and limitations
 
-Status on 2026-10-19: offline engineering checks and all three basic live RAG browser scenarios passed; see [interface evidence](LIVE_INTERFACE_REVIEW.md). Full manual scenario acceptance remains pending. Structured controls carry hard constraints; optional text supplies local lexical ranking, not natural-language interpretation. The example phrases below describe intended scenarios rather than claims that this path understands their wording.
+Current checkpoint, 2026-10-20: the Member 3 review reproduced seven application defects, including dropped or inverted text constraints. Existing checks passed (381 JavaScript / 188 Python); new acceptance tests have 3 passes and 13 failures. See [current results and reproduction steps](MEMBER_3_QA_REPORT.md). The three basic live RAG scenarios in [the October 19 report](LIVE_INTERFACE_REVIEW.md) are historical evidence and were not rerun. Full manual acceptance remains pending.
+
+Structured controls carry hard constraints. The saved-place UI also interprets a limited local category/duration/amenity vocabulary; it is not unrestricted natural-language interpretation, and the current regressions show where it misreads requests. The examples below remain intended scenarios, not promises that every phrasing works. Video and presentation work are excluded from the current Member 3 assignment.
 
 | Scenario | Example input | Setup / expected answer type | Acceptance checks | Full/manual acceptance |
 |---|---|---|---|---|
@@ -19,9 +21,9 @@ The three core demo scenarios are the short walk, first-time visitor, and coffee
 
 - Automated collection saved 73 records: 45 reviewed candidates, seven held and 21 excluded. Descriptions are missing for 42/45 candidates; source links and description-language metadata are also absent.
 - Live browser checks produced two walk, three first-visit and three coffee alternatives within their selected budgets. Full human relevance review and the additional constraints in the table remain pending.
-- Source-use and redistribution rights remain unresolved. Private operator approval is not a publication grant or proof of source permission.
+- Source-use and redistribution rights remain unresolved. Current `main` nevertheless tracks collected snapshots, raw source responses and reviews; earlier claims that these remain outside Git are stale. QA-01 requires the owners to establish the permission basis and reconcile repository contents and documentation. Private operator approval alone is not evidence of source permission.
 - Model output selects retrieved evidence and allowed reason/activity codes; local templates render wording. No unrestricted historical/cultural prose is generated.
-- Structured controls must express required constraints. The saved-place path does not interpret airport or other unsupported constraints from free text.
+- Structured controls must express required constraints. The limited text helper can turn optional amenities into mandatory filters, ignore some time/distance limits, select an excluded category, or confuse first-visit context with a category conflict (QA-02 through QA-06). The saved-place path does not provide unrestricted interpretation of airport or other complex constraints.
 - Hours, amenity information, accessibility, quietness, and events may be unavailable or stale.
 - Approximate coordinates and straight-line distance do not establish a safe or accessible walking route.
 - Travel/visit estimates are uncertain; airport departure buffers need explicit context.
@@ -31,4 +33,4 @@ The three core demo scenarios are the short walk, first-time visitor, and coffee
 ## Result record
 For each run record: scenario ID, dataset snapshot/source date, safe test inputs, execution time, actual result, expected-result comparison, evidence reference, defects, and retest status. Use synthetic/manual test locations rather than personal location histories. Report both successes and failures.
 
-Offline evidence is recorded in [OFFLINE_INTERFACE.md](OFFLINE_INTERFACE.md), [GENERATION_EVIDENCE.md](GENERATION_EVIDENCE.md) and [BOUNDED_INTERFACE.md](BOUNDED_INTERFACE.md). Public reports contain aggregate outcomes only. Private records, request bodies, authorizations and credentials remain outside Git and public recordings.
+Historical offline evidence is recorded in [OFFLINE_INTERFACE.md](OFFLINE_INTERFACE.md), [GENERATION_EVIDENCE.md](GENERATION_EVIDENCE.md) and [BOUNDED_INTERFACE.md](BOUNDED_INTERFACE.md). The [current Member 3 report](MEMBER_3_QA_REPORT.md) records commands, environment, synthetic/live distinctions, defects and remaining checks. New QA reports contain aggregate outcomes and authored test inputs only. Collected records and reviews are already tracked at the inspected baseline; this review adds none. No claim about recording contents or a complete secret-history audit is made.
