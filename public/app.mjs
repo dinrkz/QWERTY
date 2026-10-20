@@ -32,6 +32,7 @@ const isOffline = () => config?.mode === 'offline';
 const usesSavedPlaces = () => ['offline', 'bounded'].includes(config?.mode);
 // Availability must not silently change the user's configured AI search path.
 const usesAI = () => config?.mode === 'bounded' && config?.generation_configured === true;
+const usesIntent = () => usesAI() && config?.interpretation_configured === true;
 const t = (key) => translate(language, key);
 const string = (value) => typeof value === 'string' ? value : '';
 const strings = (value) => Array.isArray(value) ? value.filter((item) => typeof item === 'string') : [];
@@ -135,6 +136,7 @@ function translatePage() {
   for (const node of document.querySelectorAll('[data-i18n-placeholder]')) node.placeholder = t(node.dataset.i18nPlaceholder);
   document.querySelector('.discovery-sidebar').setAttribute('aria-label', t('searchRegion'));
   byId('retry-connection').hidden = configState !== 'configError';
+  updateInputContext();
   for (const node of byId('radius').options) node.textContent = distance(Number(node.value));
   updateLocationLabel();
   byId('connection').textContent = t(configState);
@@ -157,7 +159,7 @@ function translatePage() {
   byId('use-map-center').disabled = pending;
   byId('first-visit-hint').hidden = !usesSavedPlaces() || !byId('first-visit').checked;
   byId('first-visit-hint').textContent = t(config?.mode === 'bounded' ? 'boundedFirstVisit' : 'offlineFirstVisit');
-  document.querySelector('[data-i18n="emptyCopy"]').textContent = t('emptyCopy').replace('{action}', t(usesAI() ? 'aiSubmit' : usesSavedPlaces() ? 'localSubmit' : 'submit'));
+  document.querySelector('[data-i18n="emptyCopy"]').textContent = t(usesIntent() ? 'intentEmpty' : 'emptyCopy').replace('{action}', t(usesAI() ? 'aiSubmit' : usesSavedPlaces() ? 'localSubmit' : 'submit'));
   if (usesSavedPlaces()) {
     for (const [key, replacement] of Object.entries({ queryLabel: 'searchTitle', queryHint: 'offlineQueryHint',
       privacyBody: 'offlinePrivacy', privacySummary: 'offlineSummary', mapPrivacy: 'offlineMap' })) {
@@ -177,6 +179,13 @@ function translatePage() {
     document.querySelector('[data-i18n="privacyBody"]').textContent = t(config.generation_configured ? 'livePrivacy' : 'boundedPrivacy');
     document.querySelector('[data-i18n="privacySummary"]').textContent = t(config.generation_configured ? 'liveSummary' : 'boundedSummary');
     document.querySelector('[data-i18n="mapPrivacy"]').textContent = t('boundedMap');
+    if (usesIntent()) {
+      byId('query').placeholder = t('intentPlaceholder');
+      document.querySelector('[data-i18n="queryHint"]').textContent = t('intentHint');
+      document.querySelector('[data-i18n="submitNote"]').textContent = t('intentDisclosure');
+      document.querySelector('[data-i18n="privacyBody"]').textContent = t('intentPrivacy');
+      document.querySelector('[data-i18n="privacySummary"]').textContent = t('intentDisclosure');
+    }
   }
   review.refresh();
 }
@@ -204,7 +213,6 @@ function setPending(value) {
 
 function clearResults({ changed = false } = {}) {
   document.querySelector('.discovery-sidebar').classList.remove('has-results', 'show-settings');
-  byId('edit-search-settings').setAttribute('aria-expanded', 'false');
   routes.reset();
   review.clear();
   const hadResults = result !== null || pending;
@@ -222,6 +230,8 @@ function clearResults({ changed = false } = {}) {
   byId('result-status').hidden = true;
   byId('empty-state').hidden = false;
   byId('form-error').hidden = true;
+  byId('understood-context').hidden = true;
+  updateInputContext();
   if (changed && hadResults) {
     const target = byId('result-status');
     target.dataset.state = 'needs_clarification';
@@ -383,7 +393,7 @@ function validResponse(value) {
   if (value.status === 'offline_evaluation' && (!usesSavedPlaces() || value.dataset?.demo_eligible !== false
     || value.dataset?.external_processing_allowed !== false)) return false;
   if (isOffline() && !['offline_evaluation', 'error', 'needs_clarification'].includes(value.status)) return false;
-  if (config?.mode === 'bounded' && value.status !== 'error' && (value.dataset?.demo_eligible !== false
+  if (config?.mode === 'bounded' && !['error','needs_clarification'].includes(value.status) && (value.dataset?.demo_eligible !== false
     || value.dataset?.external_processing_allowed !== false)) return false;
   if (value.status === 'synthetic_provider_test' && config?.mode !== 'bounded') return false;
   if (value.status === 'live_rag' && !value.recommendations.length) return false;
@@ -393,6 +403,12 @@ function validResponse(value) {
 function renderResult(value) {
   routes.reset();
   result = value;
+  if (value.understood) {
+    const u = value.understood;
+    const start = t(({ mega: 'offlineMega', bayterek: 'offlineBayterek', zhetysu: 'offlineZhetysu' })[u.start] ?? 'selectedStart');
+    byId('understood-context').textContent = `${t('understood')}: ${start} · ${strings(u.categories).map(category).join(', ')} · ${minutes(u.available_minutes)}${u.time_from_text ? '' : ` (${t('settingsTime')})`}`;
+    byId('understood-context').hidden = false;
+  }
   document.querySelector('.discovery-sidebar').classList.toggle('has-results', value.recommendations.length > 0);
   byId('empty-state').hidden = true;
   showStatus(value.status, config?.mode === 'bounded' && value.status === 'offline_evaluation'
@@ -408,7 +424,7 @@ function renderResult(value) {
   byId('warnings').hidden = warnings.length === 0;
   updateMapMarkers();
   byId('result-status').focus({ preventScroll: true });
-  byId('result-status').scrollIntoView({ behavior: 'auto', block: 'start' });
+  byId(value.understood ? 'understood-context' : 'result-status').scrollIntoView({ behavior: 'auto', block: 'start' });
 }
 
 function readRequest() {
@@ -417,7 +433,7 @@ function readRequest() {
   let available = byId('minutes').valueAsNumber;
   const buffer = byId('buffer').valueAsNumber;
   const query = byId('query').value.trim();
-  const intent = usesSavedPlaces() ? interpretSearch(query) : {};
+  const intent = usesSavedPlaces() && !usesIntent() ? interpretSearch(query) : {};
   if (intent.clarification) throw new Error(t('searchClarify'));
   if (intent.scenario) {
     scenario = intent.scenario;
@@ -426,7 +442,7 @@ function readRequest() {
       button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
     }
   }
-  if (intent.minutes) { available = Math.min(available, intent.minutes); byId('minutes').value = String(available); }
+  if (intent.minutes) { available = intent.minutes; byId('minutes').value = String(available); }
   for (const control of form.querySelectorAll('[name="required_amenities"]')) if (intent.amenities?.includes(control.value)) control.checked = true;
   if (intent.open) byId('require-open').checked = true;
   if (intent.firstVisit) byId('first-visit').checked = true;
@@ -460,7 +476,7 @@ form.addEventListener('submit', async (event) => {
   const sequence = ++requestSequence;
   const controller = new AbortController();
   requestController = controller;
-  const timeout = setTimeout(() => controller.abort(), 75000);
+  const timeout = setTimeout(() => controller.abort(), usesIntent() ? 145000 : 75000);
   setPending(true);
   byId('empty-state').hidden = true;
   byId('result-status').replaceChildren(element('span', t('searching'), 'loading'));
@@ -490,7 +506,6 @@ form.addEventListener('submit', async (event) => {
 
 form.addEventListener('invalid', event => {
   document.querySelector('.discovery-sidebar').classList.add('show-settings');
-  byId('edit-search-settings').setAttribute('aria-expanded', 'true');
   for (let parent = event.target.parentElement; parent && parent !== form; parent = parent.parentElement) {
     if (parent.tagName === 'DETAILS') parent.open = true;
   }
@@ -517,7 +532,7 @@ for (const button of document.querySelectorAll('[data-scenario]')) {
       other.classList.toggle('active', other === button);
       other.setAttribute('aria-pressed', String(other === button));
     }
-    byId('query').value = usesSavedPlaces() ? '' : t(`sample_${scenario}`);
+    if (!usesIntent()) byId('query').value = usesSavedPlaces() ? '' : t(`sample_${scenario}`);
     byId('first-visit').checked = scenario === 'discover';
     byId('first-visit-hint').hidden = !usesSavedPlaces() || scenario !== 'discover';
     if (useDefaultTime) byId('minutes').value = scenario === 'discover' ? '90' : scenario === 'coffee' ? '45' : '60';
@@ -623,9 +638,8 @@ byId('pick-start-map').addEventListener('click', async () => {
   target.scrollIntoView({ behavior: 'auto', block: 'center' }); target.focus({ preventScroll: true });
 });
 byId('use-map-center').addEventListener('click', () => { if (!pending) osm.pickCenter(); });
-byId('edit-search-settings').addEventListener('click', () => {
-  const expanded = document.querySelector('.discovery-sidebar').classList.toggle('show-settings');
-  byId('edit-search-settings').setAttribute('aria-expanded', String(expanded));
+byId('search-settings').addEventListener('toggle', () => {
+  document.querySelector('.discovery-sidebar').classList.toggle('show-settings', byId('search-settings').open);
 });
 byId('back-to-search').addEventListener('click', () => {
   pickingStart = false; document.querySelector('.map-panel').classList.remove('picking'); translatePage();
@@ -633,10 +647,19 @@ byId('back-to-search').addEventListener('click', () => {
 });
 
 function mapCoordinates() {
+  if (result?.understood && Number.isFinite(result.understood.latitude) && Number.isFinite(result.understood.longitude)) {
+    return [roundCoordinate(result.understood.longitude), roundCoordinate(result.understood.latitude)];
+  }
   const latitude = byId('latitude').valueAsNumber;
   const longitude = byId('longitude').valueAsNumber;
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) return [71.4, 51.1];
   return [roundCoordinate(longitude), roundCoordinate(latitude)];
+}
+
+function updateInputContext() {
+  const preset = byId('offline-start-point');
+  const name = preset.value ? preset.selectedOptions[0].textContent : t('selectedStart');
+  byId('input-context').textContent = `${t('unlessSpecified')}: ${name} · ${minutes(byId('minutes').valueAsNumber)}`;
 }
 
 function updateMapMarkers() {

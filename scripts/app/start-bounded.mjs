@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { parseEnv } from 'node:util';
 import { readOfflineConfig } from './start-offline.mjs';
 import { createAppServer } from '../../src/server.mjs';
-import { checkGenerationAuthorization } from '../../src/app/generation-authorization.mjs';
+import { checkEffectiveGenerationAuthorization as checkGenerationAuthorization } from '../../src/app/generation-authorization.mjs';
 
 async function jsonFile(filename, max) {
   if ((await stat(filename)).size > max) throw new Error('INVALID_CONFIG');
@@ -18,17 +18,22 @@ export async function readBoundedConfig({ offlineConfig, port = 3003, activation
   const config = { ...offline, mode: 'bounded', port, generation: { enabled: false } };
   if (activationFile === undefined) return config;
   const activation = await jsonFile(activationFile, 4096);
-  if (!activation || Object.keys(activation).sort().join(',') !== 'authorization_file,budget_directory,enabled,model'
+  if (!activation || Object.keys(activation).filter(k => !['interpretation_enabled','model_override_file'].includes(k)).sort().join(',') !== 'authorization_file,budget_directory,enabled,model'
+    || (activation.interpretation_enabled !== undefined && typeof activation.interpretation_enabled !== 'boolean')
     || activation.enabled !== true || typeof activation.model !== 'string' || !activation.model.trim()
     || typeof activation.authorization_file !== 'string' || !path.isAbsolute(activation.authorization_file)
     || typeof activation.budget_directory !== 'string' || !path.isAbsolute(activation.budget_directory)) throw new Error('INVALID_CONFIG');
   const authorization = await jsonFile(activation.authorization_file, 64 * 1024);
-  checkGenerationAuthorization(authorization, offline.expected, activation.model, new Date().toISOString());
+  if (activation.model_override_file !== undefined && (typeof activation.model_override_file !== 'string'
+    || !path.isAbsolute(activation.model_override_file))) throw new Error('INVALID_CONFIG');
+  const modelOverride = activation.model_override_file === undefined ? null : await jsonFile(activation.model_override_file, 4096);
+  checkGenerationAuthorization(authorization, offline.expected, activation.model, new Date().toISOString(), modelOverride);
   const credentialEnv = envFile ? parseEnv(await readFile(envFile, 'utf8')) : env;
   const apiKey = typeof credentialEnv.OPENAI_API_KEY === 'string' ? credentialEnv.OPENAI_API_KEY.trim() : '';
   if (typeof apiKey !== 'string' || !apiKey.trim() || /[\r\n\u0000]/u.test(apiKey)) throw new Error('INVALID_CONFIG');
   // No initialization or repair here; the connector validates accounting before dispatch.
-  config.generation = { enabled: true, model: activation.model, apiKey,
+  config.generation = { enabled: true, model: activation.model, modelOverride, apiKey,
+    interpretationEnabled: activation.interpretation_enabled === true,
     authorization, budgetDirectory: activation.budget_directory };
   return config;
 }

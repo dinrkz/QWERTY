@@ -10,7 +10,7 @@ import { createAppServer } from '../../src/server.mjs';
 import { initializeRequestBudget } from '../../src/app/request-budget.mjs';
 import { checkGenerationAuthorization } from '../../src/app/generation-authorization.mjs';
 import { readBoundedConfig } from '../../scripts/app/start-bounded.mjs';
-import { expected, input, envelope, now, model, key, authorization, fakeFetch } from './fixtures/bounded-provider.mjs';
+import { expected, input, envelope, now, model, key, authorization, fakeFetch, response as providerResponse } from './fixtures/bounded-provider.mjs';
 
 const root = fileURLToPath(new URL('../../data/runtime/workflow-tests/', import.meta.url));
 async function setup(t, overrides = {}) {
@@ -119,7 +119,9 @@ async function serverFor(t, s, mode = 'bounded') {
 
 test('bounded HTTP flow stays local for search/preview, uses exact token once and hides configuration', async t => {
   const s = await setup(t), h = await serverFor(t, s);
-  assert.deepEqual(Object.keys(h.config).sort(), ['ai', 'generation_configured', 'map_public_key', 'mode', 'preview_token', 'retrieval_configured']);
+  assert.deepEqual(Object.keys(h.config).sort(), ['ai', 'generation_configured', 'generation_model', 'interpretation_configured', 'map_public_key', 'mode', 'preview_token', 'retrieval_configured']);
+  assert.equal(h.config.generation_model, model);
+  assert.equal(h.config.interpretation_configured, false);
   assert.equal(h.config.generation_configured, true); assert.equal(h.config.ai.state, 'ready');
   assert.equal(h.res.headers.get('cache-control'), 'no-store'); assert.equal(h.res.headers.get('permissions-policy'), 'geolocation=()');
   const csp = h.res.headers.get('content-security-policy');
@@ -154,6 +156,25 @@ test('main AI endpoint retrieves and generates once per click, reports exhaustio
   assert.equal(blocked.generation.failure_code, 'BUDGET_EXHAUSTED'); assert.equal(calls, 3);
   assert.equal((await (await h.post('/api/recommend', input())).json()).status, 'offline_evaluation');
   assert.equal(calls, 3);
+});
+
+test('activated main endpoint interprets before retrieval and counts both calls', async t => {
+  let retrieved;
+  const s = await setup(t, { interpretationEnabled: true, retrieve: async req => { retrieved = req; return envelope(req); },
+    testFetch: (url, options) => JSON.parse(options.body).text.format.name === 'qadam_walking_intent'
+      ? providerResponse({ start: 'mega', categories: ['cafe'], available_minutes: 90,
+        required_amenities: null, require_open: null, events_only: null, first_visit: null,
+        return_to_start: null, buffer_minutes: null, clarification: null })
+      : fakeFetch(url, options) });
+  const h = await serverFor(t, s);
+  assert.equal(h.config.interpretation_configured, true);
+  const out = await (await h.post('/api/recommend-ai', input({ query: 'Coffee near Mega for 90 minutes', available_minutes: 450 }))).json();
+  assert.equal(out.status, 'synthetic_provider_test');
+  assert.equal(out.understood.start, 'mega');
+  assert.equal(retrieved.available_minutes, 90);
+  assert.equal(retrieved.latitude, 51.089);
+  assert.equal(retrieved.query, '—'); // The offline validator normalizes the cleared query.
+  assert.equal(await s.count(), 2);
 });
 
 test('preview and confirmation reject missing/foreign origin, token, host, wrong types and oversize bodies', async t => {

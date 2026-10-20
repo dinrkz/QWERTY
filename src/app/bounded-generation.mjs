@@ -3,20 +3,20 @@ import { AppError } from '../shared/policy.mjs';
 import { errorResult } from './presentation.mjs';
 import { validateOfflineInput } from './offline.mjs';
 import { cloneBounded, createEvidenceSession } from './generation-evidence.mjs';
-import { checkGenerationAuthorization, authorizedPacket, projectOpenAIEvidence, validateAuthorizedSelection } from './generation-authorization.mjs';
+import { checkEffectiveGenerationAuthorization as checkGenerationAuthorization, authorizedPacket, projectOpenAIEvidence, validateAuthorizedSelection } from './generation-authorization.mjs';
 import { reserveRequest, reviewedRequestTimeout } from './request-budget.mjs';
 import { prepareOpenAIRequest, dispatchOpenAI } from './evidence-openai.mjs';
 
 const COPY = {
   en: { live: 'AI selected these alternatives from retrieved evidence. Wording uses application templates.',
     test: 'Synthetic provider test only. No real AI request or real-place recommendation.',
-    fallback: 'Retrieval only. AI selection did not complete; ideas use templates.', empty: 'No saved places meet these filters. No AI request was made.' },
+    fallback: 'Retrieval only. AI selection did not complete; ideas use templates.', empty: 'No saved places meet these filters. Try allowing more time or changing your preferences. No recommendation-generation request was made.' },
   ru: { live: 'ИИ выбрал эти варианты по найденным данным. Текст сформирован шаблонами приложения.',
     test: 'Только синтетический тест провайдера. Без реального запроса к ИИ и рекомендаций реальных мест.',
-    fallback: 'Только поиск по данным. Выбор ИИ не завершён; идеи шаблонные.', empty: 'Сохранённые места не подходят под фильтры. Запроса к ИИ не было.' },
+    fallback: 'Только поиск по данным. Выбор ИИ не завершён; идеи шаблонные.', empty: 'Сохранённые места не подходят под фильтры. Попробуйте увеличить время или изменить предпочтения. Запрос на генерацию рекомендаций не отправлялся.' },
   kk: { live: 'ЖИ осы нұсқаларды табылған деректерден таңдады. Мәтін қолданба үлгілерімен берілген.',
     test: 'Тек синтетикалық провайдер тесті. Нақты ЖИ сұрауы және нақты орын туралы кеңес жоқ.',
-    fallback: 'Тек деректерден іздеу. ЖИ таңдауы аяқталмады; идеялар үлгі бойынша берілген.', empty: 'Сүзгілерге сай сақталған орындар жоқ. ЖИ сұрауы жасалмады.' },
+    fallback: 'Тек деректерден іздеу. ЖИ таңдауы аяқталмады; идеялар үлгі бойынша берілген.', empty: 'Сүзгілерге сай сақталған орындар жоқ. Уақытты көбейтіп немесе қалауларыңызды өзгертіп көріңіз. Ұсыныс жасау сұрауы жіберілмеді.' },
 };
 const SAFE_CODES = ['GENERATION_DISABLED', 'PROVIDER_NOT_CONFIGURED', 'PROCESSING_NOT_AUTHORIZED', 'BUDGET_INVALID', 'BUDGET_BUSY',
   'BUDGET_EXHAUSTED', 'DATA_INVALID', 'DATA_UNAVAILABLE', 'INVALID_INPUT', 'OUTSIDE_COVERAGE', 'UNSUPPORTED_MODE',
@@ -25,9 +25,10 @@ const safeCode = e => e instanceof AppError && SAFE_CODES.includes(e.code) ? e.c
 const keyValid = value => typeof value === 'string' && value.trim().length > 0 && value.length <= 1024 && !/[\r\n\u0000]/.test(value);
 
 export function createBoundedGenerationService({ retrieve, expected, enabled = false, authorization = null,
-  budgetDirectory = null, model = '', apiKey = '', testFetch, now = () => new Date().toISOString() } = {}) {
+  budgetDirectory = null, model = '', modelOverride = null, apiKey = '', testFetch, now = () => new Date().toISOString() } = {}) {
   const pins = cloneBounded(expected, 2048);
   const approval = authorization === null ? null : cloneBounded(authorization, 64 * 1024);
+  const override = modelOverride === null ? null : cloneBounded(modelOverride, 4096);
   const testing = testFetch !== undefined;
   if (typeof retrieve !== 'function' || typeof enabled !== 'boolean'
     || (testing && (pins.dataset_kind !== 'synthetic' || typeof testFetch !== 'function'))) throw new AppError('DATA_INVALID');
@@ -49,7 +50,7 @@ export function createBoundedGenerationService({ retrieve, expected, enabled = f
         if (!enabled) throw new AppError('GENERATION_DISABLED');
         if (!keyValid(apiKey) || !keyValid(model)) throw new AppError('PROVIDER_NOT_CONFIGURED');
         if (!testing && pins.dataset_kind !== 'collected') throw new AppError('PROCESSING_NOT_AUTHORIZED');
-        return checkGenerationAuthorization(approval, pins, model, now());
+        return checkGenerationAuthorization(approval, pins, model, now(), override);
       };
       if (!forReview) authorize();
       const timestamp = now();
@@ -77,7 +78,7 @@ export function createBoundedGenerationService({ retrieve, expected, enabled = f
         let result, outcome;
         try {
           // Expiry could pass while waiting on local disk; a reserved slot is never refunded.
-          checkGenerationAuthorization(approval, pins, model, now());
+          checkGenerationAuthorization(approval, pins, model, now(), override);
           dispatched = true;
           const response = await dispatchOpenAI({ enabled: true, body, apiKey, timeoutMs: reservation.timeoutMs,
             ...(testing ? { fetchImpl: testFetch } : {}) });

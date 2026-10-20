@@ -22,8 +22,10 @@ Choose one or two distinct reason codes and two to four distinct evidence refere
 Select only allowed reasons and activities. Unknown remains unknown. Do not invent facts, URLs, places, hours, amenities, access or seating.
 Selections are alternatives, not a combined itinerary. All wording is rendered by the application from validated codes.`;
 
+// GPT-6 Luna supports no-reasoning extraction/selection; other models retain their settings.
+export const modelRequestOptions = model => model === 'gpt-6-luna' ? { reasoning: { effort: 'none' } } : {};
 export function prepareOpenAIRequest(packet, model, maxOutputTokens) {
-  const body = JSON.stringify({ model, store: false, instructions,
+  const body = JSON.stringify({ model, ...modelRequestOptions(model), store: false, instructions,
     input: [{ role: 'user', content: JSON.stringify(packet) }], max_output_tokens: maxOutputTokens,
     text: { format: { type: 'json_schema', name: 'qadam_evidence_selection', strict: true, schema } } });
   if (Buffer.byteLength(body) > MAX_REQUEST_BYTES) fail('DATA_INVALID');

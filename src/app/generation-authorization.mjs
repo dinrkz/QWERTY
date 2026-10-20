@@ -49,6 +49,23 @@ export function checkGenerationAuthorization(value, expected, model, now) {
   return { authorization: a, budget: { schema_version: 1, authorization_hash, ...l } };
 }
 
+// An explicit local model change reuses the original hash-bound allowance.
+// It cannot change records, fields, expiry or any request/token limits.
+export function checkEffectiveGenerationAuthorization(value, expected, model, now, override = null) {
+  const decision = checkGenerationAuthorization(value, expected, value?.model, now);
+  if (override === null && model === decision.authorization.model) return decision;
+  if (!exact(override, ['schema_version', 'authorization_hash', 'from_model', 'to_model', 'operator_approved', 'approved_at', 'expires_at'])
+    || override.schema_version !== 1 || override.operator_approved !== true
+    || override.authorization_hash !== decision.budget.authorization_hash
+    || override.from_model !== decision.authorization.model || override.to_model !== model || !text(model, 100)
+    || !validInstant(override.approved_at) || !validInstant(override.expires_at)
+    || Date.parse(override.approved_at) > Date.parse(now)
+    || Date.parse(override.approved_at) >= Date.parse(override.expires_at)
+    || Date.parse(override.expires_at) <= Date.parse(now)
+    || Date.parse(override.expires_at) > Date.parse(decision.authorization.expires_at)) deny();
+  return decision;
+}
+
 export function authorizedPacket(session, envelope, authorization) {
   const selected = envelope.result.candidates.slice(0, 5);
   if (selected.some(c => !authorization.records.some(r => r.id === c.poi.id && r.source_version === c.poi.source_version))) deny();

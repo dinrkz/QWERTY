@@ -9,7 +9,7 @@ import { readBoundedConfig } from './start-bounded.mjs';
 import { retrieveFromProcess } from '../../src/app/retrieval.mjs';
 import { validateOfflineInput } from '../../src/app/offline.mjs';
 import { createEvidenceSession } from '../../src/app/generation-evidence.mjs';
-import { checkGenerationAuthorization, MAX_ATTEMPTS } from '../../src/app/generation-authorization.mjs';
+import { checkGenerationAuthorization, checkEffectiveGenerationAuthorization, MAX_ATTEMPTS } from '../../src/app/generation-authorization.mjs';
 import { initializeRequestBudget, requestBudgetStatus, reviewUncertainRequest } from '../../src/app/request-budget.mjs';
 import { createGenerationWorkflow } from '../../src/app/generation-workflow.mjs';
 
@@ -127,7 +127,7 @@ export async function runPilot(directory, scenarioId) {
     const usageFile = result.generation?.attempt ? path.join(config.generation.budgetDirectory, `${result.generation.attempt}.outcome.json`) : null;
     const outcome = usageFile ? await json(usageFile) : null;
     const names = await readdir(config.generation.budgetDirectory), reserved = names.filter(n => n.endsWith('.reserved.json')).length;
-    const report = { scenario: scenarioId, finished_at: now(), model: plan.model, status: result.status,
+    const report = { scenario: scenarioId, finished_at: now(), model: config.generation.model, status: result.status,
       recommendations: result.recommendations.length, generation: result.generation, usage: outcome?.usage ?? null,
       elapsed_ms: Date.now() - started, attempts_used: reserved, attempts_remaining: config.generation.authorization.limits.max_attempts - reserved,
       prior_attempts: plan.prior_attempts ?? 0, total_attempts_used: (plan.prior_attempts ?? 0) + reserved,
@@ -180,7 +180,8 @@ export async function reviewPilot(directory, attempt, transportTimeoutMs) {
   if (activation.budget_directory !== path.join(directory, 'budget')
     || activation.authorization_file !== path.join(directory, 'authorization.json')) throw new Error('PILOT_INVALID');
   const authorization = await json(activation.authorization_file);
-  const { budget } = checkGenerationAuthorization(authorization, config.expected, activation.model, now());
+  const override = activation.model_override_file === undefined ? null : await json(activation.model_override_file);
+  const { budget } = checkEffectiveGenerationAuthorization(authorization, config.expected, activation.model, now(), override);
   return reviewUncertainRequest(activation.budget_directory, budget, { attempt, acknowledgeUnknown: true, transportTimeoutMs });
 }
 

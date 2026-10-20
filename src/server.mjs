@@ -5,9 +5,10 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { createGenerationWorkflow } from './app/generation-workflow.mjs';
 import { createWalkingRouter } from './app/walking-route.mjs';
-import { checkGenerationAuthorization } from './app/generation-authorization.mjs';
+import { checkEffectiveGenerationAuthorization as checkGenerationAuthorization } from './app/generation-authorization.mjs';
 import { requestBudgetStatus } from './app/request-budget.mjs';
 import { createOpenAI } from './app/openai.mjs';
+import { createNaturalRecommendation } from './app/walking-intent.mjs';
 import { createService } from './app/service.mjs';
 import { createOfflineService, validateOfflineInput } from './app/offline.mjs';
 import { parseRetrievalCommand, retrieveFromProcess } from './app/retrieval.mjs';
@@ -70,6 +71,8 @@ export function createAppServer({ config = readConfig(), recommend, testRetrieve
   const service = recommend ?? (saved ? createOfflineService({ retrieve, expected: config.expected })
     : createService({ ...createOpenAI({ apiKey: config.apiKey, model: config.model }), retrieve }));
   const workflow = bounded ? createGenerationWorkflow({ ...config.generation, retrieve, expected: config.expected }) : null;
+  const naturalRecommend = bounded && config.generation?.interpretationEnabled === true
+    ? createNaturalRecommendation({ ...config.generation, expected: config.expected }, input => workflow.recommend(input)) : null;
   const previewToken = bounded ? randomUUID() : null;
   const walkingRoute = bounded ? createWalkingRouter(testRouteFetch ? { fetchImpl: testRouteFetch } : {}) : null;
   let inFlight = 0;
@@ -93,11 +96,13 @@ export function createAppServer({ config = readConfig(), recommend, testRetrieve
         if (bounded && config.generation?.enabled === true) {
           try {
             const { budget } = checkGenerationAuthorization(config.generation.authorization, config.expected, config.generation.model,
-              config.generation.now?.() ?? new Date().toISOString());
+              config.generation.now?.() ?? new Date().toISOString(), config.generation.modelOverride ?? null);
             ai = await requestBudgetStatus(config.generation.budgetDirectory, budget);
           } catch { ai = { state: 'expired', remaining: 0, max_attempts: 0 }; }
         }
         json(bounded ? { mode: 'bounded', map_public_key: '', generation_configured: config.generation?.enabled === true,
+          generation_model: config.generation?.enabled === true ? config.generation.model : null,
+          interpretation_configured: Boolean(naturalRecommend),
           retrieval_configured: Boolean(config.command || testRetrieve), preview_token: previewToken, ai }
           : offline ? { mode: 'offline', map_public_key: '', generation_configured: false, retrieval_configured: Boolean(config.command) }
           : { map_public_key: config.mapKey, generation_configured: Boolean(config.apiKey && config.model), retrieval_configured: Boolean(config.command) }); return;
@@ -120,7 +125,8 @@ export function createAppServer({ config = readConfig(), recommend, testRetrieve
         try { body = await bodyJson(req); } catch { json(errorResult('INVALID_INPUT'), 400); return; }
         if (generationRoute) {
           if (target.pathname === '/api/route') { const result = await walkingRoute(body); json(result, result.status === 'ok' ? 200 : result.code === 'ROUTE_INVALID' ? 400 : 503); return; }
-          const result = await (target.pathname === '/api/recommend-ai' ? workflow.recommend(body)
+          if (target.pathname === '/api/recommend-ai') workflow.invalidate();
+          const result = await (target.pathname === '/api/recommend-ai' ? (naturalRecommend ?? workflow.recommend)(body)
             : target.pathname.endsWith('/preview') ? workflow.preview(body) : workflow.generate(body));
           json(result, result.status === 'error' ? 400 : 200); return;
         }

@@ -560,8 +560,38 @@ const interfaceLabels = {
     en: { retryConnection: 'Retry connection', retryRoute: 'Retry walking route', searchRegion: 'Search and recommendations' },
     kk: { retryConnection: 'Қайта қосылу', retryRoute: 'Бағытты қайта іздеу', searchRegion: 'Іздеу және ұсыныстар' },
 };
+const intentLabels = {
+  en: {
+    optionalControls: 'Starting point & preferences · optional',
+    intentPlaceholder: 'I’m near Mega and want a 20-minute walk.',
+    intentEmpty: 'Describe your outing above, then select “{action}”. Starting point, activity and time can all go in one sentence.',
+    intentHint: 'Tell us where you are, what you want to do and how much time you have. AI will understand your request.',
+    intentDisclosure: 'AI receives your text to understand the outing, then selected place evidence. Up to 2 AI requests per search.',
+    intentPrivacy: 'Your text is sent to OpenAI for interpretation; avoid personal details. Dedicated coordinates and the full dataset are excluded. Place names or addresses typed into the request can reveal your area. Selected place evidence is sent separately for grounded recommendations. Requests use store:false; provider retention may still apply. No prompt or location history is saved by this app.',
+    understood: 'Understood', selectedStart: 'Current starting point', settingsTime: 'from settings', unlessSpecified: 'Unless you specify otherwise',
+  },
+  ru: {
+    optionalControls: 'Старт и предпочтения · необязательно',
+    intentPlaceholder: 'Я рядом с Мегой, хочу погулять 20 минут.',
+    intentEmpty: 'Опишите прогулку выше и нажмите «{action}». Старт, занятие и время можно указать в одном предложении.',
+    intentHint: 'Напишите, где вы, что хотите делать и сколько есть времени. ИИ разберёт ваш запрос.',
+    intentDisclosure: 'ИИ получает текст запроса, затем выбранные факты о местах. До 2 запросов к ИИ за один поиск.',
+    intentPrivacy: 'Текст отправляется в OpenAI для понимания запроса; не указывайте личные данные. Поля координат и весь набор мест не передаются. Названия мест и адреса в тексте могут раскрыть район. Для рекомендаций отдельно передаются выбранные факты. Используется store:false; хранение на стороне провайдера всё равно возможно. Приложение не сохраняет историю запросов и локаций.',
+    understood: 'Поняли запрос', selectedStart: 'Текущая точка старта', settingsTime: 'из настроек', unlessSpecified: 'Если не указать в запросе',
+  },
+  kk: {
+    optionalControls: 'Бастау нүктесі мен қалаулар · міндетті емес',
+    intentPlaceholder: 'Мен Мега маңындамын, 20 минут серуендегім келеді.',
+    intentEmpty: 'Жоғарыда серуенді сипаттап, «{action}» түймесін басыңыз. Бастау орнын, әрекетті және уақытты бір сөйлемде жазыңыз.',
+    intentHint: 'Қайда екеніңізді, не істегіңіз келетінін және қанша уақытыңыз барын жазыңыз. ЖИ сұрауды түсінеді.',
+    intentDisclosure: 'ЖИ сұрау мәтінін, содан кейін таңдалған орын деректерін алады. Бір іздеуге 2 ЖИ сұрауына дейін.',
+    intentPrivacy: 'Мәтін түсіндіру үшін OpenAI-ға жіберіледі; жеке деректерді жазбаңыз. Координата өрістері мен толық деректер жиыны жіберілмейді. Мәтіндегі орын атаулары мен мекенжайлар аудан туралы мәлімет беруі мүмкін. Ұсыныстарға таңдалған деректер бөлек жіберіледі. store:false қолданылады; провайдер деректерді сақтауы мүмкін. Қолданба сұрау мен орналасу тарихын сақтамайды.',
+    understood: 'Түсінгеніміз', selectedStart: 'Қазіргі бастау нүктесі', settingsTime: 'баптаудан', unlessSpecified: 'Сұрауда көрсетілмесе',
+  },
+};
 
 export function translate(language, key) {
+  if (intentLabels[language]?.[key]) return intentLabels[language][key];
   if (interfaceLabels[language]?.[key]) return interfaceLabels[language][key];
   return messages[language]?.[key] ?? messages.ru[key] ?? key;
 }

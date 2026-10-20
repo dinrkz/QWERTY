@@ -50,7 +50,7 @@ Open **http://127.0.0.1:3001**. This preview uses clearly labeled **synthetic te
 node scripts/app/start-ai.mjs
 ```
 
-Open the URL printed in the terminal, normally **http://127.0.0.1:3003**. AI is enabled for the main search button. Starting the server does not send an AI request; submitting a search can use one request. The map loads external tiles when opened, and selecting a suggestion can request a route.
+Open the URL printed in the terminal, normally **http://127.0.0.1:3003**. AI is enabled for the main search button. With text interpretation activated, type **“I am near Mega and want to go for a walk for 20 minutes.”** AI extracts the start, activity and time before searching saved places. Manual start and filters are optional. Starting the server makes no AI call; a search uses up to two requests. The map loads external tiles when opened, and selecting a suggestion can request a route.
 
 **The real demo is not plug-and-play from a fresh clone.** Private place data, review files, a valid AI authorization/request allowance and a server-side OpenAI key must already be configured. These files are intentionally excluded from Git. Follow [saved-data setup](docs/OFFLINE_INTERFACE.md#another-authorized-local-checkout), then [AI configuration](docs/BOUNDED_INTERFACE.md#start). Missing configuration produces an explicit startup error.
 
@@ -74,8 +74,9 @@ Saved places → Python filtering and ranking → Up to 5 candidate records
 ```
 
 - **Collection:** scripts fetch, validate and deduplicate place records, preserving their source and collection details.
-- **Retrieval:** Python filters and ranks places using location, category, available time and supported constraints. A small local parser recognizes common request categories and durations; it is not unrestricted language understanding.
-- **Generation:** OpenAI selects places, supported reasons and activity ideas from the retrieved evidence. The verified demo model is `gpt-5.4-mini`.
+- **Request understanding:** When activated, OpenAI converts the typed sentence into validated filters. Named starts currently support Mega Silk Way, Bayterek and Zhetysu Park; other starts need a map point. Ambiguous or unsupported requests ask for clarification.
+- **Retrieval:** Python filters and ranks saved places using the resolved location, category, available time and supported constraints. Without the interpretation capability, a limited local keyword parser remains available.
+- **Generation:** OpenAI selects places, supported reasons and activity ideas from the retrieved evidence. The current demo uses `gpt-6-luna` with reasoning disabled for latency; the earlier October 19 results used `gpt-5.4-mini`.
 - **Validation:** the server rejects unknown place IDs and unsupported selections. Interface templates turn validated choices into readable explanations; the model does not freely invent venue facts.
 - **Routing:** after a selection, a separate routing service supplies a pedestrian path. Earlier distance/time estimates remain distinct from provider route estimates.
 
@@ -91,7 +92,7 @@ The current AI demo shares only the information needed by each provider:
 
 | Destination | Information sent |
 |---|---|
-| OpenAI | At most five selected places' names, categories, available descriptions, coarse estimates and structured filters. Raw query, coordinate fields, stable IDs and full dataset are excluded. Place names can still reveal the area. |
+| OpenAI | Interpretation receives typed text and language, with decimal coordinate-like text redacted. Names or addresses in the text can reveal the area. A separate recommendation call receives at most five selected places' names, categories, descriptions, coarse estimates and filters; it excludes the raw query, coordinate fields, stable IDs and full dataset. |
 | OpenStreetMap tile service | Map viewport and browser connection information when the map loads. |
 | FOSSGIS / Valhalla routing | Rounded start/destination coordinates and server connection information when a suggestion is selected. |
 
@@ -113,7 +114,7 @@ npm run check
 
 On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`. The application suite uses synthetic fixtures and permits local loopback connections while blocking external fetch/HTTPS calls. No private dataset or provider key is needed for these tests.
 
-The latest recorded checks passed **381 application tests, 188 Python tests and syntax checks for 60 JavaScript modules**. Syntax checking is not a separate linter or type checker. Automated tests do not replace [human acceptance checks](ACCEPTANCE_TESTS.md).
+The latest application checks passed **395 tests and syntax checks for 66 JavaScript modules**. The earlier Python checkpoint passed **188 tests**; Python behavior was unchanged in the natural-input/model update. Syntax checking is not a separate linter or type checker. Automated tests do not replace [human acceptance checks](ACCEPTANCE_TESTS.md).
 
 ## Project guide
 
